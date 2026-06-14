@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Sympl Finance</title>
+<meta name="description" content="Book your free consultation with Sympl Finance. No pitch, no pressure — an honest conversation about your nonprofit's finances.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap">
+<link rel="stylesheet" href="sympl-components.css">
+<script src="sympl-components.js" defer></script>
+<style>
+:root{
+  --inkwell:#002236; --deepwater:#007E7C; --underbrush:#003C32;
+  --bay:#65C1BF; --seaglass:#C2E6E1; --mist:#E0F2F0;
+  --yolk:#FFE079; --buttercup:#FFF5AB; --harvest:#E38900;
+  --sorbet:#FFB97D; --orangecream:#FFD9BA;
+  --paper:#FBF5F0; --tan:#F8EEE3;
+  --ink-soft:#4a5f6b; --line:rgba(0,34,54,0.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Onest',sans-serif;background:var(--paper);color:var(--inkwell);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px;}
+section{padding:80px 0;}
+.kicker{font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--deepwater);margin-bottom:14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:100px;font-family:'Onest',sans-serif;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform .2s, background .2s, color .2s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--deepwater);color:#fff;}
+.btn-primary:hover{background:var(--underbrush);}
+.btn-yolk{background:var(--yolk);color:var(--inkwell);}
+.btn-yolk:hover{background:var(--harvest);color:#fff;}
+.btn-ghost{background:transparent;color:var(--inkwell);border:1.5px solid rgba(0,34,54,0.18);}
+.btn-ghost:hover{border-color:var(--inkwell);}
+.btn:focus-visible{outline:3px solid var(--bay);outline-offset:2px;}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:200;background:rgba(251,245,240,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:74px;}
+.wordmark{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
+.wordmark .wm{font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--inkwell);}
+.wordmark .wm .dot{position:relative;}
+.wordmark .wm .dot::after{content:'';position:absolute;left:-1px;right:-2px;bottom:-3px;height:4px;background:var(--yolk);border-radius:3px;transform:rotate(-2deg);}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--deepwater);margin-top:4px;}
+.nav-links{display:flex;align-items:center;gap:6px;}
+.nav-item{position:relative;}
+.nav-item > a{display:inline-block;padding:10px 14px;font-size:14.5px;font-weight:500;color:var(--inkwell);text-decoration:none;border-radius:100px;transition:background .2s;}
+.nav-item > a:hover{background:rgba(0,34,54,0.05);}
+.nav-item > a[aria-current="page"]{background:var(--deepwater);color:#fff;}
+.nav-item .caret{font-size:10px;color:var(--ink-soft);margin-left:3px;}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:248px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 14px 34px rgba(0,34,54,0.1);opacity:0;visibility:hidden;transform:translateY(6px);transition:all .2s;}
+.nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.dropdown a{display:block;padding:10px 14px;font-size:14px;font-weight:500;text-decoration:none;border-radius:9px;color:var(--inkwell);}
+.dropdown a:hover,.dropdown a[aria-current="page"]{background:var(--mist);color:var(--deepwater);}
+.dropdown a small{display:block;font-size:11.5px;font-weight:400;color:var(--ink-soft);margin-top:1px;}
+.nav-cta{margin-left:10px;padding:11px 20px;font-size:14px;}
+.nav-burger{display:none;}
+
+/* ── CONTACT HERO ── */
+.contact-hero{padding:72px 0 0;background:var(--paper);}
+.contact-hero-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:flex-start;}
+.contact-copy{padding-bottom:72px;}
+.contact-copy h1{font-size:clamp(38px,4.8vw,58px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:20px;text-wrap:balance;}
+.contact-copy h1 em{font-family:'Lora',serif;font-style:italic;font-weight:600;}
+.swoosh-wrap{position:relative;display:inline-block;white-space:nowrap;}
+.swoosh-wrap svg{position:absolute;left:-2%;bottom:-0.34em;width:104%;height:0.5em;}
+.contact-copy .lead{font-size:17px;color:var(--ink-soft);line-height:1.65;margin-bottom:36px;max-width:460px;}
+.contact-pills{display:flex;flex-direction:column;gap:18px;}
+.contact-pill{display:flex;align-items:flex-start;gap:14px;}
+.contact-pill-icon{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;}
+.contact-pill-icon svg{width:18px;height:18px;}
+.contact-pill-text strong{display:block;font-size:14.5px;font-weight:700;color:var(--inkwell);}
+.contact-pill-text span{font-size:13.5px;color:var(--ink-soft);}
+.contact-pill-text a{color:var(--deepwater);text-decoration:none;font-weight:600;}
+.contact-pill-text a:hover{text-decoration:underline;}
+
+/* ── FORM PANEL ── */
+.contact-form-wrap{position:sticky;top:90px;}
+.contact-panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px 36px 32px;box-shadow:0 20px 56px rgba(0,34,54,0.09);}
+.contact-panel h2{font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin-bottom:6px;}
+.contact-panel .sub{font-size:14.5px;color:var(--ink-soft);margin-bottom:26px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+.field:last-of-type{margin-bottom:0;}
+.field label{font-size:13px;font-weight:700;color:var(--inkwell);letter-spacing:0.01em;}
+.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:14.5px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:12px 14px;width:100%;transition:border-color .2s;}
+.field input:focus,.field select,.field textarea:focus{outline:none;border-color:var(--deepwater);background:#fff;}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5f6b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+.field textarea{min-height:100px;resize:vertical;}
+.form-submit{width:100%;justify-content:center;margin-top:20px;padding:15px 24px;font-size:15px;}
+.form-micro{font-size:12px;color:var(--ink-soft);text-align:center;margin-top:12px;}
+.form-success{display:none;padding:18px 20px;background:var(--mist);border:1px solid var(--seaglass);border-radius:12px;text-align:center;font-size:14.5px;font-weight:600;color:var(--underbrush);margin-top:16px;}
+
+/* ── TRUST STRIP ── */
+.contact-trust{background:var(--tan);padding:48px 0;}
+.trust-row{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--inkwell);}
+.trust-item svg{width:20px;height:20px;color:var(--deepwater);}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .contact-hero-inner{grid-template-columns:1fr;gap:0;}
+  .contact-copy{padding-bottom:40px;}
+  .contact-form-wrap{position:static;}
+  .contact-hero{padding-bottom:0;}
+  .form-row{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .nav-burger{display:inline-flex;}
+}
+</style>
+</head>
+<body>
+
+<svg class="sketch-defs" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;"><defs>
+  <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018 0.022" numOctaves="4" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="grain"/>
+    <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0" result="grainA"/>
+    <feComposite in="grainA" in2="rough" operator="in" result="grainMasked"/>
+    <feMerge><feMergeNode in="rough"/><feMergeNode in="grainMasked"/></feMerge>
+  </filter>
+</defs></svg>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark" aria-label="sympl finance home">
+      <img src="Dark.svg" alt="Sympl Finance" style="height:44px;width:auto;display:block;">
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <div class="nav-item">
+        <a href="index.html#services">Services <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll<small>Monthly books, payroll, allocations</small></a>
+          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance<small>Grants, audit prep, board packs</small></a>
+          <a href="sympl-cfo-advisory.html">CFO &amp; Advisory<small>Budgets, forecasts, finance decisions</small></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#serve">Who We Serve <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="sympl-arts.html">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
+          <a href="sympl-settlement.html">Immigrant &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="sympl-clients-partners.html">Clients &amp; Partners</a></div>
+      <div class="nav-item"><a href="sympl-about.html">About</a></div>
+      <a href="sympl-contact.html" class="btn btn-yolk nav-cta" aria-current="page">Book a Free Review</a>
+      <a href="sympl-quote.html" class="btn btn-ghost nav-cta">Get a quote</a>
+    </nav>
+    <a href="sympl-contact.html" class="btn btn-yolk nav-burger" style="padding:10px 16px;font-size:13px;">Book a review</a>
+  </div>
+</header>
+
+<main>
+  <section class="contact-hero">
+    <div class="wrap contact-hero-inner">
+
+      <!-- Left: copy + direct contacts -->
+      <div class="contact-copy">
+        <p class="kicker">Free 30-minute finance review</p>
+        <h1>Let's talk about your<br><span class="swoosh-wrap"><em>nonprofit's</em> finances.<svg viewBox="0 0 340 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 14 C100 5, 240 5, 336 11" stroke="#FFE079" stroke-width="10" fill="none" stroke-linecap="round"/></svg></span></h1>
+        <p class="lead">No pitch, no pressure. We'll learn about your organization, talk through where finance is slowing you down, and tell you honestly whether and how we can help.</p>
+
+        <div class="contact-pills">
+          <div class="contact-pill">
+            <div class="contact-pill-icon">
+              <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="none"/><path d="M6 8l5 4 5-4M6 8v6h10V8M6 8h10" stroke="#007E7C" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="contact-pill-text">
+              <strong>Email us directly</strong>
+              <span><a href="mailto:tayyab@symplsolutions.com">tayyab@symplsolutions.com</a></span>
+            </div>
+          </div>
+          <div class="contact-pill">
+            <div class="contact-pill-icon">
+              <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="none"/><path d="M7 9v7M7 6.5v.5M11 16v-4a2 2 0 014 0v4M11 9v7" stroke="#007E7C" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div class="contact-pill-text">
+              <strong>LinkedIn</strong>
+              <span><a href="https://www.linkedin.com/company/symplsolutions" target="_blank" rel="noopener">/symplsolutions</a></span>
+            </div>
+          </div>
+          <div class="contact-pill">
+            <div class="contact-pill-icon">
+              <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="none"/><path d="M11 6v5l3.5 3.5M11 2a9 9 0 100 18A9 9 0 0011 2z" stroke="#007E7C" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div class="contact-pill-text">
+              <strong>Response time</strong>
+              <span>Typically within one business day</span>
+            </div>
+          </div>
+          <div class="contact-pill">
+            <div class="contact-pill-icon">
+              <svg viewBox="0 0 22 22" fill="none"><path d="M11 2C6.5 2 3 5.5 3 10c0 5.25 8 12 8 12s8-6.75 8-12c0-4.5-3.5-8-8-8zm0 10.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" stroke="#007E7C" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="contact-pill-text">
+              <strong>Based in</strong>
+              <span>Toronto, Ontario — serving nonprofits across Canada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="contact-form-wrap">
+        <div class="contact-panel">
+          <h2>Request your free consultation</h2>
+          <p class="sub">Tell us a little about your organization and we'll be in touch within one business day.</p>
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="field"><label for="cf-name">Your name</label><input id="cf-name" type="text" placeholder="Jane Smith" autocomplete="name"></div>
+              <div class="field"><label for="cf-org">Organization</label><input id="cf-org" type="text" placeholder="Your nonprofit" autocomplete="organization"></div>
+            </div>
+            <div class="field"><label for="cf-email">Work email</label><input id="cf-email" type="email" placeholder="jane@yourorg.ca" autocomplete="email"></div>
+            <div class="field">
+              <label for="cf-service">What do you need help with?</label>
+              <select id="cf-service">
+                <option value="">I'm not sure yet</option>
+                <option>Bookkeeping</option>
+                <option>Payroll</option>
+                <option>Financial reporting</option>
+                <option>Year-end &amp; audit prep</option>
+                <option>CFO &amp; fractional finance leadership</option>
+                <option>A one-time project</option>
+              </select>
+            </div>
+            <div class="field"><label for="cf-message">Tell us about your situation</label><textarea id="cf-message" placeholder="Where are things at, and what's on your mind?"></textarea></div>
+            <button class="btn btn-yolk form-submit" type="submit">Request my free consultation →</button>
+            <p class="form-micro">We typically respond within one business day.</p>
+            <div class="form-success" id="form-success">Thanks! We'll be in touch within one business day.</div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact-trust">
+    <div class="wrap">
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 1l2.39 4.84 5.35.78-3.87 3.77.91 5.32L10 13.27l-4.78 2.44.91-5.32L2.26 6.62l5.35-.78L10 1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          100% nonprofit-focused
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 4v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Free 30-min review, no obligation
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          CPA-led team
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 2C6 2 3 5.5 3 8.5c0 5 7 10 7 10s7-5 7-10C17 5.5 14 2 10 2zm0 8.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+          Canada-based
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<sympl-footer></sympl-footer>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  document.getElementById('form-success').style.display = 'block';
+  this.querySelector('button[type=submit]').disabled = true;
+  this.querySelector('button[type=submit]').textContent = 'Sent ✓';
+});
+</script>
+
+</body>
+</html>

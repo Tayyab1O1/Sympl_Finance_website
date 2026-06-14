@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sympl Finance — Brand Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<style>
+:root {
+  --inkwell: #002236;
+  --deepwater: #007E7C;
+  --underbrush: #003C32;
+  --bay: #65C1BF;
+  --seaglass: #C2E6E1;
+  --mist: #E0F2F0;
+  --yolk: #FFE079;
+  --buttercup: #FFF5AB;
+  --harvest: #E38900;
+  --sorbet: #FFB97D;
+  --orangecream: #FFD9BA;
+  --paper: #FBF5F0;
+  --tan: #F8EEE3;
+  --ink-soft: #4a5f6b;
+  --line: rgba(0,34,54,0.1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Onest', sans-serif;
+  background: var(--paper);
+  color: var(--inkwell);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ── */
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+.page { padding: 0 0 80px; }
+
+/* ── NAV SIDEBAR ── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 220px;
+  background: var(--inkwell);
+  color: var(--paper);
+  padding: 36px 24px;
+  overflow-y: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.sidebar-brand {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--paper);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.sidebar-brand span { color: var(--yolk); }
+.sidebar-brand small {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--deepwater);
+  margin-top: 4px;
+}
+.sidebar-meta { font-size: 11px; color: rgba(251,245,240,0.45); margin-bottom: 32px; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+.sidebar-nav a {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(251,245,240,0.65);
+  text-decoration: none;
+  padding: 7px 10px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-nav a:hover { background: rgba(255,255,255,0.08); color: var(--paper); }
+.sidebar-nav a .num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--yolk);
+  min-width: 18px;
+}
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  font-size: 11px;
+  color: rgba(251,245,240,0.3);
+  line-height: 1.6;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ── MAIN CONTENT ── */
+.main { margin-left: 220px; }
+.hero-bar {
+  background: var(--yolk);
+  padding: 48px 48px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bar::after {
+  content: '';
+  position: absolute;
+  right: -40px; bottom: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(0,34,54,0.06);
+}
+.hero-bar .kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--harvest);
+  margin-bottom: 12px;
+}
+.hero-bar h1 {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--inkwell);
+  line-height: 1.06;
+  margin-bottom: 12px;
+}
+.hero-bar h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 600; }
+.hero-bar p {
+  font-size: 15px;
+  color: rgba(0,34,54,0.65);
+  max-width: 480px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 64px 48px;
+  border-bottom: 1px solid var(--line);
+}
+.section:nth-child(even) { background: var(--tan); }
+.section-head { margin-bottom: 40px; }
+.section-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--deepwater);
+  margin-bottom: 6px;
+}
+.section-head h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.section-head p { font-size: 15px; color: var(--ink-soft); max-width: 600px; }
+
+/* ── COLOUR PALETTES ── */
+.palette-group { margin-bottom: 32px; }
+.palette-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.swatches { display: flex; flex-wrap: wrap; gap: 12px; }
+.swatch { border-radius: 14px; overflow: hidden; width: 112px; border: 1px solid var(--line); }
+.swatch-block { height: 72px; }
+.swatch-info { padding: 10px 12px; background: #fff; }
+.swatch-name { font-size: 12px; font-weight: 700; color: var(--inkwell); }
+.swatch-hex { font-family: 'Courier New', monospace; font-size: 11px; color: var(--ink-soft); }
+.swatch-use { font-size: 10px; color: #8a9aa4; margin-top: 3px; line-height: 1.4; }
+
+.pairings { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.pair {
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+}
+
+/* ── TYPOGRAPHY ── */
+.type-samples { display: flex; flex-direction: column; gap: 20px; }
+.type-sample {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 30px;
+}
+.type-meta {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-family: 'Courier New', monospace;
+  line-height: 1.6;
+}
+
+/* ── TABLES ── */
+.tbl { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+.tbl th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 8px 14px;
+  border-bottom: 1.5px solid var(--line);
+}
+.tbl td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--inkwell);
+  vertical-align: top;
+}
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: rgba(0,34,54,0.02); }
+.tbl code {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  background: var(--mist);
+  color: var(--deepwater);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+/* ── RULES GRID ── */
+.rules { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+.rule {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+.rule-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.do { background: var(--mist); color: var(--deepwater); }
+.dont { background: var(--orangecream); color: var(--harvest); }
+
+/* ── ILLUS BLOCKS ── */
+.illus-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.illus-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+}
+.illus-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--deepwater);
+  margin-bottom: 10px;
+}
+.illus-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
+
+/* ── FILTER CODE ── */
+.code-block {
+  background: var(--inkwell);
+  color: #7dd3fc;
+  border-radius: 12px;
+  padding: 20px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 12.5px;
+  line-height: 1.8;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+.code-block .cm { color: rgba(255,255,255,0.35); }
+.code-block .ca { color: var(--yolk); }
+.code-block .cv { color: var(--sorbet); }
+
+/* ── VOICE ── */
+.voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.voice-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+}
+.voice-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--inkwell); }
+.voice-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+.voice-card .ex {
+  margin-top: 10px;
+  background: var(--mist);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--inkwell);
+  font-style: italic;
+}
+.voice-card .ex em { color: var(--harvest); font-style: normal; font-weight: 600; }
+
+/* ── WORDMARK DEMO ── */
+.wordmark-demos { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.wm-box {
+  border-radius: 18px;
+  padding: 36px 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 200px;
+}
+.wm-light { background: var(--paper); border: 1px solid var(--line); }
+.wm-dark { background: var(--inkwell); }
+.wm-name {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.wm-dot-wrap { position: relative; display: inline-block; }
+.wm-dot-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0; right: -2px; bottom: -4px;
+  height: 5px;
+  background: var(--yolk);
+  border-radius: 4px;
+  transform: rotate(-1deg);
+}
+.wm-sub {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--deepwater);
+  margin-top: 4px;
+}
+.wm-caption { font-size: 12px; color: var(--ink-soft); margin-top: 8px; }
+
+/* ── SPACING VIZ ── */
+.spacing-items { display: flex; flex-direction: column; gap: 10px; }
+.sp-row { display: flex; align-items: center; gap: 16px; }
+.sp-bar { background: var(--seaglass); border-radius: 4px; height: 10px; flex-shrink: 0; }
+.sp-val {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--deepwater);
+  min-width: 44px;
+  font-weight: 700;
+}
+.sp-use { font-size: 13px; color: var(--ink-soft); }
+
+/* ── HASHTAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tag {
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--seaglass);
+  background: var(--mist);
+  color: var(--deepwater);
+}
+.tag.warm { background: var(--buttercup); border-color: var(--yolk); color: #6b4c00; }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--deepwater);
+  color: #fff;
+  padding: 48px;
+  text-align: center;
+  margin: 0;
+}
+.cta-band h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
+.cta-band p { font-size: 15px; opacity: 0.8; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .section { padding: 48px 24px; }
+  .illus-cards, .voice-grid { grid-template-columns: 1fr; }
+  .hero-bar { padding: 36px 24px; }
+}
+@media (max-width: 600px) {
+  .swatches .swatch { width: calc(50% - 6px); }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR NAV -->
+<aside class="sidebar" aria-label="Brand guide navigation">
+  <div class="sidebar-brand">sympl<span>.</span><small>finance</small></div>
+  <p class="sidebar-meta">Brand Guide · Draft v01</p>
+  <nav class="sidebar-nav">
+    <a href="#colours"><span class="num">01</span>Colour palette</a>
+    <a href="#typography"><span class="num">02</span>Typography</a>
+    <a href="#illustration"><span class="num">03</span>Illustration</a>
+    <a href="#logo"><span class="num">04</span>Logo & wordmark</a>
+    <a href="#voice"><span class="num">05</span>Voice & tone</a>
+    <a href="#spacing"><span class="num">06</span>Spacing & layout</a>
+    <a href="#components"><span class="num">07</span>UI components</a>
+    <a href="#social"><span class="num">08</span>Social content</a>
+  </nav>
+  <div class="sidebar-footer">Based on Sympl Brand Guide<br>Andrew Mingo Design<br>© Sympl 2026</div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero-bar">
+    <p class="kicker">Brand Reference</p>
+    <h1>Sympl Finance<br><em>Brand Guide.</em></h1>
+    <p>Colour, type, illustration, voice, and layout — everything you need to make on-brand content for Sympl Finance.</p>
+  </div>
+
+  <!-- 01 COLOUR -->
+  <section class="section" id="colours">
+    <div class="section-head">
+      <p class="section-num">01 · Colour palette</p>
+      <h2>A calm, mission-driven palette.</h2>
+      <p>Natural reference points — deep ocean, shallow shoreline, sunlit grass, and warm paper. Trustworthy without feeling corporate.</p>
+    </div>
+
+    <div class="palette-group">
+      <div class="palette-label">Core</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-block" style="background:#002236;"></div>
+          <div class="swatch-info"><div class="swatch-name">Inkwell</div><div class="swatch-hex">#002236</div><div class="swatch-use">Primary text, nav, dark backgrounds</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#007E7C;"></div>
+          <div class="swatch-info"><div class="swatch-name">Deepwater</div><div class="swatch-hex">#007E7C</div><div class="swatch-use">Brand accent, CTAs, links</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#FFE079;"></div>
+          <div class="swatch-info"><div class="swatch-name">Yolk</div><div class="swatch-hex">#FFE079</div><div class="swatch-use">Primary CTA, highlights, swoosh</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#FBF5F0; border-bottom: 1px solid #e8e0d8;"></div>
+          <div class="swatch-info"><div class="swatch-name">Paper</div><div class="swatch-hex">#FBF5F0</div><div class="swatch-use">Page background, warm off-white</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <div class="palette-label">Supporting</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-block" style="background:#65C1BF;"></div>
+          <div class="swatch-info"><div class="swatch-name">Bay</div><div class="swatch-hex">#65C1BF</div><div class="swatch-use">Chart bars, step numerals</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#C2E6E1;"></div>
+          <div class="swatch-info"><div class="swatch-name">Seaglass</div><div class="swatch-hex">#C2E6E1</div><div class="swatch-use">Soft fills, pills, chart backgrounds</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#E0F2F0;"></div>
+          <div class="swatch-info"><div class="swatch-name">Mist</div><div class="swatch-hex">#E0F2F0</div><div class="swatch-use">Section backgrounds, icon fills</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#F8EEE3; border-bottom: 1px solid #e8ddd0;"></div>
+          <div class="swatch-info"><div class="swatch-name">Tan</div><div class="swatch-hex">#F8EEE3</div><div class="swatch-use">Alt section backgrounds</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <div class="palette-label">Warmth / accent</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-block" style="background:#FFB97D;"></div>
+          <div class="swatch-info"><div class="swatch-name">Sorbet</div><div class="swatch-hex">#FFB97D</div><div class="swatch-use">Pain-point accents, sparkles</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#FFD9BA; border-bottom: 1px solid #e8c9a0;"></div>
+          <div class="swatch-info"><div class="swatch-name">Orange Cream</div><div class="swatch-hex">#FFD9BA</div><div class="swatch-use">Light fills on warm cards</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#E38900;"></div>
+          <div class="swatch-info"><div class="swatch-name">Harvest</div><div class="swatch-hex">#E38900</div><div class="swatch-use">Tags, Yolk CTA hover state</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background:#003C32;"></div>
+          <div class="swatch-info"><div class="swatch-name">Underbrush</div><div class="swatch-hex">#003C32</div><div class="swatch-use">Deep green, rare emphasis</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-label" style="margin-top:8px;">Approved pairings</div>
+    <div class="pairings">
+      <span class="pair" style="background:#002236; color:#FBF5F0; border-color:#002236;">Inkwell on Paper</span>
+      <span class="pair" style="background:#E0F2F0; color:#007E7C; border-color:#C2E6E1;">Deepwater on Mist</span>
+      <span class="pair" style="background:#FFE079; color:#002236; border-color:#FFE079;">Inkwell on Yolk</span>
+      <span class="pair" style="background:#C2E6E1; color:#003C32; border-color:#65C1BF;">Underbrush on Seaglass</span>
+      <span class="pair" style="background:#FBF5F0; color:#002236; border-color:#e8e0d8;">Inkwell on Paper</span>
+    </div>
+  </section>
+
+  <!-- 02 TYPOGRAPHY -->
+  <section class="section" id="typography">
+    <div class="section-head">
+      <p class="section-num">02 · Typography</p>
+      <h2>Onest + Lora.</h2>
+      <p>Onest handles all interface work — clean, readable, geometric. Lora adds serif warmth, used sparingly for pull quotes, italic accents, and step numerals.</p>
+    </div>
+
+    <div class="type-samples">
+      <div class="type-sample">
+        <div style="font-size:11px; color:var(--ink-soft); margin-bottom:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Display / H1</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:700; font-size:42px; letter-spacing:-0.03em; line-height:1.08; color:var(--inkwell);">Nonprofit finances,<br>made sympl.</div>
+        <div class="type-meta">Onest · weight 700 · size clamp(40px, 6vw, 68px) · tracking −0.03em · line-height 1.08</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:11px; color:var(--ink-soft); margin-bottom:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">H2 — Section title</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:700; font-size:30px; letter-spacing:-0.02em; line-height:1.1; color:var(--inkwell);">Finance support that grows with you.</div>
+        <div class="type-meta">Onest · weight 700 · size clamp(30px, 4.4vw, 46px) · tracking −0.02em</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:11px; color:var(--ink-soft); margin-bottom:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Lead / Intro paragraph</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:400; font-size:20px; color:var(--ink-soft); line-height:1.6; max-width:520px;">Bookkeeping, payroll, reporting, and finance leadership — handled by a team that works only with nonprofits.</div>
+        <div class="type-meta">Onest · weight 400 · size 20px · color ink-soft #4a5f6b · line-height 1.6</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:11px; color:var(--ink-soft); margin-bottom:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Kicker / Eyebrow</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--deepwater);">What we do</div>
+        <div class="type-meta">Onest · weight 700 · size 13px · tracking 0.18em · ALL CAPS · color Deepwater</div>
+      </div>
+      <div class="type-sample" style="background:var(--inkwell);">
+        <div style="font-size:11px; color:rgba(251,245,240,0.45); margin-bottom:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Kicker on dark background</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--yolk);">Part of Sympl Solutions</div>
+        <div class="type-meta" style="color:rgba(251,245,240,0.35); border-top-color:rgba(255,255,255,0.1);">Same rules — colour shifts to Yolk on dark backgrounds</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:11px; color:var(--ink-soft); margin-bottom:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Lora italic — pull quote</div>
+        <div style="font-family:'Lora',serif; font-style:italic; font-weight:500; font-size:20px; color:var(--inkwell); line-height:1.4;">"It's one thing I just don't worry about anymore."</div>
+        <div style="font-family:'Lora',serif; font-size:42px; font-weight:600; color:var(--bay); line-height:1; margin-top:16px;">1</div>
+        <div class="type-meta">Lora · italic · weight 500 · quote size ~16–22px · step numeral size ~46px · use sparingly</div>
+      </div>
+    </div>
+
+    <div class="rules" style="margin-top:28px;">
+      <div class="rule"><span class="rule-badge do">Do</span>Use Lora italic for the word "sympl." in headlines — it carries the brand's wordplay.</div>
+      <div class="rule"><span class="rule-badge do">Do</span>Set all headings in Onest 700 with negative letter-spacing (−0.02em to −0.03em).</div>
+      <div class="rule"><span class="rule-badge do">Do</span>Keep body text at 14–16px, line-height 1.6, colour Inkwell or ink-soft <code style="font-family:monospace; font-size:11px;">#4a5f6b</code>.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Using Lora for long body copy — reserve it for short accents only.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Mixing serif and sans within the same sentence, except for the "sympl." brand moment.</div>
+    </div>
+  </section>
+
+  <!-- 03 ILLUSTRATION -->
+  <section class="section" id="illustration">
+    <div class="section-head">
+      <p class="section-num">03 · Illustration style</p>
+      <h2>Hand-drawn warmth meets data clarity.</h2>
+      <p>The most distinctive and ownable part of the visual identity. It blends a loose, hand-drawn feel with precise data-document accuracy — reflecting what Sympl does: make complex things feel human.</p>
+    </div>
+
+    <div class="illus-cards">
+      <div class="illus-card">
+        <div class="illus-card-label">The pencil SVG filter</div>
+        <p>Hero illustrations are built in SVG then passed through a custom filter that applies fractal noise displacement + a subtle grain composite. Lines look slightly imprecise, as if sketched on paper. Reinforces "made by people, not machines."</p>
+      </div>
+      <div class="illus-card">
+        <div class="illus-card-label">Service mockup illustrations</div>
+        <p>The services section uses clean, polished UI mockups — rounded-rect "screens" with tables, charts, and status badges. <strong>No pencil filter.</strong> The contrast between rough hero art and precise service mockups creates visual hierarchy.</p>
+      </div>
+      <div class="illus-card">
+        <div class="illus-card-label">Subject matter</div>
+        <p>Concrete artefacts: ledgers, bar charts, checklists, pay stubs, forecasts. Secondary motifs: lighthouse (guidance), handshake (partnership), coin stack (finance). Avoid generic human figures.</p>
+      </div>
+      <div class="illus-card">
+        <div class="illus-card-label">Sparkles</div>
+        <p>Small four-pointed sparkles appear near primary illustrations. Always in Sorbet <code style="font-family:monospace;font-size:11px;">#FFB97D</code> or Bay <code style="font-family:monospace;font-size:11px;">#65C1BF</code>. Maximum <strong>two per scene</strong> — more reads as clip-art.</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <div class="palette-label">Colour in illustrations</div>
+      <table class="tbl">
+        <thead><tr><th>Element</th><th>Colour</th><th>Hex</th></tr></thead>
+        <tbody>
+          <tr><td>Strokes, structural lines</td><td>Inkwell</td><td><code>#002236</code></td></tr>
+          <tr><td>Background fills / blobs</td><td>Mist</td><td><code>#E0F2F0</code></td></tr>
+          <tr><td>Chart bars (primary)</td><td>Deepwater</td><td><code>#007E7C</code></td></tr>
+          <tr><td>Chart bars (secondary)</td><td>Seaglass</td><td><code>#C2E6E1</code></td></tr>
+          <tr><td>UI elements inside illustration</td><td>Deepwater</td><td><code>#007E7C</code></td></tr>
+          <tr><td>Check badges, focal accent</td><td>Yolk</td><td><code>#FFE079</code></td></tr>
+          <tr><td>Sparkles</td><td>Sorbet or Bay</td><td><code>#FFB97D</code> / <code>#65C1BF</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="palette-label">Pencil filter parameters</div>
+    <div class="code-block">
+      <span class="cm">/* Hero illustration SVG filter */</span><br>
+      <span class="ca">feTurbulence</span> baseFrequency=<span class="cv">"0.018 0.022"</span> numOctaves=<span class="cv">"4"</span> seed=<span class="cv">"7"</span><br>
+      <span class="ca">feDisplacementMap</span> scale=<span class="cv">"3.2"</span> xChannelSelector=<span class="cv">"R"</span> yChannelSelector=<span class="cv">"G"</span><br>
+      <span class="ca">feTurbulence</span> baseFrequency=<span class="cv">"0.9"</span> numOctaves=<span class="cv">"2"</span> seed=<span class="cv">"3"</span> <span class="cm">/* grain */</span><br>
+      <span class="ca">feColorMatrix</span> alpha=<span class="cv">"0.06"</span> <span class="cm">/* subtle grain overlay */</span>
+    </div>
+
+    <div style="background:var(--inkwell); border-radius:14px; padding:22px 26px; margin-bottom:20px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--yolk); margin-bottom:14px;">The hand-drawn swoosh underline</div>
+      <p style="font-size:14px; color:rgba(251,245,240,0.8); line-height:1.65; margin-bottom:14px;">The brand's single most repeated motif — an SVG arc path in Yolk <code style="font-family:monospace;font-size:11px;background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:4px;color:var(--yolk);">#FFE079</code>, 9px stroke, rounded linecap, no fill — used beneath key headline words only.</p>
+      <div style="font-size:22px; font-family:'Onest',sans-serif; font-weight:700; color:#fff; letter-spacing:-0.02em; position:relative; display:inline-block;">
+        grows with you
+        <svg viewBox="0 0 260 16" style="position:absolute;left:-2%;bottom:-0.38em;width:104%;height:0.5em;" preserveAspectRatio="none"><path d="M4 12 C70 4, 190 4, 256 9" stroke="#FFE079" stroke-width="9" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <p style="font-size:12px; color:rgba(251,245,240,0.4); margin-top:14px;">Once per page · Headlines only · On the most mission-critical phrase</p>
+    </div>
+
+    <div class="rules">
+      <div class="rule"><span class="rule-badge do">Do</span>Apply the pencil filter to hero illustrations for hand-drawn warmth.</div>
+      <div class="rule"><span class="rule-badge do">Do</span>Keep service mockup illustrations clean — no pencil filter.</div>
+      <div class="rule"><span class="rule-badge do">Do</span>Include a Yolk check badge or sparkle as focal accent in each hero illustration.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Photography of people alongside illustrations — it clashes with the illustrated world.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>More than two sparkles in a single scene.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Using the swoosh underline more than once per page.</div>
+    </div>
+  </section>
+
+  <!-- 04 LOGO -->
+  <section class="section" id="logo">
+    <div class="section-head">
+      <p class="section-num">04 · Logo & wordmark</p>
+      <h2>Always lowercase. Always the dot.</h2>
+      <p>The wordmark is typographic — no separate symbol. The period between "sympl" and "finance" is a structural part of the brand, not punctuation.</p>
+    </div>
+
+    <div class="wordmark-demos">
+      <div class="wm-box wm-light">
+        <div style="font-family:'Onest',sans-serif; font-weight:800; font-size:30px; letter-spacing:-0.04em; color:var(--inkwell); line-height:1; display:flex; flex-direction:column;">
+          <span>sympl<span class="wm-dot-wrap" style="color:var(--inkwell);">.</span></span>
+          <small class="wm-sub">finance</small>
+        </div>
+        <div class="wm-caption">Primary — on Paper</div>
+      </div>
+      <div class="wm-box wm-dark">
+        <div style="font-family:'Onest',sans-serif; font-weight:800; font-size:30px; letter-spacing:-0.04em; color:var(--paper); line-height:1; display:flex; flex-direction:column;">
+          <span>sympl<span style="color:var(--yolk);">.</span></span>
+          <small style="font-size:11px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--deepwater); margin-top:4px;">finance</small>
+        </div>
+        <div class="wm-caption" style="color:rgba(251,245,240,0.4);">Reversed — on Inkwell</div>
+      </div>
+    </div>
+
+    <table class="tbl">
+      <thead><tr><th>Element</th><th>Primary</th><th>Reversed</th></tr></thead>
+      <tbody>
+        <tr><td>"sympl" typeface</td><td>Onest 800</td><td>Onest 800</td></tr>
+        <tr><td>"sympl" colour</td><td>Inkwell <code>#002236</code></td><td>Paper <code>#FBF5F0</code></td></tr>
+        <tr><td>Dot treatment</td><td>Inkwell + Yolk brushstroke underline</td><td>Yolk <code>#FFE079</code></td></tr>
+        <tr><td>"finance" typeface</td><td>Onest 600, all-caps, 11px</td><td>Onest 600, all-caps, 11px</td></tr>
+        <tr><td>"finance" colour</td><td>Deepwater <code>#007E7C</code></td><td>Deepwater <code>#007E7C</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="rules" style="margin-top:20px;">
+      <div class="rule"><span class="rule-badge do">Do</span>Always render "sympl" in Onest 800, "finance" in Onest 600 small-caps beneath it.</div>
+      <div class="rule"><span class="rule-badge do">Do</span>Keep the entire wordmark all-lowercase at all times.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Capitalising any letter of the wordmark — not even "Sympl" in running text (use "sympl.finance" or "Sympl Finance").</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Stretching, rotating, recolouring, or adding drop shadows to the wordmark.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Rendering the wordmark below ~18px — "finance" becomes unreadable.</div>
+    </div>
+  </section>
+
+  <!-- 05 VOICE -->
+  <section class="section" id="voice">
+    <div class="section-head">
+      <p class="section-num">05 · Voice & tone</p>
+      <h2>Knowledgeable colleague,<br>not consultant.</h2>
+      <p>Plain language, first-person warmth, and occasional lightness — without being flippant about the work nonprofits do.</p>
+    </div>
+
+    <div class="voice-grid">
+      <div class="voice-card">
+        <h4>Plain, not dumbed-down</h4>
+        <p>Explain "restricted funds" in two sentences without "fiduciary." The audience is smart — just not accountants.</p>
+        <div class="ex">Restricted grants are yours to spend only on what the funder specified.</div>
+      </div>
+      <div class="voice-card">
+        <h4>Warm, not gushing</h4>
+        <p>First-person, genuine investment in the mission — but no exclamation marks unless earned.</p>
+        <div class="ex">✅ "We're genuinely invested in your mission."<br><em>✗ "We absolutely love working with amazing organizations!"</em></div>
+      </div>
+      <div class="voice-card">
+        <h4>Specific, not vague</h4>
+        <p>Numbers and timelines build trust. Use them wherever possible.</p>
+        <div class="ex">✅ "Books closed within five business days."<br><em>✗ "We work quickly."</em></div>
+      </div>
+      <div class="voice-card">
+        <h4>Confident, not salesy</h4>
+        <p>CTAs are actions, not promises. Low-pressure framing always wins.</p>
+        <div class="ex">✅ "Book a free consultation."<br><em>✗ "Start your journey today!"</em></div>
+      </div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <div class="palette-label">Tone by section</div>
+      <table class="tbl">
+        <thead><tr><th>Section</th><th>Tone</th></tr></thead>
+        <tbody>
+          <tr><td>Hero headlines</td><td>Reassuring, clear, lightly playful (the "sympl" wordplay)</td></tr>
+          <tr><td>Pain points</td><td>Empathetic, non-judgmental ("you're not alone")</td></tr>
+          <tr><td>Service descriptions</td><td>Precise, benefit-led, specific</td></tr>
+          <tr><td>Team / About</td><td>Warm, genuine, first-person</td></tr>
+          <tr><td>Testimonials</td><td>Verbatim client voice — do not edit</td></tr>
+          <tr><td>CTAs</td><td>Action-led, low-pressure ("free, no-obligation")</td></tr>
+          <tr><td>Finance tips (social)</td><td>Educational, peer-to-peer, plain English</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div>
+        <div class="palette-label">Words to use</div>
+        <div class="tags">
+          <span class="tag">plain-English</span><span class="tag">clear</span><span class="tag">calm</span><span class="tag">current</span><span class="tag">on time</span><span class="tag">your mission</span><span class="tag">behind the scenes</span><span class="tag">flat monthly fee</span><span class="tag">no hourly billing</span><span class="tag">dedicated</span><span class="tag">nonprofit-only</span>
+        </div>
+      </div>
+      <div>
+        <div class="palette-label">Words to avoid</div>
+        <div class="tags">
+          <span class="tag warm">synergies</span><span class="tag warm">leverage</span><span class="tag warm">best-in-class</span><span class="tag warm">innovative</span><span class="tag warm">seamlessly</span><span class="tag warm">comprehensive solution</span><span class="tag warm">robust</span><span class="tag warm">scalable</span><span class="tag warm">journey</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 SPACING -->
+  <section class="section" id="spacing">
+    <div class="section-head">
+      <p class="section-num">06 · Spacing & layout</p>
+      <h2>Generous space projects calm.</h2>
+      <p>Financial anxiety is stressful — the design should feel the opposite. Everything breathes.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+      <div>
+        <div class="palette-label">Spacing scale</div>
+        <div class="spacing-items">
+          <div class="sp-row"><div class="sp-bar" style="width:84px;"></div><span class="sp-val">84px</span><span class="sp-use">Section vertical padding</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:48px;"></div><span class="sp-val">48px</span><span class="sp-use">Section heading margin-bottom</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:32px;"></div><span class="sp-val">32px</span><span class="sp-use">Wrap horizontal padding</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:22px;"></div><span class="sp-val">22px</span><span class="sp-use">Card gap in grid layouts</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:14px;"></div><span class="sp-val">14px</span><span class="sp-use">Button / CTA row gap</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:12px;"></div><span class="sp-val">12px</span><span class="sp-use">Pill / tag gap</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="palette-label">Border radius</div>
+        <table class="tbl" style="margin-top:0;">
+          <thead><tr><th>Component</th><th>Radius</th></tr></thead>
+          <tbody>
+            <tr><td>Cards</td><td><code>18px</code></td></tr>
+            <tr><td>Buttons</td><td><code>100px</code></td></tr>
+            <tr><td>CTA band</td><td><code>26px</code></td></tr>
+            <tr><td>Form inputs</td><td><code>11px</code></td></tr>
+            <tr><td>Pills / tags</td><td><code>100px</code></td></tr>
+            <tr><td>Team avatars</td><td><code>50%</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <div class="palette-label">Layout grid</div>
+      <table class="tbl">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Max content width</td><td><code>1200px</code>, centred</td></tr>
+          <tr><td>Hero grid split</td><td><code>1.08fr / 0.92fr</code> — text slightly wider than art</td></tr>
+          <tr><td>3-column card grid</td><td><code>repeat(3, 1fr)</code>, gap <code>22px</code></td></tr>
+          <tr><td>2-column grid</td><td><code>repeat(2, 1fr)</code>, gap <code>22px</code></td></tr>
+          <tr><td>Mobile breakpoint</td><td><code>900px</code> → all grids collapse to single column</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 07 COMPONENTS -->
+  <section class="section" id="components">
+    <div class="section-head">
+      <p class="section-num">07 · UI components</p>
+      <h2>Buttons, cards, and alternating sections.</h2>
+    </div>
+
+    <div class="palette-label">Buttons</div>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:16px; align-items:center;">
+      <a style="display:inline-flex;align-items:center;padding:14px 26px;border-radius:100px;font-family:'Onest',sans-serif;font-size:14px;font-weight:600;text-decoration:none;background:var(--deepwater);color:#fff;">Primary →</a>
+      <a style="display:inline-flex;align-items:center;padding:14px 26px;border-radius:100px;font-family:'Onest',sans-serif;font-size:14px;font-weight:600;text-decoration:none;background:var(--inkwell);color:#fff;">Dark</a>
+      <a style="display:inline-flex;align-items:center;padding:14px 26px;border-radius:100px;font-family:'Onest',sans-serif;font-size:14px;font-weight:600;text-decoration:none;background:var(--yolk);color:var(--inkwell);">Yolk CTA →</a>
+      <a style="display:inline-flex;align-items:center;padding:13px 24px;border-radius:100px;font-family:'Onest',sans-serif;font-size:14px;font-weight:600;text-decoration:none;background:transparent;color:var(--inkwell);border:1.5px solid rgba(0,34,54,0.18);">Ghost</a>
+    </div>
+
+    <table class="tbl" style="margin-bottom:28px;">
+      <thead><tr><th>Variant</th><th>Background</th><th>Text</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><code>btn-primary</code></td><td>Deepwater <code>#007E7C</code></td><td>White</td><td>Main page CTA</td></tr>
+        <tr><td><code>btn-dark</code></td><td>Inkwell <code>#002236</code></td><td>White</td><td>Nav CTA</td></tr>
+        <tr><td><code>btn-yolk</code></td><td>Yolk <code>#FFE079</code></td><td>Inkwell</td><td>Final CTA, download, consult</td></tr>
+        <tr><td><code>btn-ghost</code></td><td>Transparent</td><td>Inkwell (or Paper reversed)</td><td>Secondary action</td></tr>
+      </tbody>
+    </table>
+
+    <div class="palette-label">Section background rhythm</div>
+    <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:24px;">
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:14px 18px; font-size:13px; font-weight:600; color:var(--ink-soft);">Paper #FBF5F0 — default section</div>
+      <div style="background:var(--tan); border:1px solid var(--line); border-radius:10px; padding:14px 18px; font-size:13px; font-weight:600; color:var(--ink-soft);">Tan #F8EEE3 — alternate section</div>
+      <div style="background:var(--mist); border:1px solid var(--line); border-radius:10px; padding:14px 18px; font-size:13px; font-weight:600; color:var(--ink-soft);">Mist #E0F2F0 — feature/stats section</div>
+      <div style="background:var(--inkwell); border-radius:10px; padding:14px 18px; font-size:13px; font-weight:600; color:var(--paper);">Inkwell #002236 — dark/hero CTA section</div>
+      <div style="background:var(--deepwater); border-radius:10px; padding:14px 18px; font-size:13px; font-weight:600; color:#fff;">Deepwater #007E7C — teal accent section</div>
+    </div>
+  </section>
+
+  <!-- 08 SOCIAL -->
+  <section class="section" id="social">
+    <div class="section-head">
+      <p class="section-num">08 · Social content</p>
+      <h2>Four weeks, one arc.</h2>
+      <p>The launch plan follows a deliberate narrative: introduce → build authority → show value → convert. Cadence is 3 posts per week on each platform.</p>
+    </div>
+
+    <div class="palette-label" style="margin-bottom:14px;">Content arc</div>
+    <table class="tbl" style="margin-bottom:28px;">
+      <thead><tr><th>Week</th><th>Theme</th><th>Goal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Launch & introduce</td><td>Brand awareness</td></tr>
+        <tr><td><strong>2</strong></td><td>Establish authority</td><td>Trust and credibility</td></tr>
+        <tr><td><strong>3</strong></td><td>Show the value</td><td>Problem → solution</td></tr>
+        <tr><td><strong>4</strong></td><td>Engage & convert</td><td>Lead generation</td></tr>
+      </tbody>
+    </table>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;">
+      <div class="illus-card">
+        <div class="illus-card-label">LinkedIn — priority channel</div>
+        <p>Long-form text with 3–5 structured points. Native polls (no graphic). Educational carousels (6 slides). Testimonial cards. Link always in first comment, not body copy.</p>
+      </div>
+      <div class="illus-card">
+        <div class="illus-card-label">Instagram — visual channel</div>
+        <p>Short copy, emoji-forward. Reels for step-by-step tips. Carousels with "save + share" prompts. Stories mirror feed polls. Link in bio — update monthly for campaigns.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px;">
+      <div>
+        <div class="palette-label">LinkedIn hashtags</div>
+        <div class="tags">
+          <span class="tag">#NonprofitFinance</span>
+          <span class="tag">#CanadianNonprofits</span>
+          <span class="tag">#NonprofitLeadership</span>
+          <span class="tag">#NonprofitGovernance</span>
+          <span class="tag">#FractionalCFO</span>
+          <span class="tag">#Bookkeeping</span>
+          <span class="tag">#SocialImpact</span>
+        </div>
+      </div>
+      <div>
+        <div class="palette-label">Instagram hashtags</div>
+        <div class="tags">
+          <span class="tag">#NonprofitLife</span>
+          <span class="tag">#MissionDriven</span>
+          <span class="tag">#CharityCanada</span>
+          <span class="tag">#SocialImpact</span>
+          <span class="tag">#NonprofitTips</span>
+          <span class="tag">#Bookkeeping</span>
+          <span class="tag">#CanadianCharities</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rules">
+      <div class="rule"><span class="rule-badge do">Do</span>Use brand palette only — no off-palette colours in social graphics.</div>
+      <div class="rule"><span class="rule-badge do">Do</span>One primary message per graphic — never two competing headlines.</div>
+      <div class="rule"><span class="rule-badge do">Do</span>Boostable posts: clean, single clear CTA, ad-ready layout, send to a dedicated landing page (not homepage).</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Putting links in the body copy of LinkedIn posts — first comment only.</div>
+      <div class="rule"><span class="rule-badge dont">Avoid</span>Publishing CRA-adjacent content (PSB rebate, deferred revenue) without a quick compliance review first.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <div class="cta-band">
+    <h2>Finance, made sympl.</h2>
+    <p>sympl.finance · Part of Sympl Solutions — Strategy · Marketing · Digital · Finance · © Sympl 2026</p>
+  </div>
+
+</main>
+
+</body>
+</html>

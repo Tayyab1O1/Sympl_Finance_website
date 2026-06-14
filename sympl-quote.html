@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Quote | Sympl Finance</title>
+<meta name="description" content="Tell us about your nonprofit and we'll put together a tailored quote for bookkeeping, payroll, reporting, or CFO advisory services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap">
+<link rel="stylesheet" href="sympl-components.css">
+<script src="sympl-components.js" defer></script>
+<style>
+:root{
+  --inkwell:#002236; --deepwater:#007E7C; --underbrush:#003C32;
+  --bay:#65C1BF; --seaglass:#C2E6E1; --mist:#E0F2F0;
+  --yolk:#FFE079; --buttercup:#FFF5AB; --harvest:#E38900;
+  --sorbet:#FFB97D; --orangecream:#FFD9BA;
+  --paper:#FBF5F0; --tan:#F8EEE3;
+  --ink-soft:#4a5f6b; --line:rgba(0,34,54,0.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Onest',sans-serif;background:var(--paper);color:var(--inkwell);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px;}
+.kicker{font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--deepwater);margin-bottom:14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:100px;font-family:'Onest',sans-serif;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,background .2s,color .2s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--deepwater);color:#fff;}
+.btn-primary:hover{background:var(--underbrush);}
+.btn-yolk{background:var(--yolk);color:var(--inkwell);}
+.btn-yolk:hover{background:var(--harvest);color:#fff;}
+.btn-ghost{background:transparent;color:var(--inkwell);border:1.5px solid rgba(0,34,54,0.18);}
+.btn-ghost:hover{border-color:var(--inkwell);}
+.btn:focus-visible{outline:3px solid var(--bay);outline-offset:2px;}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:200;background:rgba(251,245,240,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:74px;}
+.wordmark{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
+.wordmark .wm{font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--inkwell);}
+.wordmark .wm .dot{position:relative;}
+.wordmark .wm .dot::after{content:'';position:absolute;left:-1px;right:-2px;bottom:-3px;height:4px;background:var(--yolk);border-radius:3px;transform:rotate(-2deg);}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--deepwater);margin-top:4px;}
+.nav-links{display:flex;align-items:center;gap:6px;}
+.nav-item{position:relative;}
+.nav-item > a{display:inline-block;padding:10px 14px;font-size:14.5px;font-weight:500;color:var(--inkwell);text-decoration:none;border-radius:100px;transition:background .2s;}
+.nav-item > a:hover{background:rgba(0,34,54,0.05);}
+.nav-item .caret{font-size:10px;color:var(--ink-soft);margin-left:3px;}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:248px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 14px 34px rgba(0,34,54,0.1);opacity:0;visibility:hidden;transform:translateY(6px);transition:all .2s;}
+.nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.dropdown a{display:block;padding:10px 14px;font-size:14px;font-weight:500;text-decoration:none;border-radius:9px;color:var(--inkwell);}
+.dropdown a:hover,.dropdown a[aria-current="page"]{background:var(--mist);color:var(--deepwater);}
+.dropdown a small{display:block;font-size:11.5px;font-weight:400;color:var(--ink-soft);margin-top:1px;}
+.nav-cta{margin-left:6px;padding:11px 20px;font-size:14px;}
+.nav-burger{display:none;}
+
+/* ── QUOTE PAGE ── */
+.quote-hero{padding:64px 0 80px;}
+.quote-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:flex-start;}
+
+.quote-copy h1{font-size:clamp(34px,4vw,52px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:18px;text-wrap:balance;}
+.quote-copy h1 em{font-family:'Lora',serif;font-style:italic;font-weight:600;}
+.swoosh-wrap{position:relative;display:inline-block;white-space:nowrap;}
+.swoosh-wrap svg{position:absolute;left:-2%;bottom:-0.34em;width:104%;height:0.5em;}
+.quote-copy .lead{font-size:16px;color:var(--ink-soft);line-height:1.65;margin-bottom:32px;}
+
+.what-to-expect{display:flex;flex-direction:column;gap:16px;}
+.expect-item{display:flex;gap:14px;align-items:flex-start;}
+.expect-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--mist);border:1px solid var(--seaglass);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--deepwater);}
+.expect-text strong{display:block;font-size:14px;font-weight:700;}
+.expect-text span{font-size:13px;color:var(--ink-soft);}
+
+/* ── FORM ── */
+.quote-form-wrap{position:sticky;top:90px;}
+.quote-panel{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 20px 56px rgba(0,34,54,0.09);overflow:hidden;}
+
+/* Step indicator */
+.steps-bar{display:flex;border-bottom:1px solid var(--line);padding:20px 28px;gap:0;}
+.step-dot{display:flex;align-items:center;gap:8px;flex:1;}
+.step-dot:not(:last-child)::after{content:'';flex:1;height:1px;background:var(--line);margin:0 8px;}
+.step-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;transition:background .3s,color .3s;}
+.step-icon.done{background:var(--deepwater);color:#fff;}
+.step-icon.active{background:var(--yolk);color:var(--inkwell);}
+.step-icon.pending{background:var(--tan);color:var(--ink-soft);}
+.step-label{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;}
+.step-label.active{color:var(--inkwell);}
+
+.form-steps{padding:28px;}
+
+/* Fields */
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.field label{font-size:13px;font-weight:700;color:var(--inkwell);}
+.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:14.5px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:12px 14px;width:100%;transition:border-color .2s;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--deepwater);background:#fff;}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5f6b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+.field textarea{min-height:88px;resize:vertical;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* Checkbox group */
+.check-group{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.check-option{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none;}
+.check-option:hover{border-color:var(--deepwater);background:var(--mist);}
+.check-option input[type=checkbox]{width:16px;height:16px;accent-color:var(--deepwater);flex-shrink:0;cursor:pointer;}
+.check-option input[type=checkbox]:checked + span{color:var(--deepwater);font-weight:600;}
+.check-option:has(input:checked){border-color:var(--deepwater);background:var(--mist);}
+.check-option span{font-size:13.5px;font-weight:500;}
+
+/* Nav buttons */
+.form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px;}
+.form-nav .btn-back{background:transparent;color:var(--ink-soft);border:1.5px solid rgba(0,34,54,0.13);padding:11px 20px;font-size:14px;}
+.form-nav .btn-back:hover{border-color:var(--inkwell);color:var(--inkwell);}
+.form-nav .btn-next{background:var(--deepwater);color:#fff;padding:13px 28px;font-size:15px;border:none;}
+.form-nav .btn-next:hover{background:var(--underbrush);}
+.form-nav .btn-submit{background:var(--yolk);color:var(--inkwell);padding:13px 28px;font-size:15px;border:none;}
+.form-nav .btn-submit:hover{background:var(--harvest);color:#fff;}
+
+.step-panel{display:none;}
+.step-panel.active{display:block;}
+
+.form-success-screen{display:none;padding:40px 28px;text-align:center;}
+.form-success-screen .success-icon{width:56px;height:56px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.form-success-screen h3{font-size:22px;font-weight:800;margin-bottom:10px;}
+.form-success-screen p{font-size:15px;color:var(--ink-soft);max-width:340px;margin:0 auto;}
+
+/* ── MOBILE ── */
+@media(max-width:960px){
+  .quote-grid{grid-template-columns:1fr;gap:40px;}
+  .quote-form-wrap{position:static;}
+  .quote-hero{padding-bottom:60px;}
+}
+@media(max-width:640px){
+  .form-row,.check-group{grid-template-columns:1fr;}
+  .steps-bar{padding:16px 20px;}
+  .form-steps{padding:20px;}
+  .nav-links{display:none;}
+  .nav-burger{display:inline-flex;}
+}
+</style>
+</head>
+<body>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true"><defs>
+  <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018 0.022" numOctaves="4" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="grain"/>
+    <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0" result="grainA"/>
+    <feComposite in="grainA" in2="rough" operator="in" result="grainMasked"/>
+    <feMerge><feMergeNode in="rough"/><feMergeNode in="grainMasked"/></feMerge>
+  </filter>
+</defs></svg>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark" aria-label="sympl finance home">
+      <img src="Dark.svg" alt="Sympl Finance" style="height:44px;width:auto;display:block;">
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <div class="nav-item">
+        <a href="index.html#services">Services <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll<small>Monthly books, payroll, allocations</small></a>
+          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance<small>Grants, audit prep, board packs</small></a>
+          <a href="sympl-cfo-advisory.html">CFO &amp; Advisory<small>Budgets, forecasts, finance decisions</small></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#serve">Who We Serve <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="sympl-arts.html">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
+          <a href="sympl-settlement.html">Immigrant &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="sympl-clients-partners.html">Clients &amp; Partners</a></div>
+      <div class="nav-item"><a href="sympl-about.html">About</a></div>
+      <a href="sympl-contact.html" class="btn btn-yolk nav-cta">Book a Free Review</a>
+      <a href="sympl-quote.html" class="btn btn-ghost nav-cta" aria-current="page">Get a quote</a>
+    </nav>
+    <a href="sympl-quote.html" class="btn btn-yolk nav-burger" style="padding:10px 16px;font-size:13px;">Get a quote</a>
+  </div>
+</header>
+
+<main>
+  <section class="quote-hero">
+    <div class="wrap quote-grid">
+
+      <!-- Left: copy -->
+      <div class="quote-copy">
+        <p class="kicker">Tailored pricing</p>
+        <h1>Get a <span class="swoosh-wrap">custom quote<svg viewBox="0 0 260 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C70 4, 190 4, 256 9" stroke="#FFE079" stroke-width="9" fill="none" stroke-linecap="round"/></svg></span> for your nonprofit.</h1>
+        <p class="lead">Every nonprofit is different — budget size, staff headcount, grant complexity. Tell us about yours and we'll come back with a clear, flat-fee quote. No surprises.</p>
+
+        <div class="what-to-expect">
+          <div class="expect-item">
+            <div class="expect-num">1</div>
+            <div class="expect-text">
+              <strong>Answer a few questions</strong>
+              <span>3 quick steps — about your org, services needed, and how to reach you.</span>
+            </div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">2</div>
+            <div class="expect-text">
+              <strong>We scope and price</strong>
+              <span>We review your answers and put together a tailored flat-fee proposal.</span>
+            </div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">3</div>
+            <div class="expect-text">
+              <strong>You get a clear number</strong>
+              <span>Typically within 1–2 business days. No obligation to proceed.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: multi-step form -->
+      <div class="quote-form-wrap">
+        <div class="quote-panel">
+
+          <!-- Steps bar -->
+          <div class="steps-bar" id="steps-bar">
+            <div class="step-dot">
+              <div class="step-icon active" id="si-1">1</div>
+              <span class="step-label active" id="sl-1">Your org</span>
+            </div>
+            <div class="step-dot">
+              <div class="step-icon pending" id="si-2">2</div>
+              <span class="step-label" id="sl-2">Services</span>
+            </div>
+            <div class="step-dot">
+              <div class="step-icon pending" id="si-3">3</div>
+              <span class="step-label" id="sl-3">Contact</span>
+            </div>
+          </div>
+
+          <div class="form-steps" id="form-steps">
+
+            <!-- Step 1: Your org -->
+            <div class="step-panel active" id="step-1">
+              <div class="form-row">
+                <div class="field">
+                  <label for="q-name">Your name</label>
+                  <input id="q-name" type="text" placeholder="Jane Smith" autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="q-org">Organization name</label>
+                  <input id="q-org" type="text" placeholder="Your nonprofit">
+                </div>
+              </div>
+              <div class="field">
+                <label for="q-type">Organization type</label>
+                <select id="q-type">
+                  <option value="">Select one…</option>
+                  <option>Arts &amp; culture (theatre, gallery, festival)</option>
+                  <option>Immigrant &amp; settlement services</option>
+                  <option>Social services / community org</option>
+                  <option>Health &amp; wellness nonprofit</option>
+                  <option>Education nonprofit</option>
+                  <option>Environmental nonprofit</option>
+                  <option>Other nonprofit / charity</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-budget">Annual operating budget</label>
+                <select id="q-budget">
+                  <option value="">Select a range…</option>
+                  <option>Under $250K</option>
+                  <option>$250K – $500K</option>
+                  <option>$500K – $1M</option>
+                  <option>$1M – $2.5M</option>
+                  <option>$2.5M – $5M</option>
+                  <option>Over $5M</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-staff">Number of paid staff</label>
+                <select id="q-staff">
+                  <option value="">Select a range…</option>
+                  <option>1–5</option>
+                  <option>6–15</option>
+                  <option>16–30</option>
+                  <option>31–50</option>
+                  <option>50+</option>
+                </select>
+              </div>
+              <div class="form-nav">
+                <span></span>
+                <button class="btn form-nav btn-next" onclick="goStep(2)">Next: Services →</button>
+              </div>
+            </div>
+
+            <!-- Step 2: Services -->
+            <div class="step-panel" id="step-2">
+              <div class="field">
+                <label>Which services do you need? <span style="font-weight:400;color:var(--ink-soft)">(select all that apply)</span></label>
+                <div class="check-group">
+                  <label class="check-option"><input type="checkbox" value="bookkeeping"><span>Bookkeeping</span></label>
+                  <label class="check-option"><input type="checkbox" value="payroll"><span>Payroll</span></label>
+                  <label class="check-option"><input type="checkbox" value="reporting"><span>Reporting &amp; compliance</span></label>
+                  <label class="check-option"><input type="checkbox" value="cfo"><span>CFO &amp; advisory</span></label>
+                  <label class="check-option"><input type="checkbox" value="audit"><span>Year-end &amp; audit prep</span></label>
+                  <label class="check-option"><input type="checkbox" value="cleanup"><span>Books cleanup</span></label>
+                </div>
+              </div>
+              <div class="field">
+                <label for="q-situation">Current situation</label>
+                <select id="q-situation">
+                  <option value="">Select one…</option>
+                  <option>We have no bookkeeper right now</option>
+                  <option>We're switching from another firm</option>
+                  <option>We're doing it in-house and need support</option>
+                  <option>We're a new nonprofit just getting started</option>
+                  <option>We need a one-time project done</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-software">Accounting software you use (if any)</label>
+                <select id="q-software">
+                  <option value="">Select one…</option>
+                  <option>QuickBooks Online</option>
+                  <option>QuickBooks Desktop</option>
+                  <option>Xero</option>
+                  <option>Sage</option>
+                  <option>Excel / spreadsheets</option>
+                  <option>None yet</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-fyear">Fiscal year end</label>
+                <select id="q-fyear">
+                  <option value="">Select a month…</option>
+                  <option>January 31</option>
+                  <option>February 28/29</option>
+                  <option>March 31</option>
+                  <option>April 30</option>
+                  <option>May 31</option>
+                  <option>June 30</option>
+                  <option>July 31</option>
+                  <option>August 31</option>
+                  <option>September 30</option>
+                  <option>October 31</option>
+                  <option>November 30</option>
+                  <option>December 31</option>
+                </select>
+              </div>
+              <div class="form-nav">
+                <button class="btn btn-back" onclick="goStep(1)">← Back</button>
+                <button class="btn btn-next" onclick="goStep(3)">Next: Contact →</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Contact -->
+            <div class="step-panel" id="step-3">
+              <div class="field">
+                <label for="q-email">Work email</label>
+                <input id="q-email" type="email" placeholder="jane@yourorg.ca" autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="q-phone">Phone number <span style="font-weight:400;color:var(--ink-soft)">(optional)</span></label>
+                <input id="q-phone" type="tel" placeholder="(416) 555-0100" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="q-timeline">When do you need this by?</label>
+                <select id="q-timeline">
+                  <option value="">Select one…</option>
+                  <option>As soon as possible</option>
+                  <option>Within the next month</option>
+                  <option>Within 1–3 months</option>
+                  <option>Just exploring for now</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="q-notes">Anything else we should know? <span style="font-weight:400;color:var(--ink-soft)">(optional)</span></label>
+                <textarea id="q-notes" placeholder="Grant complexity, specific deadlines, past issues, anything that helps us scope accurately…"></textarea>
+              </div>
+              <div class="form-nav">
+                <button class="btn btn-back" onclick="goStep(2)">← Back</button>
+                <button class="btn btn-submit" onclick="submitQuote()">Send my quote request →</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Success screen -->
+          <div class="form-success-screen" id="quote-success">
+            <div class="success-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#007E7C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Quote request received!</h3>
+            <p>We'll review your details and send a tailored flat-fee proposal within 1–2 business days. Keep an eye on your inbox.</p>
+            <a href="index.html" class="btn btn-ghost" style="margin-top:24px;">Back to home</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<sympl-footer></sympl-footer>
+
+<script>
+var currentStep = 1;
+
+function goStep(n) {
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep = n;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  updateStepsBar();
+  document.querySelector('.quote-panel').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function updateStepsBar() {
+  for (var i = 1; i <= 3; i++) {
+    var icon = document.getElementById('si-' + i);
+    var label = document.getElementById('sl-' + i);
+    icon.className = 'step-icon ' + (i < currentStep ? 'done' : i === currentStep ? 'active' : 'pending');
+    icon.textContent = i < currentStep ? '✓' : i;
+    label.className = 'step-label' + (i === currentStep ? ' active' : '');
+  }
+}
+
+function submitQuote() {
+  document.getElementById('form-steps').style.display = 'none';
+  document.querySelector('.steps-bar').style.display = 'none';
+  document.getElementById('quote-success').style.display = 'block';
+}
+</script>
+
+</body>
+</html>

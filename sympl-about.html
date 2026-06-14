@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Sympl Finance</title>
+<meta name="description" content="Meet the dedicated nonprofit finance team at Sympl Finance — CPAs, bookkeepers, and operations specialists who only work with mission-driven organizations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap">
+<link rel="stylesheet" href="sympl-components.css">
+<script src="sympl-components.js" defer></script>
+<style>
+:root{
+  --inkwell:#002236; --deepwater:#007E7C; --underbrush:#003C32;
+  --bay:#65C1BF; --seaglass:#C2E6E1; --mist:#E0F2F0;
+  --yolk:#FFE079; --buttercup:#FFF5AB; --harvest:#E38900;
+  --sorbet:#FFB97D; --orangecream:#FFD9BA;
+  --paper:#FBF5F0; --tan:#F8EEE3;
+  --ink-soft:#4a5f6b; --line:rgba(0,34,54,0.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Onest',sans-serif;background:var(--paper);color:var(--inkwell);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px;}
+section{padding:80px 0;}
+.kicker{font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--deepwater);margin-bottom:14px;}
+.h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;letter-spacing:-0.02em;line-height:1.1;}
+.lead{font-size:18px;color:var(--ink-soft);line-height:1.6;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:100px;font-family:'Onest',sans-serif;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,background .2s,color .2s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--deepwater);color:#fff;}
+.btn-primary:hover{background:var(--underbrush);}
+.btn-yolk{background:var(--yolk);color:var(--inkwell);}
+.btn-yolk:hover{background:var(--harvest);color:#fff;}
+.btn-ghost{background:transparent;color:var(--inkwell);border:1.5px solid rgba(0,34,54,0.18);}
+.btn-ghost:hover{border-color:var(--inkwell);}
+.btn:focus-visible{outline:3px solid var(--bay);outline-offset:2px;}
+
+/* ── Nav ── */
+.nav{position:sticky;top:0;z-index:200;background:rgba(251,245,240,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:74px;}
+.wordmark{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
+.wordmark .wm{font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--inkwell);}
+.wordmark .wm .dot{position:relative;}
+.wordmark .wm .dot::after{content:'';position:absolute;left:-1px;right:-2px;bottom:-3px;height:4px;background:var(--yolk);border-radius:3px;transform:rotate(-2deg);}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--deepwater);margin-top:4px;}
+.nav-links{display:flex;align-items:center;gap:6px;}
+.nav-item{position:relative;}
+.nav-item > a{display:inline-block;padding:10px 14px;font-size:14.5px;font-weight:500;color:var(--inkwell);text-decoration:none;border-radius:100px;transition:background .2s;}
+.nav-item > a:hover{background:rgba(0,34,54,0.05);}
+.nav-item > a[aria-current="page"]{background:var(--deepwater);color:#fff;}
+.nav-item .caret{font-size:10px;color:var(--ink-soft);margin-left:3px;}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:248px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 14px 34px rgba(0,34,54,0.1);opacity:0;visibility:hidden;transform:translateY(6px);transition:all .2s;}
+.nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.dropdown a{display:block;padding:10px 14px;font-size:14px;font-weight:500;text-decoration:none;border-radius:9px;color:var(--inkwell);}
+.dropdown a:hover{background:var(--mist);color:var(--deepwater);}
+.dropdown a small{display:block;font-size:11.5px;font-weight:400;color:var(--ink-soft);margin-top:1px;}
+.nav-cta{margin-left:10px;padding:11px 20px;font-size:14px;}
+.nav-burger{display:none;background:var(--yolk);color:var(--inkwell);border:none;border-radius:100px;cursor:pointer;}
+
+/* ── Hero ── */
+.about-hero{padding:72px 0 88px;background:var(--paper);}
+.about-hero-grid{display:grid;grid-template-columns:1.24fr 0.76fr;gap:48px;align-items:center;}
+.about-hero-copy{min-width:0;}
+.about-hero h1{font-size:clamp(40px,5.2vw,62px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:20px;max-width:680px;}
+.about-hero h1 em{font-family:'Lora',serif;font-style:italic;font-weight:600;}
+.swoosh-wrap{position:relative;display:inline-block;white-space:nowrap;}
+.swoosh-wrap svg{position:absolute;left:-2%;bottom:-0.34em;width:104%;height:0.5em;}
+.about-hero .lead{max-width:560px;margin-bottom:28px;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ── About mosaic ── */
+.mosaic-zone{position:relative;}
+.about-hero .mosaic{display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:64px;gap:10px;}
+.cube{border-radius:10px;overflow:hidden;position:relative;background:#ddd6cc;opacity:0;transform:translateY(14px);}
+.cube.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease;}
+.cube.fill{background:var(--seaglass);}
+.cube.fill.warm{background:var(--orangecream);}
+.cube .ph-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(0,34,54,0.45);text-align:center;padding:6px;line-height:1.4;}
+.cube img{width:100%;height:100%;object-fit:cover;}
+
+/* about mosaic — mirrors homepage grammar, big block top-right + big block bottom-center */
+.a-c1{grid-column:4/span 2;grid-row:1/span 2;}
+.a-c2{grid-column:1;grid-row:1;}
+.a-c3{grid-column:2;grid-row:1;}
+.a-c4{grid-column:2;grid-row:2;}
+.a-c5{grid-column:3;grid-row:2;}
+.a-c6{grid-column:4;grid-row:3;}
+.a-c7{grid-column:2/span 2;grid-row:3/span 2;}
+.a-c8{grid-column:1;grid-row:4;}
+.a-c9{grid-column:5;grid-row:4;}
+
+.badge{position:absolute;top:-22px;right:-6px;width:112px;height:112px;}
+.badge .ring{position:absolute;inset:0;animation:spin 16s linear infinite;}
+.badge .centre{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-style:italic;font-weight:600;font-size:18px;color:var(--inkwell);}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── Reveal ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.in{opacity:1;transform:none;}
+
+/* ── Story ── */
+.story{background:var(--tan);}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.story-visual{position:relative;}
+.story-photo-main{border-radius:18px;background:var(--mist);border:1px solid var(--seaglass);aspect-ratio:4/3;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.story-photo-main img{width:100%;height:100%;object-fit:cover;}
+.story-photo-main .ph-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,34,54,0.4);text-align:center;padding:16px;}
+.story-photo-float{position:absolute;bottom:-22px;right:-22px;width:120px;height:120px;border-radius:14px;background:var(--yolk);border:4px solid var(--paper);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.story-photo-float img{width:100%;height:100%;object-fit:cover;}
+.story-photo-float .ph-label{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(0,34,54,0.5);text-align:center;padding:8px;line-height:1.4;}
+.story-text{padding-top:4px;}
+.story-text .h2{margin-bottom:20px;}
+.story-text p{font-size:17px;color:var(--ink-soft);line-height:1.7;margin-bottom:16px;}
+.story-text p:last-child{margin-bottom:0;}
+.story-stat-row{display:flex;gap:32px;margin-top:32px;padding-top:28px;border-top:1px solid rgba(0,34,54,.1);}
+.story-stat span{display:block;font-size:36px;font-weight:800;letter-spacing:-.04em;color:var(--inkwell);line-height:1;}
+.story-stat small{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--deepwater);margin-top:4px;display:block;}
+
+/* ── Team ── */
+.team-section{background:var(--paper);}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;}
+.team-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;transition:transform .24s,box-shadow .24s;}
+.team-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,34,54,0.08);}
+.team-photo{width:80px;height:80px;border-radius:50%;overflow:hidden;margin-bottom:16px;background:var(--inkwell);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:20px;font-style:italic;font-weight:600;color:var(--yolk);}
+.team-photo img{width:100%;height:100%;object-fit:cover;}
+.team-card h3{font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px;}
+.team-role{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--deepwater);margin-bottom:14px;display:block;}
+.team-bio{font-size:14px;color:var(--ink-soft);line-height:1.62;flex:1;}
+.team-cpa-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--underbrush);background:var(--mist);border:1px solid var(--seaglass);border-radius:999px;padding:4px 10px;margin-top:14px;align-self:flex-start;}
+
+/* ── Credentials ── */
+.creds-section{background:var(--mist);}
+.creds-head{text-align:center;max-width:640px;margin:0 auto 52px;}
+.creds-head .h2{margin-bottom:12px;}
+.creds-head p{font-size:16px;color:var(--ink-soft);line-height:1.62;}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.cert-card{background:#fff;border:1px solid var(--seaglass);border-radius:18px;padding:28px;transition:transform .24s,box-shadow .24s;}
+.cert-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,34,54,0.07);}
+.cert-icon{width:52px;height:52px;border-radius:13px;background:var(--deepwater);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.cert-icon svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.cert-card h3{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px;}
+.cert-card p{font-size:14px;color:var(--ink-soft);line-height:1.6;}
+.cert-note{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:28px;max-width:600px;margin-left:auto;margin-right:auto;}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  section{padding:56px 0;}
+  .wrap{padding:0 22px;}
+  .nav-links{display:none;}
+  .nav-burger{display:inline-flex;}
+  .about-hero{padding:44px 0 56px;}
+  .about-hero-grid{grid-template-columns:1fr;gap:36px;}
+  .about-hero h1{max-width:none;}
+  .mosaic-zone{order:-1;margin-top:18px;}
+  .story-grid{grid-template-columns:1fr;gap:36px;}
+  .story-photo-float{display:none;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .cert-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .team-grid,.cert-grid{grid-template-columns:1fr;}
+  .hero-ctas .btn{width:100%;justify-content:center;}
+  .story-stat-row{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark" aria-label="Sympl Finance home">
+      <img src="Dark.svg" alt="Sympl Finance" style="height:44px;width:auto;display:block;">
+    </a>
+    <button class="nav-burger" aria-label="Open menu" style="padding:10px 16px;font-size:13px;">Menu</button>
+    <nav class="nav-links" aria-label="Main">
+      <div class="nav-item">
+        <a href="index.html#services">Services <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="index.html#services">Bookkeeping<small>Monthly close, reconciliations</small></a>
+          <a href="index.html#services">Payroll<small>Canadian payroll, CRA compliance</small></a>
+          <a href="index.html#services">Reporting<small>Board packs, funder reports</small></a>
+          <a href="index.html#services">Finance Manager<small>Fractional CFO-level support</small></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#serve">Who We Serve <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="index.html#serve">Arts &amp; Culture<small>Galleries, theatres, festivals</small></a>
+          <a href="index.html#serve">Settlement &amp; Housing<small>Newcomer and housing orgs</small></a>
+          <a href="index.html#serve">Health &amp; Social Services<small>Community health nonprofits</small></a>
+          <a href="index.html#serve">Education &amp; Youth<small>Schools, after-school, literacy</small></a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="sympl-clients-partners.html">Clients &amp; Partners</a></div>
+      <div class="nav-item"><a href="sympl-about.html" aria-current="page">About</a></div>
+      <a href="sympl-contact.html" class="btn btn-yolk nav-cta">Book a Free Review</a>
+      <a href="sympl-quote.html" class="btn btn-ghost nav-cta">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════════════════════════════════ HERO -->
+<section class="about-hero">
+  <div class="wrap about-hero-grid">
+    <div class="about-hero-copy">
+      <p class="kicker rv">About Sympl Finance</p>
+      <h1 class="rv">Finance people who <em>only</em><br>
+        work with <span class="swoosh-wrap">nonprofits.<svg viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C44 4, 116 4, 156 9" stroke="#FFE079" stroke-width="9" fill="none" stroke-linecap="round"/></svg></span>
+      </h1>
+      <p class="lead rv">Sympl Finance is the dedicated nonprofit finance team within Sympl Solutions. We take the financial weight off mission-driven organizations — so the people doing the work can stay focused on the work.</p>
+      <div class="hero-ctas rv">
+        <a href="#team" class="btn btn-primary">Meet the team</a>
+        <a href="sympl-quote.html" class="btn btn-ghost">Get a quote</a>
+      </div>
+    </div>
+    <div class="mosaic-zone rv">
+      <div class="mosaic about-hero__mosaic" aria-label="Photos of the Sympl Finance team">
+        <!-- PHOTO SLOTS: replace .ph-label content with <img src="…" alt="…"> -->
+        <div class="cube a-c1"><div class="ph-label">Team photo</div></div>
+        <div class="cube a-c2"><div class="ph-label">Photo · Natasha</div></div>
+        <div class="cube a-c3 fill" aria-hidden="true"></div>
+        <div class="cube a-c4 fill warm" aria-hidden="true"></div>
+        <div class="cube a-c5"><div class="ph-label">Photo · workspace</div></div>
+        <div class="cube a-c6"><div class="ph-label">Photo · Bilal</div></div>
+        <div class="cube a-c7"><div class="ph-label">Team meeting</div></div>
+        <div class="cube a-c8 fill warm" aria-hidden="true"></div>
+        <div class="cube a-c9 fill" aria-hidden="true"></div>
+      </div>
+      <div class="badge" role="img" aria-label="About Sympl Finance">
+        <svg class="ring" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="58" fill="#FFE079" stroke="#002236" stroke-width="1.6"/>
+          <defs><path id="cp-about" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"/></defs>
+          <text style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;fill:#002236;font-family:'Onest',sans-serif;"><textPath href="#cp-about">TEAM · STORY · MISSION · SYMPL · </textPath></text>
+        </svg>
+        <span class="centre">us</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ STORY -->
+<section class="story">
+  <div class="wrap story-grid">
+    <div class="story-visual rv">
+      <div class="story-photo-main">
+        <!-- Replace with: <img src="assets/team-photo.jpg" alt="The Sympl Finance team"> -->
+        <p class="ph-label">Add a team photo here</p>
+      </div>
+      <div class="story-photo-float">
+        <!-- Replace with: <img src="assets/office.jpg" alt="Sympl office"> -->
+        <p class="ph-label">Office photo</p>
+      </div>
+    </div>
+    <div class="story-text">
+      <p class="kicker rv">Our story</p>
+      <h2 class="h2 rv">Built around one<br>simple idea.</h2>
+      <div class="rv" style="margin-top:20px;">
+        <p>Nonprofits deserve the same financial clarity that businesses take for granted — without paying executive salaries to get it. Time and again we met brilliant organizations held back by books that were behind, reports that arrived late, and finances that left boards in the dark.</p>
+        <p>So we built a finance practice exclusively for them. Not generalists who dabble in nonprofits — a team that does nothing else. From day-to-day bookkeeping to fractional finance management, we bring clarity and confidence to every financial decision.</p>
+      </div>
+      <div class="story-stat-row rv">
+        <div class="story-stat">
+          <span>100%</span>
+          <small>Nonprofits only</small>
+        </div>
+        <div class="story-stat">
+          <span>CPA</span>
+          <small>Led practice</small>
+        </div>
+        <div class="story-stat">
+          <span>Canada</span>
+          <small>Based &amp; focused</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ TEAM -->
+<section class="team-section" id="team">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="kicker">Our team</p>
+      <h2 class="h2">The people behind your books.</h2>
+      <p>A blend of CPAs, bookkeepers, and operations specialists — so you're never relying on one person's availability or knowledge.</p>
+    </div>
+    <div class="team-grid">
+
+      <article class="team-card rv">
+        <div class="team-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/67feb55e71c3cd5e34b41270/b83bcf5a-a592-46ea-8222-9bac7429f4cc/nq.jpg?format=300w" alt="Natasha Qureshi" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Natasha Qureshi</h3>
+        <span class="team-role">Principal</span>
+        <p class="team-bio">Natasha leads Sympl with a background spanning healthcare, fintech, consumer goods, and the nonprofit sector. She has worked with global names like Citibank alongside startups and charities, and brings an MBA, a Master's in Computer Science, and a Fulbright scholarship to her work helping nonprofits build strong, sustainable finances.</p>
+      </article>
+
+      <article class="team-card rv">
+        <div class="team-photo">ZS</div>
+        <h3>Zarah Syed</h3>
+        <span class="team-role">Client &amp; Operations Manager</span>
+        <p class="team-bio">Zarah keeps client relationships and day-to-day operations running smoothly. She's the steady point of contact making sure work is delivered on time, communication stays clear, and every nonprofit we work with feels well looked after.</p>
+      </article>
+
+      <article class="team-card rv">
+        <div class="team-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/67feb55e71c3cd5e34b41270/1ad247c7-f03c-4784-9408-425191a94ac0/WhatsApp+Image+2025-05-16+at+9.04.05+PM.jpeg?format=300w" alt="Bilal Zafar" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Bilal Zafar</h3>
+        <span class="team-role">Bookkeeping &amp; Finance Lead</span>
+        <p class="team-bio">Bilal is a CPA with roots at KPMG and a strong track record across nonprofits, startups, manufacturing, and consumer goods. He leads a team of bookkeepers who help Canadian nonprofits keep audit-ready books, deliver timely monthly reports, and modernize their accounting through smart automation.</p>
+        <span class="team-cpa-tag">
+          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 9 2 6"/></svg>
+          CPA
+        </span>
+      </article>
+
+      <article class="team-card rv">
+        <div class="team-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/67feb55e71c3cd5e34b41270/4808b24f-3aaa-45a1-b527-0e04443911bb/ahmer.png?format=300w" alt="Ahmer Tahir" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Ahmer Tahir</h3>
+        <span class="team-role">Bookkeeping &amp; Finance Lead</span>
+        <p class="team-bio">Ahmer is a CPA and former EY professional with deep experience in audit, bookkeeping, and financial advisory across nonprofits, small businesses, and startups. He's trusted for his precision and for turning complex financial data into clear, actionable insight that helps nonprofits do more with limited resources.</p>
+        <span class="team-cpa-tag">
+          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 9 2 6"/></svg>
+          CPA
+        </span>
+      </article>
+
+      <article class="team-card rv">
+        <div class="team-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/67feb55e71c3cd5e34b41270/9bbe56cd-e8fb-43b8-a78d-01e7f9a14350/tayyab.jpg?format=300w" alt="Tayyab Rashad" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Tayyab Rashad</h3>
+        <span class="team-role">Digital Transformation Manager</span>
+        <p class="team-bio">Tayyab specializes in the systems and tools behind smooth finances — optimizing workflows, setting up cloud accounting, and automating manual work. With a background in development, project management, and accounting (and a distinction in ACCA), he helps nonprofits run leaner and smarter.</p>
+        <span class="team-cpa-tag" style="background:var(--buttercup);border-color:var(--harvest);color:var(--harvest);">
+          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 9 2 6"/></svg>
+          ACCA
+        </span>
+      </article>
+
+      <article class="team-card rv">
+        <div class="team-photo">BC</div>
+        <h3>Beverly Cubio</h3>
+        <span class="team-role">Admin Assistant</span>
+        <p class="team-bio">Beverly supports the team behind the scenes, keeping documents, schedules, and the small details organized so client work moves along without a hitch.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CREDENTIALS -->
+<section class="creds-section">
+  <div class="wrap">
+    <div class="creds-head rv">
+      <p class="kicker">Credentials</p>
+      <h2 class="h2">Qualified, certified, and accountable.</h2>
+      <p>Our team holds recognized professional designations across accounting, payroll, and the tools we run your books on — so you can trust the work is done right.</p>
+    </div>
+    <div class="cert-grid">
+
+      <div class="cert-card rv">
+        <div class="cert-icon">
+          <svg viewBox="0 0 26 26">
+            <circle cx="13" cy="9" r="5"/>
+            <path d="M4 22c0-5 4-8 9-8s9 3 9 8"/>
+            <path d="M17 2l1.5 3 3.5.5-2.5 2.5.5 3.5L17 10l-3 1.5.5-3.5L12 5.5l3.5-.5z"/>
+          </svg>
+        </div>
+        <h3>ACCA</h3>
+        <p>Chartered Certified Accountants — globally recognized expertise in accounting and financial management. Held by our digital and operations leads.</p>
+      </div>
+
+      <div class="cert-card rv">
+        <div class="cert-icon" style="background:var(--underbrush);">
+          <svg viewBox="0 0 26 26">
+            <rect x="3" y="5" width="20" height="16" rx="3"/>
+            <path d="M8 10h10M8 14h6"/>
+            <circle cx="19" cy="18" r="4" fill="#FFE079" stroke="#FFE079"/>
+            <path d="M17.5 18l1 1 2-2" stroke="#002236" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3>QuickBooks ProAdvisor</h3>
+        <p>Certified at Level 1, Level 2, and Payroll — your cloud accounting is set up and run by specialists who know the platform inside out.</p>
+      </div>
+
+      <div class="cert-card rv">
+        <div class="cert-icon" style="background:var(--harvest);">
+          <svg viewBox="0 0 26 26">
+            <path d="M13 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/>
+          </svg>
+        </div>
+        <h3>Payroll Compliance Professional</h3>
+        <p>The PCP designation — Canadian payroll compliance done accurately and on time, so your staff are paid correctly and CRA is always satisfied.</p>
+      </div>
+
+    </div>
+    <p class="cert-note rv">CPA (Chartered Professional Accountant) credentials are held by our finance leads. Designations are maintained across the Sympl Finance team.</p>
+  </div>
+</section>
+
+<sympl-testimonials variant="home"></sympl-testimonials>
+<sympl-final-cta></sympl-final-cta>
+
+</main>
+
+<sympl-footer></sympl-footer>
+
+<script>
+(function(){
+  /* Reveal on scroll */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  /* Hero mosaic: staggered load + slow crossfade pulse */
+  const cubes = [...document.querySelectorAll('.about-hero__mosaic .cube')];
+  cubes.forEach((c, i) => setTimeout(() => c.classList.add('in'), 120 + i * 90));
+  const photoCubes = cubes.filter(c => !c.classList.contains('fill'));
+  let mi = 0;
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => {
+      const c = photoCubes[mi % photoCubes.length];
+      c.style.transition = 'opacity .8s';
+      c.style.opacity = '0.35';
+      setTimeout(() => { c.style.opacity = '1'; }, 800);
+      mi++;
+    }, 2400);
+  }
+})();
+</script>
+</body>
+</html>
