@@ -138,7 +138,7 @@ section{padding:80px 0;}
 .nav-cta{margin-left:10px;padding:11px 20px;font-size:14px;}
 .nav-burger{display:none;}
 
-.service-hero{padding:72px 0 88px;background:var(--paper);}
+.service-hero{padding:clamp(36px,4vh,52px) 0 clamp(44px,5vh,60px);background:var(--paper);min-height:clamp(340px,60vh,500px);}
 .service-hero-grid{display:grid;grid-template-columns:1.02fr 0.98fr;gap:56px;align-items:center;}
 .service-hero h1{font-size:clamp(40px,5.2vw,62px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:20px;text-wrap:balance;}
 .service-hero h1 em{font-family:'Lora',serif;font-style:italic;font-weight:600;}
@@ -265,7 +265,7 @@ section{padding:80px 0;}
   .wrap{padding:0 22px;}
   .nav-links{display:none;}
   .nav-burger{display:inline-flex;}
-  .service-hero{padding:44px 0 72px;}
+  .service-hero{padding:32px 0 44px;min-height:auto;}
   .service-hero-grid,.artifact-grid,.fit-grid{grid-template-columns:1fr;gap:36px;}
   .include-grid,.process-grid,.proof-strip{grid-template-columns:1fr 1fr;}
   .close-board{order:-1;}
@@ -313,6 +313,7 @@ section{padding:80px 0;}
       </div>
       <div class="nav-item"><a href="sympl-clients-partners.html">Clients &amp; Partners</a></div>
       <div class="nav-item"><a href="sympl-about.html">About</a></div>
+      <div class="nav-item"><a href="sympl-blog.html">Blog</a></div>
       <a href="sympl-contact.html" class="btn btn-yolk nav-cta">Book a Free Review</a>
       <a href="sympl-quote.html" class="btn btn-ghost nav-cta">Get a quote</a>
     </nav>
@@ -636,6 +637,7 @@ section{padding:80px 0;}
         <div class="sympl-footer-col">
           <h4>Company</h4>
           <a href="sympl-about.html">About</a>
+          <a href="sympl-blog.html">Blog</a>
           <a href="sympl-clients-partners.html">Clients &amp; Partners</a>
           <a href="index.html#tips">Finance tips</a>
           <a href="sympl-contact.html">Book a review</a>

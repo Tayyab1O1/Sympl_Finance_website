@@ -362,6 +362,7 @@ class SymplFooter extends HTMLElement {
               <h4>Company</h4>
               <a href="sympl-about.html">About</a>
               <a href="sympl-clients-partners.html">Clients &amp; Partners</a>
+              <a href="sympl-blog.html">Blog</a>
               <a href="index.html#tips">Finance tips</a>
               <a href="sympl-contact.html">Book a review</a>
               <a href="sympl-quote.html">Get a quote</a>
@@ -415,6 +416,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '</div>' +
         '<a href="sympl-clients-partners.html">Clients &amp; Partners</a>' +
         '<a href="sympl-about.html">About</a>' +
+        '<a href="sympl-blog.html">Blog</a>' +
       '</div>' +
       '<div class="nav-drawer-ctas">' +
         '<a href="sympl-contact.html" class="btn btn-yolk">Book a Free Review</a>' +
