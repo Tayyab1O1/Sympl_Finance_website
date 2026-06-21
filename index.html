@@ -1410,6 +1410,207 @@
         color: var(--deepwater);
       }
 
+      /* ───────── TECH + CREDENTIALS ───────── */
+      .credtech {
+        padding: 80px 0;
+        background: var(--inkwell);
+        color: var(--paper);
+      }
+      .credtech-head {
+        text-align: center;
+        margin-bottom: 56px;
+      }
+      .credtech-head .kicker { color: var(--bay); }
+      .credtech-head h2 {
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--paper);
+        margin-top: 8px;
+      }
+      .credtech-block { margin-bottom: 52px; }
+      .credtech-block:last-child { margin-bottom: 0; }
+      .credtech-sub {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(251,245,240,0.45);
+        margin-bottom: 20px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .creds-carousel-wrap { position: relative; }
+      .creds-track-outer { overflow: hidden; }
+      .creds-track {
+        display: flex;
+        gap: 12px;
+        will-change: transform;
+      }
+      .cert-pill {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
+        padding: 16px 22px;
+        flex: 0 0 calc(25% - 9px);
+        min-width: 0;
+      }
+      .cert-abbr {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--yolk);
+        letter-spacing: -0.02em;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .cert-detail { display: flex; flex-direction: column; gap: 2px; }
+      .cert-title {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--paper);
+        line-height: 1.2;
+      }
+      .cert-body {
+        font-size: 11.5px;
+        color: rgba(251,245,240,0.5);
+        line-height: 1.4;
+      }
+      .tools-carousel-wrap {
+        position: relative;
+      }
+      .tools-scroll-btn {
+        position: absolute;
+        right: -52px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        z-index: 2;
+      }
+      .tools-scroll-btn:hover { background: rgba(255,255,255,0.2); box-shadow: 0 0 0 6px rgba(255,255,255,0.06); }
+      .tools-scroll-btn:active { background: rgba(255,255,255,0.28); }
+      .tools-scroll-btn svg { width: 14px; height: 14px; fill: rgba(251,245,240,0.85); }
+      .tools-track-outer { overflow: hidden; }
+      .tools-track {
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        grid-auto-flow: column;
+        grid-auto-columns: calc(20% - 9.6px);
+        gap: 12px;
+        will-change: transform;
+      }
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+      }
+      .tool-card {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        transition: background 0.2s;
+      }
+      .tool-card:hover { background: rgba(255,255,255,0.09); }
+      .tool-logo-wrap {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        background: rgba(255,255,255,0.92);
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .tool-logo-wrap img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+        display: block;
+      }
+      .tool-more {
+        background: rgba(255,255,255,0.03);
+        border: 1px dashed rgba(255,255,255,0.18);
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        color: rgba(251,245,240,0.4);
+        transition: all 0.2s;
+      }
+      .tool-more:hover { background: rgba(255,255,255,0.06); color: rgba(251,245,240,0.75); border-color: rgba(255,255,255,0.3); }
+      .tool-more-arrow { font-size: 26px; line-height: 1; }
+      .tool-more-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+      .tool-ico {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .tool-ico svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+      .tool-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--paper);
+        margin-bottom: 3px;
+      }
+      .tool-use {
+        font-size: 11.5px;
+        color: rgba(251,245,240,0.5);
+        line-height: 1.35;
+      }
+      @media (max-width: 900px) {
+        .tools-grid { grid-template-columns: repeat(2, 1fr); }
+        .cert-pill { min-width: 140px; }
+      }
+      @media (max-width: 560px) {
+        .tools-grid { grid-template-columns: 1fr 1fr; }
+        .certs-row { flex-direction: column; }
+      }
+
+      /* ───────── CTA BRIDGE ───────── */
+      .cta-bridge { background: var(--mist); padding: 52px 0; }
+      .cta-bridge-card {
+        background: #fff;
+        border: 1px solid var(--seaglass);
+        border-radius: 14px;
+        padding: 24px 28px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+      .cta-bridge-text {
+        font-size: 15px;
+        color: var(--ink-soft);
+        line-height: 1.55;
+        max-width: 600px;
+      }
+      .cta-bridge-btns { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+      @media (max-width: 680px) {
+        .cta-bridge-card { flex-direction: column; align-items: flex-start; }
+      }
+
       /* ───────── FINAL CTA ───────── */
       .final {
         padding: 80px 0 84px;
@@ -2051,6 +2252,47 @@
     </section>
     -->
 
+    <!-- ═══════════ SERVICES OVERVIEW ═══════════ -->
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="services-head rv">
+          <p class="kicker">What we do</p>
+          <h2 class="h2">One partner for your whole finance function.</h2>
+        </div>
+        <div class="svc-grid">
+          <div
+            class="svc-tabs"
+            id="svcTabs"
+            role="tablist"
+            aria-label="Services"
+          ></div>
+          <div class="svc-stage rv">
+            <div class="svc-stage-inner" id="svcStage"></div>
+            <div class="svc-photo">
+              <img
+                id="svcPhoto"
+                src="images/Homepage/bookkeeping.jpg"
+                alt=""
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  object-position: 50% 20%;
+                "
+              />
+            </div>
+            <span class="sparkle" aria-hidden="true"
+              ><svg width="20" height="20" viewBox="0 0 20 20">
+                <path
+                  d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z"
+                  fill="#FFB97D"
+                /></svg
+            ></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════ WHO WE SERVE ═══════════ -->
     <section class="serve" id="serve">
       <div class="wrap">
@@ -2136,46 +2378,334 @@
       </div>
     </section>
 
-    <!-- ═══════════ SERVICES OVERVIEW ═══════════ -->
-    <section class="services" id="services">
+    <!-- ── CTA BRIDGE 1 ── -->
+    <div class="cta-bridge">
       <div class="wrap">
-        <div class="services-head rv">
-          <p class="kicker">What we do</p>
-          <h2 class="h2">One partner for your whole finance function.</h2>
+        <div class="cta-bridge-card rv">
+          <p class="cta-bridge-text">Sound like your organization? Start with a free, no-pressure review of your finances — no prep needed.</p>
+          <div class="cta-bridge-btns">
+            <a href="sympl-contact.html" class="btn btn-primary">Book a free review →</a>
+            <a href="sympl-quote.html" class="btn btn-ghost">Get a quote</a>
+          </div>
         </div>
-        <div class="svc-grid">
-          <div
-            class="svc-tabs"
-            id="svcTabs"
-            role="tablist"
-            aria-label="Services"
-          ></div>
-          <div class="svc-stage rv">
-            <div class="svc-stage-inner" id="svcStage"></div>
-            <div class="svc-photo">
-              <img
-                id="svcPhoto"
-                src="images/Homepage/bookkeeping.jpg"
-                alt=""
-                style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  object-position: 50% 20%;
-                "
-              />
-            </div>
-            <span class="sparkle" aria-hidden="true"
-              ><svg width="20" height="20" viewBox="0 0 20 20">
-                <path
-                  d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z"
-                  fill="#FFB97D"
-                /></svg
-            ></span>
+      </div>
+    </div>
+
+    <!-- ═══════════ INSIGHTS / BLOG ═══════════ -->
+    <section class="insights" id="insights">
+      <div class="wrap">
+        <h2 class="insights-heading rv">Insights</h2>
+        <div class="insights-grid">
+          <a href="sympl-blog.html" class="insights-featured rv">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=85&auto=format&fit=crop" alt="Nonprofit finance insights" />
+            <span class="btn btn-yolk insights-cta">View All Posts</span>
+          </a>
+          <div class="insights-list">
+            <a href="sympl-blog-post.html?id=t3010-filing-checklist" class="insight-item rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&q=80&auto=format&fit=crop" alt="T3010 filing" />
+              <div class="insight-text">
+                <p class="insight-cat">GRANT REPORTING</p>
+                <h3>The T3010 Filing Checklist Every Ontario Nonprofit Needs Before March 31</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
+            <a href="sympl-blog-post.html?id=grant-tracking-ledger" class="insight-item rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80&auto=format&fit=crop" alt="Grant tracking ledger" />
+              <div class="insight-text">
+                <p class="insight-cat">BOOKKEEPING</p>
+                <h3>Why Nonprofits Need a Separate Grant Tracking Ledger</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
+            <a href="sympl-blog-post.html?id=payroll-remittance-deadlines" class="insight-item rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?w=300&q=80&auto=format&fit=crop" alt="CRA payroll remittance" />
+              <div class="insight-text">
+                <p class="insight-cat">PAYROLL</p>
+                <h3>CRA Payroll Remittance Deadlines for Small Nonprofits</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
+            <a href="sympl-blog-post.html?id=toronto-theatre-case-study" class="insight-item insight-item--hide-mobile rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&q=80&auto=format&fit=crop" alt="Toronto theatre case study" />
+              <div class="insight-text">
+                <p class="insight-cat">ARTS &amp; CULTURE</p>
+                <h3>How a Toronto Theatre Company Reclaimed 12 Hours a Month</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ═══════════ TECH + CREDENTIALS ═══════════ -->
+    <section class="credtech" id="credentials">
+      <div class="wrap">
+        <div class="credtech-head rv">
+          <p class="kicker">Built different</p>
+          <h2>Certified professionals. Tech-forward practice.</h2>
+        </div>
+
+        <!-- Credentials block -->
+        <div class="credtech-block">
+          <p class="credtech-sub rv">Our credentials — qualified, accountable, nonprofit-focused</p>
+          <div class="creds-carousel-wrap">
+            <div class="creds-track-outer">
+              <div class="creds-track" id="credsTrack">
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">CPA</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Chartered Professional Accountant</span>
+                    <span class="cert-body">CPA Canada — the gold standard in Canadian accounting</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">ACCA</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Chartered Certified Accountant</span>
+                    <span class="cert-body">Association of Chartered Certified Accountants, UK & global</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">CA</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Chartered Accountant</span>
+                    <span class="cert-body">Institute of Chartered Accountants — rigorous professional standard</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">ProAdvisor</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">QuickBooks Elite ProAdvisor</span>
+                    <span class="cert-body">Top 2% of QuickBooks consulting firms in Canada</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">Xero</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Xero Certified Advisor</span>
+                    <span class="cert-body">Certified in Xero accounting, reporting & migrations</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">Dext</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Dext Certified Partner</span>
+                    <span class="cert-body">Certified in automated receipt capture & document workflows</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">HUB</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Hubdoc Certified</span>
+                    <span class="cert-body">Certified in Hubdoc document collection & management</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">PCP</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Payroll Compliance Practitioner</span>
+                    <span class="cert-body">National Payroll Institute — Canadian payroll compliance</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="tools-scroll-btn" id="credsArrow" aria-label="Next credentials">
+              <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tools block -->
+        <div class="credtech-block">
+          <p class="credtech-sub rv">Our tech stack — digitally enabled, cloud-native, and fluent in every tool</p>
+          <div class="tools-carousel-wrap">
+          <div class="tools-track-outer">
+          <div class="tools-track" id="toolsTrack">
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/quickbooks.intuit.com" alt="QuickBooks logo" onerror="this.style.display='none';this.parentNode.innerHTML='<svg viewBox=\'0 0 24 24\' width=\'22\' height=\'22\' fill=\'none\' stroke=\'#2CA01C\' stroke-width=\'2\'><path d=\'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z\'/></svg>'">
+              </div>
+              <div>
+                <p class="tool-name">QuickBooks Online</p>
+                <p class="tool-use">Core accounting & bookkeeping platform</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/wagepoint.com" alt="Wagepoint logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Wagepoint</p>
+                <p class="tool-use">Canadian payroll, T4s & remittances</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/dext.com" alt="Dext logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Dext</p>
+                <p class="tool-use">Receipt capture & document processing</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/plooto.com" alt="Plooto logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Plooto</p>
+                <p class="tool-use">AP automation & bill payments</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/fathom.finance" alt="Fathom logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Fathom</p>
+                <p class="tool-use">Financial reporting & dashboards</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/hubdoc.com" alt="Hubdoc logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Hubdoc</p>
+                <p class="tool-use">Document collection & management</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft 365 logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Microsoft 365</p>
+                <p class="tool-use">Documents, spreadsheets & collaboration</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/rotessa.com" alt="Rotessa logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Rotessa</p>
+                <p class="tool-use">Bank-to-bank pre-authorized payments</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/payworks.ca" alt="Payworks logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Payworks</p>
+                <p class="tool-use">Payroll & HR management platform</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/xero.com" alt="Xero logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Xero</p>
+                <p class="tool-use">Cloud accounting for growing orgs</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/asana.com" alt="Asana logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Asana</p>
+                <p class="tool-use">Task & project tracking for teams</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/slack.com" alt="Slack logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Slack</p>
+                <p class="tool-use">Team communication & file sharing</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/notion.so" alt="Notion logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Notion</p>
+                <p class="tool-use">Docs, wikis & project management</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/monday.com" alt="Monday.com logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Monday.com</p>
+                <p class="tool-use">Visual work & project management</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/workspace.google.com" alt="Google Workspace logo" onerror="this.style.onerror=null;this.src='https://logo.clearbit.com/google.com'">
+              </div>
+              <div>
+                <p class="tool-name">Google Workspace</p>
+                <p class="tool-use">Email, Drive, Docs & collaboration</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/stripe.com" alt="Stripe logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Stripe</p>
+                <p class="tool-use">Online payments & donation processing</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/zoom.us" alt="Zoom logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">Zoom</p>
+                <p class="tool-use">Video meetings & board presentations</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="https://logo.clearbit.com/canadahelps.org" alt="CanadaHelps logo" onerror="this.style.display='none'">
+              </div>
+              <div>
+                <p class="tool-name">CanadaHelps</p>
+                <p class="tool-use">Online donation platform for nonprofits</p>
+              </div>
+            </div>
+          </div>
+          </div>
+          <button class="tools-scroll-btn" id="toolsArrow" aria-label="Next tools">
+            <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
+          </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA BRIDGE 2 ── -->
+    <div class="cta-bridge">
+      <div class="wrap">
+        <div class="cta-bridge-card rv">
+          <p class="cta-bridge-text">Certified professionals backed by modern tools. See what that looks like for your organization in a free 30-minute review.</p>
+          <div class="cta-bridge-btns">
+            <a href="sympl-contact.html" class="btn btn-primary">Book a free review →</a>
+            <a href="sympl-quote.html" class="btn btn-ghost">Get a quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ═══════════ HOW IT WORKS ═══════════ -->
     <!--
@@ -2228,8 +2758,8 @@
       >
         <div class="proof-wrap">
           <div class="proof-head">
-            <p class="kicker">What our partners say</p>
-            <h2>Organizations that stopped worrying about their books.</h2>
+            <p class="kicker">What our clients say</p>
+            <h2>Trusted by nonprofits who mean business.</h2>
           </div>
           <div class="testimonial-lab">
             <div class="testimonial-track">
@@ -2280,53 +2810,6 @@
         </div>
       </section>
     </sympl-testimonials>
-
-    <!-- ═══════════ INSIGHTS / BLOG ═══════════ -->
-    <section class="insights" id="insights">
-      <div class="wrap">
-        <h2 class="insights-heading rv">Insights</h2>
-        <div class="insights-grid">
-          <a href="sympl-blog.html" class="insights-featured rv">
-            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=85&auto=format&fit=crop" alt="Nonprofit finance insights" />
-            <span class="btn btn-yolk insights-cta">View All Posts</span>
-          </a>
-          <div class="insights-list">
-            <a href="sympl-blog-post.html?id=t3010-filing-checklist" class="insight-item rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&q=80&auto=format&fit=crop" alt="T3010 filing" />
-              <div class="insight-text">
-                <p class="insight-cat">GRANT REPORTING</p>
-                <h3>The T3010 Filing Checklist Every Ontario Nonprofit Needs Before March 31</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-            <a href="sympl-blog-post.html?id=grant-tracking-ledger" class="insight-item rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80&auto=format&fit=crop" alt="Grant tracking ledger" />
-              <div class="insight-text">
-                <p class="insight-cat">BOOKKEEPING</p>
-                <h3>Why Nonprofits Need a Separate Grant Tracking Ledger</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-            <a href="sympl-blog-post.html?id=payroll-remittance-deadlines" class="insight-item rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?w=300&q=80&auto=format&fit=crop" alt="CRA payroll remittance" />
-              <div class="insight-text">
-                <p class="insight-cat">PAYROLL</p>
-                <h3>CRA Payroll Remittance Deadlines for Small Nonprofits</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-            <a href="sympl-blog-post.html?id=toronto-theatre-case-study" class="insight-item insight-item--hide-mobile rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&q=80&auto=format&fit=crop" alt="Toronto theatre case study" />
-              <div class="insight-text">
-                <p class="insight-cat">ARTS &amp; CULTURE</p>
-                <h3>How a Toronto Theatre Company Reclaimed 12 Hours a Month</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ═══════════ DATA SECURITY ═══════════ -->
     <!--
@@ -2842,6 +3325,103 @@
         e.target.style.display = "none";
         document.getElementById("magnetThanks").style.display = "block";
       });
+
+      // ── Credentials carousel ────────────────────────────────
+      (function () {
+        const track = document.getElementById("credsTrack");
+        const btn   = document.getElementById("credsArrow");
+        if (!track || !btn) return;
+
+        const origPills = Array.from(track.querySelectorAll(".cert-pill"));
+        origPills.forEach(p => {
+          const clone = p.cloneNode(true);
+          clone.classList.remove("rv");
+          clone.classList.add("in");
+          track.appendChild(clone);
+        });
+
+        // Equalize pill heights
+        const allPills = track.querySelectorAll(".cert-pill");
+        let maxH = 0;
+        allPills.forEach(p => { if (p.offsetHeight > maxH) maxH = p.offsetHeight; });
+        if (maxH > 0) allPills.forEach(p => { p.style.minHeight = maxH + "px"; });
+
+        let pos = 0, animating = false;
+
+        function pillWidth() {
+          const p = track.querySelector(".cert-pill");
+          return p ? p.offsetWidth + 12 : 0;
+        }
+
+        btn.addEventListener("click", function () {
+          if (animating) return;
+          animating = true;
+          pos += 1;
+          track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
+          track.style.transform  = `translateX(${-pos * pillWidth()}px)`;
+
+          track.addEventListener("transitionend", function done() {
+            track.removeEventListener("transitionend", done);
+            if (pos >= origPills.length) {
+              track.style.transition = "none";
+              pos = 0;
+              track.style.transform = "translateX(0)";
+            }
+            animating = false;
+          }, { once: true });
+        });
+      })();
+
+      // ── Tools carousel ──────────────────────────────────────
+      (function () {
+        const track = document.getElementById("toolsTrack");
+        const btn   = document.getElementById("toolsArrow");
+        if (!track || !btn) return;
+
+        // Duplicate all cards for infinite loop
+        const origCards = Array.from(track.querySelectorAll(".tool-card"));
+        origCards.forEach(c => {
+          const clone = c.cloneNode(true);
+          clone.classList.remove("rv");
+          clone.classList.add("in");
+          track.appendChild(clone);
+        });
+
+        // Pin every card to the tallest card height so both grid rows are equal
+        const allCards = track.querySelectorAll(".tool-card");
+        let maxH = 0;
+        allCards.forEach(c => { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
+        if (maxH > 0) allCards.forEach(c => { c.style.minHeight = maxH + "px"; });
+
+        // 2-row column-flow grid: originals / 2 rows = number of original columns
+        const origCols = origCards.length / 2;
+
+        let pos = 0;
+        let animating = false;
+
+        function colWidth() {
+          const c = track.querySelector(".tool-card");
+          return c ? c.offsetWidth + 12 : 0;
+        }
+
+        btn.addEventListener("click", function () {
+          if (animating) return;
+          animating = true;
+          pos += 1;
+          track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
+          track.style.transform  = `translateX(${-pos * colWidth()}px)`;
+
+          track.addEventListener("transitionend", function done() {
+            track.removeEventListener("transitionend", done);
+            if (pos >= origCols) {
+              track.style.transition = "none";
+              pos = 0;
+              track.style.transform = "translateX(0)";
+            }
+            animating = false;
+          }, { once: true });
+        });
+      })();
     </script>
   </body>
 </html>

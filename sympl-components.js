@@ -190,8 +190,8 @@ class SymplTestimonials extends HTMLElement {
       <section class="sympl-proof" id="testimonials" aria-label="Client testimonials">
         <div class="proof-wrap">
           <div class="proof-head">
-            <p class="kicker">What our partners say</p>
-            <h2>Organizations that stopped worrying about their books.</h2>
+            <p class="kicker">What our clients say</p>
+            <h2>Trusted by nonprofits who mean business.</h2>
           </div>
           <div class="testimonial-lab" data-testimonial-lab></div>
         </div>
