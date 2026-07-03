@@ -205,19 +205,37 @@ section{padding:80px 0;}
 .team-bio{font-size:14px;color:var(--ink-soft);line-height:1.62;flex:1;}
 .team-cpa-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--underbrush);background:var(--mist);border:1px solid var(--seaglass);border-radius:999px;padding:4px 10px;margin-top:14px;align-self:flex-start;}
 
-/* ── Credentials ── */
-.creds-section{background:var(--mist);}
+/* ── Credentials (mirrors homepage credtech credentials block) ── */
+.creds-section{background:var(--inkwell);color:var(--paper);}
 .creds-head{text-align:center;max-width:640px;margin:0 auto 52px;}
-.creds-head .h2{margin-bottom:12px;}
-.creds-head p{font-size:16px;color:var(--ink-soft);line-height:1.62;}
-.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.cert-card{background:#fff;border:1px solid var(--seaglass);border-radius:18px;padding:28px;transition:transform .24s,box-shadow .24s;}
-.cert-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,34,54,0.07);}
-.cert-icon{width:52px;height:52px;border-radius:13px;background:var(--deepwater);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
-.cert-icon svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.cert-card h3{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px;}
-.cert-card p{font-size:14px;color:var(--ink-soft);line-height:1.6;}
-.cert-note{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:28px;max-width:600px;margin-left:auto;margin-right:auto;}
+.creds-head .kicker{color:var(--bay);}
+.creds-head .h2{margin-bottom:12px;color:var(--paper);}
+.creds-head p{font-size:16px;color:rgba(251,245,240,0.65);line-height:1.62;}
+.creds-carousel-wrap{position:relative;}
+.creds-track-outer{overflow:hidden;}
+.creds-track{display:flex;gap:12px;will-change:transform;}
+.cert-pill{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px 22px;flex:0 0 calc(25% - 9px);min-width:0;}
+.cert-abbr{font-size:20px;font-weight:800;color:var(--yolk);letter-spacing:-0.02em;line-height:1;white-space:nowrap;}
+.cert-detail{display:flex;flex-direction:column;gap:2px;}
+.cert-title{font-size:13.5px;font-weight:700;color:var(--paper);line-height:1.2;}
+.cert-body{font-size:11.5px;color:rgba(251,245,240,0.5);line-height:1.4;}
+.tools-scroll-btn{position:absolute;right:-52px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,box-shadow .2s;z-index:2;}
+.tools-scroll-btn:hover{background:rgba(255,255,255,0.2);box-shadow:0 0 0 6px rgba(255,255,255,0.06);}
+.tools-scroll-btn:active{background:rgba(255,255,255,0.28);}
+.tools-scroll-btn svg{width:14px;height:14px;fill:rgba(251,245,240,0.85);}
+@media(max-width:640px){.cert-pill{min-width:140px;}}
+
+/* ── Client marquee (mirrors homepage) ── */
+.marquee-band{padding:34px 0 40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);}
+.marquee-label{text-align:center;font-size:12.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:22px;}
+.marquee{overflow:hidden;position:relative;}
+.marquee-track{display:flex;gap:64px;width:max-content;animation:marqueeScroll 32s linear infinite;}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+@keyframes marqueeScroll{to{transform:translateX(-50%);}}
+.logo-slot{display:flex;align-items:center;gap:10px;opacity:0.6;filter:grayscale(1);font-size:15px;font-weight:700;letter-spacing:-0.01em;color:var(--inkwell);white-space:nowrap;}
+.logo-slot img{width:30px;height:30px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+.logo-slot .name{display:inline-block;width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none;}}
 
 /* ── Responsive ── */
 @media(max-width:900px){
@@ -259,10 +277,9 @@ section{padding:80px 0;}
       <div class="nav-item">
         <a href="index.html#serve">Who We Serve <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="index.html#serve">Arts &amp; Culture<small>Galleries, theatres, festivals</small></a>
-          <a href="index.html#serve">Settlement &amp; Housing<small>Newcomer and housing orgs</small></a>
-          <a href="index.html#serve">Health &amp; Social Services<small>Community health nonprofits</small></a>
-          <a href="index.html#serve">Education &amp; Youth<small>Schools, after-school, literacy</small></a>
+          <a href="sympl-arts.html">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+          <a href="sympl-nonprofit.html">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
         </div>
       </div>
       <div class="nav-item"><a href="sympl-clients-partners.html">Clients &amp; Partners</a></div>
@@ -287,8 +304,8 @@ section{padding:80px 0;}
   </div>
   <div class="about-hero-inner wrap">
     <p class="kicker rv">About Sympl Finance</p>
-    <h1 class="rv">Finance people who <em>only</em><br>
-      work with <span class="swoosh-wrap">nonprofits.<svg viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C44 4, 116 4, 156 9" stroke="#FFE079" stroke-width="9" fill="none" stroke-linecap="round"/></svg></span>
+    <h1 class="rv">Financial clarity, without<br>
+      the <span class="swoosh-wrap">executive salary.<svg viewBox="0 0 320 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C88 4, 232 4, 316 9" stroke="#FFE079" stroke-width="9" fill="none" stroke-linecap="round"/></svg></span>
     </h1>
   </div>
 </section>
@@ -298,12 +315,7 @@ section{padding:80px 0;}
   <div class="wrap story-grid">
     <div class="story-visual rv">
       <div class="story-photo-main">
-        <!-- Replace with: <img src="assets/team-photo.jpg" alt="The Sympl Finance team"> -->
-        <p class="ph-label">Add a team photo here</p>
-      </div>
-      <div class="story-photo-float">
-        <!-- Replace with: <img src="assets/office.jpg" alt="Sympl office"> -->
-        <p class="ph-label">Office photo</p>
+        <img src="images/team/Team.png" alt="The Sympl Finance team" loading="lazy">
       </div>
     </div>
     <div class="story-text">
@@ -321,10 +333,6 @@ section{padding:80px 0;}
         <div class="story-stat">
           <span>CPA</span>
           <small>Led practice</small>
-        </div>
-        <div class="story-stat">
-          <span>Canada</span>
-          <small>Based &amp; focused</small>
         </div>
       </div>
     </div>
@@ -364,10 +372,6 @@ section{padding:80px 0;}
         <h3>Bilal Zafar</h3>
         <span class="team-role">Bookkeeping &amp; Finance Lead</span>
         <p class="team-bio">Bilal is a CPA with roots at KPMG and a strong track record across nonprofits, startups, manufacturing, and consumer goods. He leads a team of bookkeepers who help Canadian nonprofits keep audit-ready books, deliver timely monthly reports, and modernize their accounting through smart automation.</p>
-        <span class="team-cpa-tag">
-          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 9 2 6"/></svg>
-          CPA
-        </span>
       </article>
 
       <article class="team-card rv">
@@ -377,10 +381,6 @@ section{padding:80px 0;}
         <h3>Ahmer Tahir</h3>
         <span class="team-role">Bookkeeping &amp; Finance Lead</span>
         <p class="team-bio">Ahmer is a CPA and former EY professional with deep experience in audit, bookkeeping, and financial advisory across nonprofits, small businesses, and startups. He's trusted for his precision and for turning complex financial data into clear, actionable insight that helps nonprofits do more with limited resources.</p>
-        <span class="team-cpa-tag">
-          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 9 2 6"/></svg>
-          CPA
-        </span>
       </article>
 
       <article class="team-card rv">
@@ -390,10 +390,6 @@ section{padding:80px 0;}
         <h3>Tayyab Rashad</h3>
         <span class="team-role">Digital Transformation Manager</span>
         <p class="team-bio">Tayyab specializes in the systems and tools behind smooth finances - optimizing workflows, setting up cloud accounting, and automating manual work. With a background in development, project management, and accounting (and a distinction in ACCA), he helps nonprofits run leaner and smarter.</p>
-        <span class="team-cpa-tag" style="background:var(--buttercup);border-color:var(--harvest);color:var(--harvest);">
-          <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 9 2 6"/></svg>
-          ACCA
-        </span>
       </article>
 
       <article class="team-card rv">
@@ -413,49 +409,93 @@ section{padding:80px 0;}
     <div class="creds-head rv">
       <p class="kicker">Credentials</p>
       <h2 class="h2">Qualified, certified, and accountable.</h2>
-      <p>Our team holds recognized professional designations across accounting, payroll, and the tools we run your books on - so you can trust the work is done right.</p>
+      <p>Our team holds recognized professional designations across accounting and payroll - so you can trust the work is done right.</p>
     </div>
-    <div class="cert-grid">
-
-      <div class="cert-card rv">
-        <div class="cert-icon">
-          <svg viewBox="0 0 26 26">
-            <circle cx="13" cy="9" r="5"/>
-            <path d="M4 22c0-5 4-8 9-8s9 3 9 8"/>
-            <path d="M17 2l1.5 3 3.5.5-2.5 2.5.5 3.5L17 10l-3 1.5.5-3.5L12 5.5l3.5-.5z"/>
-          </svg>
+    <div class="creds-carousel-wrap">
+      <div class="creds-track-outer">
+        <div class="creds-track" id="credsTrack">
+          <div class="cert-pill rv">
+            <span class="cert-abbr">CPA</span>
+            <div class="cert-detail">
+              <span class="cert-title">Chartered Professional Accountant</span>
+              <span class="cert-body">CPA Canada — the gold standard in Canadian accounting</span>
+            </div>
+          </div>
+          <div class="cert-pill rv">
+            <span class="cert-abbr">ACCA</span>
+            <div class="cert-detail">
+              <span class="cert-title">Chartered Certified Accountant</span>
+              <span class="cert-body">Association of Chartered Certified Accountants, UK & global</span>
+            </div>
+          </div>
+          <div class="cert-pill rv">
+            <span class="cert-abbr">PCP</span>
+            <div class="cert-detail">
+              <span class="cert-title">Payroll Compliance Practitioner</span>
+              <span class="cert-body">National Payroll Institute — Canadian payroll compliance</span>
+            </div>
+          </div>
+          <div class="cert-pill rv">
+            <span class="cert-abbr">ProAdvisor</span>
+            <div class="cert-detail">
+              <span class="cert-title">QuickBooks Elite ProAdvisor</span>
+              <span class="cert-body">Top 2% of QuickBooks consulting firms in Canada</span>
+            </div>
+          </div>
+          <div class="cert-pill rv">
+            <span class="cert-abbr">Xero</span>
+            <div class="cert-detail">
+              <span class="cert-title">Xero Certified Advisor</span>
+              <span class="cert-body">Certified in Xero accounting, reporting & migrations</span>
+            </div>
+          </div>
+          <div class="cert-pill rv">
+            <span class="cert-abbr">Dext</span>
+            <div class="cert-detail">
+              <span class="cert-title">Dext Certified Partner</span>
+              <span class="cert-body">Certified in automated receipt capture & document workflows</span>
+            </div>
+          </div>
         </div>
-        <h3>ACCA</h3>
-        <p>Chartered Certified Accountants - globally recognized expertise in accounting and financial management. Held by our digital and operations leads.</p>
       </div>
-
-      <div class="cert-card rv">
-        <div class="cert-icon" style="background:var(--underbrush);">
-          <svg viewBox="0 0 26 26">
-            <rect x="3" y="5" width="20" height="16" rx="3"/>
-            <path d="M8 10h10M8 14h6"/>
-            <circle cx="19" cy="18" r="4" fill="#FFE079" stroke="#FFE079"/>
-            <path d="M17.5 18l1 1 2-2" stroke="#002236" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <h3>QuickBooks ProAdvisor</h3>
-        <p>Certified at Level 1, Level 2, and Payroll - your cloud accounting is set up and run by specialists who know the platform inside out.</p>
-      </div>
-
-      <div class="cert-card rv">
-        <div class="cert-icon" style="background:var(--harvest);">
-          <svg viewBox="0 0 26 26">
-            <path d="M13 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/>
-          </svg>
-        </div>
-        <h3>Payroll Compliance Professional</h3>
-        <p>The PCP designation - Canadian payroll compliance done accurately and on time, so your staff are paid correctly and CRA is always satisfied.</p>
-      </div>
-
+      <button class="tools-scroll-btn" id="credsArrow" aria-label="Next credentials">
+        <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
+      </button>
     </div>
-    <p class="cert-note rv">CPA (Chartered Professional Accountant) credentials are held by our finance leads. Designations are maintained across the Sympl Finance team.</p>
   </div>
 </section>
+
+<!-- ═══════════ CLIENT MARQUEE ═══════════ -->
+<div class="marquee-band">
+  <p class="marquee-label">
+    Trusted by nonprofits across Canada
+  </p>
+  <div class="marquee">
+    <div class="marquee-track" id="mtrack">
+      <span class="logo-slot"
+        ><img src="images/clients/Logos/Bcurrent.png" alt="" loading="lazy" /><span class="name">Bcurrent</span></span
+      >
+      <span class="logo-slot"
+        ><img src="images/clients/Logos/Care%3AOf.png" alt="" loading="lazy" /><span class="name">Care/Of</span></span
+      >
+      <span class="logo-slot"
+        ><img src="images/clients/Logos/East%20End%20Arts.png" alt="" loading="lazy" /><span class="name">East End Arts</span></span
+      >
+      <span class="logo-slot"
+        ><img src="images/clients/Logos/EcoEquitable.png" alt="" loading="lazy" /><span class="name">EcoEquitable</span></span
+      >
+      <span class="logo-slot"
+        ><img src="images/clients/Logos/Pacific%20Immigration%20Resource%20Society.png" alt="" loading="lazy" /><span class="name">Pacific Immigration Resource Society</span></span
+      >
+      <span class="logo-slot"
+        ><img src="images/clients/Logos/Regent%20Park%20Film%20Festival.png" alt="" loading="lazy" /><span class="name">Regent Park Film Festival</span></span
+      >
+      <span class="logo-slot"
+        ><img src="images/clients/Logos/The%20Reading%20Partnership.png" alt="" loading="lazy" /><span class="name">The Reading Partnership</span></span
+      >
+    </div>
+  </div>
+</div>
 
 <sympl-testimonials variant="home">
   <section class="sympl-proof" id="testimonials" aria-label="Client testimonials">
@@ -530,14 +570,14 @@ section{padding:80px 0;}
         </div>
         <div class="sympl-footer-col">
           <h4>Services</h4>
-          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll</a>
-          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance</a>
+          <a href="sympl-bookkeeping.html">Bookkeeping</a>
+          <a href="sympl-payroll.html">Payroll</a>
           <a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>
         </div>
         <div class="sympl-footer-col">
           <h4>Who we serve</h4>
           <a href="sympl-arts.html">Arts &amp; Culture</a>
-          <a href="sympl-settlement.html">Immigrant &amp; Settlement</a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement</a>
           <a href="index.html#serve">All nonprofits</a>
         </div>
         <div class="sympl-footer-col">
@@ -582,6 +622,55 @@ section{padding:80px 0;}
       mi++;
     }, 2400);
   }
+
+  /* Credentials carousel */
+  const track = document.getElementById("credsTrack");
+  const btn   = document.getElementById("credsArrow");
+  if (track && btn) {
+    const origPills = Array.from(track.querySelectorAll(".cert-pill"));
+    origPills.forEach(p => {
+      const clone = p.cloneNode(true);
+      clone.classList.remove("rv");
+      clone.classList.add("in");
+      track.appendChild(clone);
+    });
+
+    const allPills = track.querySelectorAll(".cert-pill");
+    let maxH = 0;
+    allPills.forEach(p => { if (p.offsetHeight > maxH) maxH = p.offsetHeight; });
+    if (maxH > 0) allPills.forEach(p => { p.style.minHeight = maxH + "px"; });
+
+    let pos = 0, animating = false;
+
+    function pillWidth() {
+      const p = track.querySelector(".cert-pill");
+      return p ? p.offsetWidth + 12 : 0;
+    }
+
+    btn.addEventListener("click", function () {
+      if (animating) return;
+      animating = true;
+      pos += 1;
+      track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
+      track.offsetHeight; // force reflow so the transition registers
+      track.style.transform  = `translateX(${-pos * pillWidth()}px)`;
+
+      window.setTimeout(function () {
+        if (pos >= origPills.length) {
+          track.style.transition = "none";
+          pos = 0;
+          track.style.transform = "translateX(0)";
+          track.offsetHeight;
+          track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
+        }
+        animating = false;
+      }, 460);
+    });
+  }
+
+  /* Client marquee: duplicate track for seamless loop */
+  const mt = document.getElementById("mtrack");
+  if (mt) mt.innerHTML += mt.innerHTML;
 })();
 </script>
 </body>

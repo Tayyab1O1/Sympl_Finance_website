@@ -364,7 +364,7 @@
         font-weight: 800;
         letter-spacing: -0.03em;
         line-height: 1.08;
-        margin-bottom: 20px;
+        margin-bottom: 44px;
       }
       .hero h1 em {
         font-family: "Lora", serif;
@@ -379,9 +379,9 @@
       .swoosh-wrap svg {
         position: absolute;
         left: -2%;
-        bottom: -0.34em;
+        bottom: -0.76em;
         width: 104%;
-        height: 0.5em;
+        height: 0.62em;
       }
       .hero .lead {
         max-width: 480px;
@@ -400,7 +400,12 @@
       .mosaic {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        grid-auto-rows: 64px;
+        grid-template-rows: repeat(4, 64px);
+        grid-template-areas:
+          "a a b b f1"
+          "a a b b f1"
+          "f2 c c d d"
+          "f2 c c d d";
         gap: 10px;
       }
       .cube {
@@ -444,70 +449,23 @@
         height: 100%;
         object-fit: cover;
       }
-      .c1 {
-        grid-column: 2 / span 2;
-        grid-row: 1 / span 2;
+      .m-a {
+        grid-area: a;
       }
-      .c2 {
-        grid-column: 4;
-        grid-row: 1;
+      .m-b {
+        grid-area: b;
       }
-      .c3 {
-        grid-column: 1;
-        grid-row: 2;
+      .m-c {
+        grid-area: c;
       }
-      .c4 {
-        grid-column: 5;
-        grid-row: 2;
+      .m-d {
+        grid-area: d;
       }
-      .c5 {
-        grid-column: 4;
-        grid-row: 2;
+      .m-f1 {
+        grid-area: f1;
       }
-      .c6 {
-        grid-column: 2;
-        grid-row: 3;
-      }
-      .c7 {
-        grid-column: 3 / span 2;
-        grid-row: 3 / span 2;
-      }
-      .c8 {
-        grid-column: 1;
-        grid-row: 4;
-      }
-      .c9 {
-        grid-column: 5;
-        grid-row: 4;
-      }
-      .badge {
-        position: absolute;
-        top: -22px;
-        right: -6px;
-        width: 112px;
-        height: 112px;
-      }
-      .badge .ring {
-        position: absolute;
-        inset: 0;
-        animation: spin 16s linear infinite;
-      }
-      .badge .centre {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Lora", serif;
-        font-style: italic;
-        font-weight: 600;
-        font-size: 18px;
-        color: var(--inkwell);
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+      .m-f2 {
+        grid-area: f2;
       }
 
       /* ───────── MARQUEE ───────── */
@@ -556,13 +514,19 @@
         color: var(--inkwell);
         white-space: nowrap;
       }
-      .logo-slot span.mark {
-        width: 26px;
-        height: 26px;
-        border-radius: 7px;
-        background: var(--inkwell);
-        opacity: 0.25;
+      .logo-slot img {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        object-fit: cover;
         flex-shrink: 0;
+      }
+      .logo-slot .name {
+        display: inline-block;
+        width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       /* ───────── STATEMENT ───────── */
@@ -624,21 +588,6 @@
       .serve-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 16px 36px rgba(0, 34, 54, 0.08);
-      }
-      .serve-card.spec {
-        border: 1.5px solid var(--yolk);
-      }
-      .spec-badge {
-        position: absolute;
-        top: -11px;
-        left: 20px;
-        background: var(--yolk);
-        color: var(--inkwell);
-        font-size: 10.5px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        padding: 4px 12px;
-        border-radius: 100px;
       }
       .serve-ico {
         width: 48px;
@@ -1478,9 +1427,6 @@
         color: rgba(251,245,240,0.5);
         line-height: 1.4;
       }
-      .tools-carousel-wrap {
-        position: relative;
-      }
       .tools-scroll-btn {
         position: absolute;
         right: -52px;
@@ -1498,18 +1444,9 @@
       .tools-scroll-btn:hover { background: rgba(255,255,255,0.2); box-shadow: 0 0 0 6px rgba(255,255,255,0.06); }
       .tools-scroll-btn:active { background: rgba(255,255,255,0.28); }
       .tools-scroll-btn svg { width: 14px; height: 14px; fill: rgba(251,245,240,0.85); }
-      .tools-track-outer { overflow: hidden; }
-      .tools-track {
-        display: grid;
-        grid-template-rows: repeat(2, auto);
-        grid-auto-flow: column;
-        grid-auto-columns: calc(20% - 9.6px);
-        gap: 12px;
-        will-change: transform;
-      }
       .tools-grid {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 12px;
       }
       .tool-card {
@@ -1926,12 +1863,7 @@
           gap: 16px;
         }
         .mosaic {
-          grid-auto-rows: 54px;
-        }
-        .badge {
-          width: 92px;
-          height: 92px;
-          top: -14px;
+          grid-template-rows: repeat(4, 54px);
         }
         .rep-strip {
           width: 72%;
@@ -1981,9 +1913,6 @@
         .marquee-track {
           animation: none;
         }
-        .badge .ring {
-          animation: none;
-        }
       }
     </style>
   </head>
@@ -2002,14 +1931,14 @@
           <div class="nav-item">
             <a href="#services">Services <span class="caret">▾</span></a>
             <div class="dropdown">
-              <a href="sympl-bookkeeping-payroll.html"
-                >Bookkeeping &amp; Payroll<small
-                  >Monthly books, payroll, bill payments</small
+              <a href="sympl-bookkeeping.html"
+                >Bookkeeping<small
+                  >Monthly books, reconciliations, cleanup</small
                 ></a
               >
-              <a href="sympl-reporting-compliance.html"
-                >Reporting &amp; Compliance<small
-                  >Grants, T3010, audit prep</small
+              <a href="sympl-payroll.html"
+                >Payroll<small
+                  >Payroll, allocations, remittances</small
                 ></a
               >
               <a href="sympl-cfo-advisory.html"
@@ -2028,7 +1957,7 @@
                 ></a
               >
               <a href="sympl-settlement.html"
-                >Immigrant &amp; Settlement<small
+                >Immigration &amp; Settlement<small
                   >Settlement and newcomer agencies</small
                 ></a
               >
@@ -2070,16 +1999,13 @@
             <span class="swoosh-wrap"
               ><em>made sympl.</em>
               <svg
-                viewBox="0 0 260 16"
+                viewBox="0 0 900 180"
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
                 <path
-                  d="M4 12 C70 4, 190 4, 256 9"
-                  stroke="#FFE079"
-                  stroke-width="9"
-                  fill="none"
-                  stroke-linecap="round"
+                  d="M892.363281 28.613281 C880.117188 20.863281 862.210938 20.316406 848.746094 21.167969 C581.359375 38.472656 287.574219 85.300781 25.824219 151.441406 C17.265625 153.613281 -13.433594 178.152344 8.507812 177.160156 C16.292969 176.804688 44.214844 166.097656 64.898438 160.871094 C130.410156 143.96875 373.34375 78.207031 762.449219 61.589844 C760.363281 67.359375 766.160156 73.148438 787.085938 79.035156 C830.804688 87.710938 856.148438 70.878906 892.847656 47.078125 C901.773438 41.617188 900.3125 33.648438 892.34375 28.589844 Z"
+                  fill="#F5CA43"
                 />
               </svg>
             </span>
@@ -2096,99 +2022,43 @@
         </div>
 
         <div class="mosaic-zone">
-          <div class="mosaic" aria-label="Photos of the Sympl team and clients">
-            <!-- PHOTO SLOTS: replace .ph-label with <img src alt> -->
-            <div class="cube c1">
+          <div
+            class="mosaic"
+            aria-label="Photos of nonprofit communities Sympl works with"
+          >
+            <div class="cube m-a">
               <img
-                src="images/Homepage/team.jpg"
-                alt="Sympl Finance team"
+                src="images/Homepage/hero%201.png"
+                alt="Community program graduation celebration"
+                style="object-position: 50% 30%"
+              />
+            </div>
+            <div class="cube fill m-f1" aria-hidden="true"></div>
+            <div class="cube m-b">
+              <img
+                src="images/Homepage/hero%202.png"
+                alt="Outdoor community movie night"
+                loading="lazy"
+                style="object-position: 50% 55%"
+              />
+            </div>
+            <div class="cube fill warm m-f2" aria-hidden="true"></div>
+            <div class="cube m-c">
+              <img
+                src="images/Homepage/hero%203.png"
+                alt="Nonprofit staff training workshop"
+                loading="lazy"
+                style="object-position: 50% 45%"
+              />
+            </div>
+            <div class="cube m-d">
+              <img
+                src="images/Homepage/hero%204.png"
+                alt="Community art class in the park"
+                loading="lazy"
                 style="object-position: 50% 40%"
               />
             </div>
-            <div class="cube c2">
-              <img
-                src="images/Homepage/immigration.png"
-                alt="Sympl team"
-                loading="lazy"
-                style="object-position: 20% 38%"
-              />
-            </div>
-            <div class="cube c3">
-              <img
-                src="images/Homepage/natasha.jpeg"
-                alt="Sympl team"
-                loading="lazy"
-                style="object-position: 80% 38%"
-              />
-            </div>
-            <div class="cube c4 fill" aria-hidden="true"></div>
-            <div class="cube c5">
-              <img
-                src="images/Homepage/tayyab.png"
-                alt="Sympl team"
-                loading="lazy"
-                style="object-position: 50% 34%"
-              />
-            </div>
-            <div class="cube c6">
-              <img
-                src="images/Homepage/owais.jpg"
-                alt="Sympl team"
-                loading="lazy"
-                style="object-position: 35% 40%"
-              />
-            </div>
-            <div class="cube c7">
-              <img
-                src="images/Homepage/office.png"
-                alt="Sympl Finance team"
-                loading="lazy"
-                style="object-position: 50% 36%"
-              />
-            </div>
-            <div class="cube c8 fill warm" aria-hidden="true"></div>
-            <div class="cube c9">
-              <img
-                src="images/Homepage/theater.png"
-                alt="Sympl team"
-                loading="lazy"
-                style="object-position: 68% 38%"
-              />
-            </div>
-          </div>
-          <div
-            class="badge"
-            role="img"
-            aria-label="Nonprofit finance experts, only"
-          >
-            <svg class="ring" viewBox="0 0 120 120">
-              <circle
-                cx="60"
-                cy="60"
-                r="58"
-                fill="#FFE079"
-                stroke="#002236"
-                stroke-width="1.6"
-              />
-              <defs>
-                <path
-                  id="cp"
-                  d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"
-                />
-              </defs>
-              <text
-                style="
-                  font-size: 11.5px;
-                  font-weight: 600;
-                  letter-spacing: 0.14em;
-                  fill: #002236;
-                  font-family: &quot;Onest&quot;, sans-serif;
-                "
-              >
-                <textPath href="#cp" textLength="276" lengthAdjust="spacing">NONPROFIT SPECIALISTS ·</textPath>
-              </text>
-            </svg>
-            <span class="centre">only.</span>
           </div>
         </div>
       </div>
@@ -2201,27 +2071,26 @@
       </p>
       <div class="marquee">
         <div class="marquee-track" id="mtrack">
-          <!-- LOGO SLOTS: replace with client logo imgs (Inkwell tint), with written permission -->
           <span class="logo-slot"
-            ><span class="mark"></span>[Client logo 1]</span
+            ><img src="images/clients/Logos/Bcurrent.png" alt="" loading="lazy" /><span class="name">Bcurrent</span></span
           >
           <span class="logo-slot"
-            ><span class="mark"></span>[Client logo 2]</span
+            ><img src="images/clients/Logos/Care%3AOf.png" alt="" loading="lazy" /><span class="name">Care/Of</span></span
           >
           <span class="logo-slot"
-            ><span class="mark"></span>[Client logo 3]</span
+            ><img src="images/clients/Logos/East%20End%20Arts.png" alt="" loading="lazy" /><span class="name">East End Arts</span></span
           >
           <span class="logo-slot"
-            ><span class="mark"></span>[Client logo 4]</span
+            ><img src="images/clients/Logos/EcoEquitable.png" alt="" loading="lazy" /><span class="name">EcoEquitable</span></span
           >
           <span class="logo-slot"
-            ><span class="mark"></span>[Client logo 5]</span
+            ><img src="images/clients/Logos/Pacific%20Immigration%20Resource%20Society.png" alt="" loading="lazy" /><span class="name">Pacific Immigration Resource Society</span></span
           >
           <span class="logo-slot"
-            ><span class="mark"></span>[Client logo 6]</span
+            ><img src="images/clients/Logos/Regent%20Park%20Film%20Festival.png" alt="" loading="lazy" /><span class="name">Regent Park Film Festival</span></span
           >
           <span class="logo-slot"
-            ><span class="mark"></span>[Client logo 7]</span
+            ><img src="images/clients/Logos/The%20Reading%20Partnership.png" alt="" loading="lazy" /><span class="name">The Reading Partnership</span></span
           >
         </div>
       </div>
@@ -2257,7 +2126,7 @@
       <div class="wrap">
         <div class="services-head rv">
           <p class="kicker">What we do</p>
-          <h2 class="h2">One partner for your whole finance function.</h2>
+          <h2 class="h2">Books, payroll, reporting, and finance leadership, all in one place.</h2>
         </div>
         <div class="svc-grid">
           <div
@@ -2298,16 +2167,14 @@
       <div class="wrap">
         <div class="serve-head rv">
           <p class="kicker">Who we serve</p>
-          <h2 class="h2">Two sectors, deeply.<br />Every mission, gladly.</h2>
+          <h2 class="h2">Nonprofits of every shape and size.</h2>
           <p class="lead" style="margin-top: 14px">
-            We've built our practice around the two corners of the nonprofit
-            world we know best, and we welcome mission-driven organizations of
-            every kind.
+            Arts, settlement, education, community services, and beyond. See
+            how we work with organizations like yours.
           </p>
         </div>
         <div class="serve-grid">
-          <div class="serve-card spec rv">
-            <span class="spec-badge">SPECIALTY</span>
+          <div class="serve-card rv">
             <div class="serve-ico">
               <svg viewBox="0 0 24 24">
                 <path
@@ -2318,16 +2185,14 @@
             </div>
             <h3>Arts &amp; Culture</h3>
             <p>
-              Theatres, galleries, festivals, and arts organizations. We speak
-              arts council: grant reporting, rental revenue reconciliation, and
-              seasonal cash flow are part of the service, not an add-on.
+              Theatres, galleries, festivals, and arts organizations. Grant
+              reporting, rental revenue, and seasonal cash flow, handled.
             </p>
             <a class="more" href="sympl-arts.html"
               >How we work with arts orgs →</a
             >
           </div>
-          <div class="serve-card spec rv">
-            <span class="spec-badge">SPECIALTY</span>
+          <div class="serve-card rv">
             <div class="serve-ico">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="9" />
@@ -2336,17 +2201,16 @@
                 />
               </svg>
             </div>
-            <h3>Immigrant &amp; Settlement</h3>
+            <h3>Immigration &amp; Settlement</h3>
             <p>
               Settlement agencies and newcomer-serving organizations. IRCC
-              contract reporting, multi-contract salary allocation, and
-              funder-by-funder tracking, handled.
+              contract reporting and funder-by-funder tracking, handled.
             </p>
             <a class="more" href="sympl-settlement.html"
               >How we work with settlement orgs →</a
             >
           </div>
-          <div class="serve-card rv">
+          <div class="serve-card rv" style="display:none;">
             <div class="serve-ico">
               <svg viewBox="0 0 24 24">
                 <path
@@ -2356,10 +2220,27 @@
             </div>
             <h3>Community &amp; Social Services</h3>
             <p>
-              Food banks, shelters, youth programs, and local charities doing
-              essential work close to home.
+              Food banks, shelters, and youth programs doing essential work
+              close to home. Multi-funder grant tracking, simplified.
             </p>
-            <a class="more" href="sympl-quote.html">Talk to us →</a>
+            <a class="more" href="sympl-contact.html">Talk to us →</a>
+          </div>
+          <div class="serve-card rv">
+            <div class="serve-ico">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M2 9l10-5 10 5-10 5-10-5z"
+                />
+                <path d="M6 11.5V16c0 1.1 2.7 3 6 3s6-1.9 6-3v-4.5" />
+                <path d="M22 9v6" />
+              </svg>
+            </div>
+            <h3>Education</h3>
+            <p>
+              Schools, tutoring programs, and education-focused nonprofits
+              balancing tuition, grants, and program budgets.
+            </p>
+            <a class="more" href="sympl-contact.html">Talk to us →</a>
           </div>
           <div class="serve-card rv">
             <div class="serve-ico">
@@ -2369,10 +2250,11 @@
             </div>
             <h3>Other Nonprofits</h3>
             <p>
-              Charities, foundations, and mission-driven organizations of every
-              kind that need reliable books and clear financial reporting.
+              Charities, foundations, and mission-driven organizations of
+              every kind that need reliable books and clear financial
+              reporting.
             </p>
-            <a class="more" href="sympl-quote.html">Talk to us →</a>
+            <a class="more" href="sympl-contact.html">Talk to us →</a>
           </div>
         </div>
       </div>
@@ -2382,7 +2264,7 @@
     <div class="cta-bridge">
       <div class="wrap">
         <div class="cta-bridge-card rv">
-          <p class="cta-bridge-text">Sound like your organization? Start with a free, no-pressure review of your finances — no prep needed.</p>
+          <p class="cta-bridge-text">Big or small, arts or settlement or something else entirely, you shouldn't have to figure out your finances alone. Let's talk, no prep needed.</p>
           <div class="cta-bridge-btns">
             <a href="sympl-contact.html" class="btn btn-primary">Book a free review →</a>
             <a href="sympl-quote.html" class="btn btn-ghost">Get a quote</a>
@@ -2390,364 +2272,6 @@
         </div>
       </div>
     </div>
-
-    <!-- ═══════════ INSIGHTS / BLOG ═══════════ -->
-    <section class="insights" id="insights">
-      <div class="wrap">
-        <h2 class="insights-heading rv">Insights</h2>
-        <div class="insights-grid">
-          <a href="sympl-blog.html" class="insights-featured rv">
-            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=85&auto=format&fit=crop" alt="Nonprofit finance insights" />
-            <span class="btn btn-yolk insights-cta">View All Posts</span>
-          </a>
-          <div class="insights-list">
-            <a href="sympl-blog-post.html?id=t3010-filing-checklist" class="insight-item rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&q=80&auto=format&fit=crop" alt="T3010 filing" />
-              <div class="insight-text">
-                <p class="insight-cat">GRANT REPORTING</p>
-                <h3>The T3010 Filing Checklist Every Ontario Nonprofit Needs Before March 31</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-            <a href="sympl-blog-post.html?id=grant-tracking-ledger" class="insight-item rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80&auto=format&fit=crop" alt="Grant tracking ledger" />
-              <div class="insight-text">
-                <p class="insight-cat">BOOKKEEPING</p>
-                <h3>Why Nonprofits Need a Separate Grant Tracking Ledger</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-            <a href="sympl-blog-post.html?id=payroll-remittance-deadlines" class="insight-item rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?w=300&q=80&auto=format&fit=crop" alt="CRA payroll remittance" />
-              <div class="insight-text">
-                <p class="insight-cat">PAYROLL</p>
-                <h3>CRA Payroll Remittance Deadlines for Small Nonprofits</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-            <a href="sympl-blog-post.html?id=toronto-theatre-case-study" class="insight-item insight-item--hide-mobile rv">
-              <img class="insight-thumb" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&q=80&auto=format&fit=crop" alt="Toronto theatre case study" />
-              <div class="insight-text">
-                <p class="insight-cat">ARTS &amp; CULTURE</p>
-                <h3>How a Toronto Theatre Company Reclaimed 12 Hours a Month</h3>
-                <span class="insight-more">Read More +</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════ TECH + CREDENTIALS ═══════════ -->
-    <section class="credtech" id="credentials">
-      <div class="wrap">
-        <div class="credtech-head rv">
-          <p class="kicker">Built different</p>
-          <h2>Certified professionals. Tech-forward practice.</h2>
-        </div>
-
-        <!-- Credentials block -->
-        <div class="credtech-block">
-          <p class="credtech-sub rv">Our credentials — qualified, accountable, nonprofit-focused</p>
-          <div class="creds-carousel-wrap">
-            <div class="creds-track-outer">
-              <div class="creds-track" id="credsTrack">
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">CPA</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">Chartered Professional Accountant</span>
-                    <span class="cert-body">CPA Canada — the gold standard in Canadian accounting</span>
-                  </div>
-                </div>
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">ACCA</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">Chartered Certified Accountant</span>
-                    <span class="cert-body">Association of Chartered Certified Accountants, UK & global</span>
-                  </div>
-                </div>
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">CA</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">Chartered Accountant</span>
-                    <span class="cert-body">Institute of Chartered Accountants — rigorous professional standard</span>
-                  </div>
-                </div>
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">ProAdvisor</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">QuickBooks Elite ProAdvisor</span>
-                    <span class="cert-body">Top 2% of QuickBooks consulting firms in Canada</span>
-                  </div>
-                </div>
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">Xero</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">Xero Certified Advisor</span>
-                    <span class="cert-body">Certified in Xero accounting, reporting & migrations</span>
-                  </div>
-                </div>
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">Dext</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">Dext Certified Partner</span>
-                    <span class="cert-body">Certified in automated receipt capture & document workflows</span>
-                  </div>
-                </div>
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">HUB</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">Hubdoc Certified</span>
-                    <span class="cert-body">Certified in Hubdoc document collection & management</span>
-                  </div>
-                </div>
-                <div class="cert-pill rv">
-                  <span class="cert-abbr">PCP</span>
-                  <div class="cert-detail">
-                    <span class="cert-title">Payroll Compliance Practitioner</span>
-                    <span class="cert-body">National Payroll Institute — Canadian payroll compliance</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button class="tools-scroll-btn" id="credsArrow" aria-label="Next credentials">
-              <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Tools block -->
-        <div class="credtech-block">
-          <p class="credtech-sub rv">Our tech stack — digitally enabled, cloud-native, and fluent in every tool</p>
-          <div class="tools-carousel-wrap">
-          <div class="tools-track-outer">
-          <div class="tools-track" id="toolsTrack">
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/quickbooks.intuit.com" alt="QuickBooks logo" onerror="this.style.display='none';this.parentNode.innerHTML='<svg viewBox=\'0 0 24 24\' width=\'22\' height=\'22\' fill=\'none\' stroke=\'#2CA01C\' stroke-width=\'2\'><path d=\'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z\'/></svg>'">
-              </div>
-              <div>
-                <p class="tool-name">QuickBooks Online</p>
-                <p class="tool-use">Core accounting & bookkeeping platform</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/wagepoint.com" alt="Wagepoint logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Wagepoint</p>
-                <p class="tool-use">Canadian payroll, T4s & remittances</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/dext.com" alt="Dext logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Dext</p>
-                <p class="tool-use">Receipt capture & document processing</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/plooto.com" alt="Plooto logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Plooto</p>
-                <p class="tool-use">AP automation & bill payments</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/fathom.finance" alt="Fathom logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Fathom</p>
-                <p class="tool-use">Financial reporting & dashboards</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/hubdoc.com" alt="Hubdoc logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Hubdoc</p>
-                <p class="tool-use">Document collection & management</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft 365 logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Microsoft 365</p>
-                <p class="tool-use">Documents, spreadsheets & collaboration</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/rotessa.com" alt="Rotessa logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Rotessa</p>
-                <p class="tool-use">Bank-to-bank pre-authorized payments</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/payworks.ca" alt="Payworks logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Payworks</p>
-                <p class="tool-use">Payroll & HR management platform</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/xero.com" alt="Xero logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Xero</p>
-                <p class="tool-use">Cloud accounting for growing orgs</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/asana.com" alt="Asana logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Asana</p>
-                <p class="tool-use">Task & project tracking for teams</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/slack.com" alt="Slack logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Slack</p>
-                <p class="tool-use">Team communication & file sharing</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/notion.so" alt="Notion logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Notion</p>
-                <p class="tool-use">Docs, wikis & project management</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/monday.com" alt="Monday.com logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Monday.com</p>
-                <p class="tool-use">Visual work & project management</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/workspace.google.com" alt="Google Workspace logo" onerror="this.style.onerror=null;this.src='https://logo.clearbit.com/google.com'">
-              </div>
-              <div>
-                <p class="tool-name">Google Workspace</p>
-                <p class="tool-use">Email, Drive, Docs & collaboration</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/stripe.com" alt="Stripe logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Stripe</p>
-                <p class="tool-use">Online payments & donation processing</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/zoom.us" alt="Zoom logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">Zoom</p>
-                <p class="tool-use">Video meetings & board presentations</p>
-              </div>
-            </div>
-            <div class="tool-card rv">
-              <div class="tool-logo-wrap">
-                <img src="https://logo.clearbit.com/canadahelps.org" alt="CanadaHelps logo" onerror="this.style.display='none'">
-              </div>
-              <div>
-                <p class="tool-name">CanadaHelps</p>
-                <p class="tool-use">Online donation platform for nonprofits</p>
-              </div>
-            </div>
-          </div>
-          </div>
-          <button class="tools-scroll-btn" id="toolsArrow" aria-label="Next tools">
-            <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
-          </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CTA BRIDGE 2 ── -->
-    <div class="cta-bridge">
-      <div class="wrap">
-        <div class="cta-bridge-card rv">
-          <p class="cta-bridge-text">Certified professionals backed by modern tools. See what that looks like for your organization in a free 30-minute review.</p>
-          <div class="cta-bridge-btns">
-            <a href="sympl-contact.html" class="btn btn-primary">Book a free review →</a>
-            <a href="sympl-quote.html" class="btn btn-ghost">Get a quote</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════ HOW IT WORKS ═══════════ -->
-    <!--
-    <section class="how" id="how">
-      <div class="wrap">
-        <div class="how-head rv">
-          <p class="kicker">How it works</p>
-          <h2 class="h2">Getting started is <em>sympl.</em></h2>
-        </div>
-        <div class="how-grid">
-          <div class="how-card rv">
-            <div class="how-num">1</div>
-            <h3>A friendly first chat</h3>
-            <p>
-              We learn your organization and where finance is causing stress. No
-              obligation.
-            </p>
-          </div>
-          <div class="how-card rv">
-            <div class="how-num">2</div>
-            <h3>A plan and a flat price</h3>
-            <p>
-              We recommend the right mix and agree your monthly fee upfront,
-              with no hourly billing.
-            </p>
-          </div>
-          <div class="how-card rv">
-            <div class="how-num">3</div>
-            <h3>We take it from here</h3>
-            <p>
-              Books stay current, reports arrive on time, and we're on call as
-              you grow.
-            </p>
-          </div>
-        </div>
-        <p class="how-foot rv">
-          Want to see the details?
-          <a href="#book">Here's exactly what your first 30 days look like →</a>
-        </p>
-      </div>
-    </section>
-    -->
 
     <!-- ═══════════ TESTIMONIALS ═══════════ -->
     <sympl-testimonials variant="home">
@@ -2810,6 +2334,206 @@
         </div>
       </section>
     </sympl-testimonials>
+
+    <!-- ═══════════ TECH + CREDENTIALS ═══════════ -->
+    <section class="credtech" id="credentials">
+      <div class="wrap">
+        <div class="credtech-head rv">
+          <p class="kicker">Built different</p>
+          <h2>Certified professionals. Tech-forward practice.</h2>
+        </div>
+
+        <!-- Credentials block -->
+        <div class="credtech-block">
+          <p class="credtech-sub rv">Our credentials — qualified, accountable, nonprofit-focused</p>
+          <div class="creds-carousel-wrap">
+            <div class="creds-track-outer">
+              <div class="creds-track" id="credsTrack">
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">CPA</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Chartered Professional Accountant</span>
+                    <span class="cert-body">CPA Canada — the gold standard in Canadian accounting</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">ACCA</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Chartered Certified Accountant</span>
+                    <span class="cert-body">Association of Chartered Certified Accountants, UK & global</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">PCP</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Payroll Compliance Practitioner</span>
+                    <span class="cert-body">National Payroll Institute — Canadian payroll compliance</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">ProAdvisor</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">QuickBooks Elite ProAdvisor</span>
+                    <span class="cert-body">Top 2% of QuickBooks consulting firms in Canada</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">Xero</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Xero Certified Advisor</span>
+                    <span class="cert-body">Certified in Xero accounting, reporting & migrations</span>
+                  </div>
+                </div>
+                <div class="cert-pill rv">
+                  <span class="cert-abbr">Dext</span>
+                  <div class="cert-detail">
+                    <span class="cert-title">Dext Certified Partner</span>
+                    <span class="cert-body">Certified in automated receipt capture & document workflows</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="tools-scroll-btn" id="credsArrow" aria-label="Next credentials">
+              <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tools block -->
+        <div class="credtech-block">
+          <p class="credtech-sub rv">Our tech stack — digitally enabled, cloud-native, and fluent in every tool</p>
+          <div class="tools-grid">
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Quickbook.png" alt="QuickBooks logo">
+              </div>
+              <div>
+                <p class="tool-name">QuickBooks Online</p>
+                <p class="tool-use">Core accounting & bookkeeping platform</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Xero.png" alt="Xero logo">
+              </div>
+              <div>
+                <p class="tool-name">Xero</p>
+                <p class="tool-use">Cloud accounting for growing orgs</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Wagepoint.png" alt="Wagepoint logo">
+              </div>
+              <div>
+                <p class="tool-name">Wagepoint</p>
+                <p class="tool-use">Canadian payroll, T4s & remittances</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Payworks.png" alt="Payworks logo">
+              </div>
+              <div>
+                <p class="tool-name">Payworks</p>
+                <p class="tool-use">Payroll & HR management platform</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Dext.png" alt="Dext logo">
+              </div>
+              <div>
+                <p class="tool-name">Dext</p>
+                <p class="tool-use">Receipt capture & document processing</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Plooto.png" alt="Plooto logo">
+              </div>
+              <div>
+                <p class="tool-name">Plooto</p>
+                <p class="tool-use">AP automation & bill payments</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Float.png" alt="Float logo">
+              </div>
+              <div>
+                <p class="tool-name">Float</p>
+                <p class="tool-use">Cash flow forecasting & planning</p>
+              </div>
+            </div>
+            <div class="tool-card rv">
+              <div class="tool-logo-wrap">
+                <img src="images/tech%20stack/Expensify.png" alt="Expensify logo">
+              </div>
+              <div>
+                <p class="tool-name">Expensify</p>
+                <p class="tool-use">Staff & board expense claims</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA BRIDGE 2 ── -->
+    <div class="cta-bridge">
+      <div class="wrap">
+        <div class="cta-bridge-card rv">
+          <p class="cta-bridge-text">Certified professionals backed by modern tools. See what that looks like for your organization in a free 30-minute review.</p>
+          <div class="cta-bridge-btns">
+            <a href="sympl-contact.html" class="btn btn-primary">Book a free review →</a>
+            <a href="sympl-quote.html" class="btn btn-ghost">Get a quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ HOW IT WORKS ═══════════ -->
+    <!--
+    <section class="how" id="how">
+      <div class="wrap">
+        <div class="how-head rv">
+          <p class="kicker">How it works</p>
+          <h2 class="h2">Getting started is <em>sympl.</em></h2>
+        </div>
+        <div class="how-grid">
+          <div class="how-card rv">
+            <div class="how-num">1</div>
+            <h3>A friendly first chat</h3>
+            <p>
+              We learn your organization and where finance is causing stress. No
+              obligation.
+            </p>
+          </div>
+          <div class="how-card rv">
+            <div class="how-num">2</div>
+            <h3>A plan and a flat price</h3>
+            <p>
+              We recommend the right mix and agree your monthly fee upfront,
+              with no hourly billing.
+            </p>
+          </div>
+          <div class="how-card rv">
+            <div class="how-num">3</div>
+            <h3>We take it from here</h3>
+            <p>
+              Books stay current, reports arrive on time, and we're on call as
+              you grow.
+            </p>
+          </div>
+        </div>
+        <p class="how-foot rv">
+          Want to see the details?
+          <a href="#book">Here's exactly what your first 30 days look like →</a>
+        </p>
+      </div>
+    </section>
+    -->
 
     <!-- ═══════════ DATA SECURITY ═══════════ -->
     <!--
@@ -3028,6 +2752,53 @@
     </section>
     -->
 
+    <!-- ═══════════ INSIGHTS / BLOG ═══════════ -->
+    <section class="insights" id="insights">
+      <div class="wrap">
+        <h2 class="insights-heading rv">Insights</h2>
+        <div class="insights-grid">
+          <a href="sympl-blog.html" class="insights-featured rv">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=85&auto=format&fit=crop" alt="Nonprofit finance insights" />
+            <span class="btn btn-yolk insights-cta">View All Posts</span>
+          </a>
+          <div class="insights-list">
+            <a href="sympl-blog-post.html?id=t3010-filing-checklist" class="insight-item rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&q=80&auto=format&fit=crop" alt="T3010 filing" />
+              <div class="insight-text">
+                <p class="insight-cat">GRANT REPORTING</p>
+                <h3>The T3010 Filing Checklist Every Ontario Nonprofit Needs Before March 31</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
+            <a href="sympl-blog-post.html?id=grant-tracking-ledger" class="insight-item rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80&auto=format&fit=crop" alt="Grant tracking ledger" />
+              <div class="insight-text">
+                <p class="insight-cat">BOOKKEEPING</p>
+                <h3>Why Nonprofits Need a Separate Grant Tracking Ledger</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
+            <a href="sympl-blog-post.html?id=payroll-remittance-deadlines" class="insight-item rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?w=300&q=80&auto=format&fit=crop" alt="CRA payroll remittance" />
+              <div class="insight-text">
+                <p class="insight-cat">PAYROLL</p>
+                <h3>CRA Payroll Remittance Deadlines for Small Nonprofits</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
+            <a href="sympl-blog-post.html?id=toronto-theatre-case-study" class="insight-item insight-item--hide-mobile rv">
+              <img class="insight-thumb" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&q=80&auto=format&fit=crop" alt="Toronto theatre case study" />
+              <div class="insight-text">
+                <p class="insight-cat">ARTS &amp; CULTURE</p>
+                <h3>How a Toronto Theatre Company Reclaimed 12 Hours a Month</h3>
+                <span class="insight-more">Read More +</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════ FINAL CTA ═══════════ -->
     <section class="final" id="book">
       <div class="wrap">
@@ -3084,18 +2855,18 @@
           </div>
           <div class="footer-col">
             <h4>Services</h4>
-            <a href="sympl-bookkeeping-payroll.html"
-              >Bookkeeping &amp; Payroll</a
+            <a href="sympl-bookkeeping.html"
+              >Bookkeeping</a
             >
-            <a href="sympl-reporting-compliance.html"
-              >Reporting &amp; Compliance</a
+            <a href="sympl-payroll.html"
+              >Payroll</a
             >
             <a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>
           </div>
           <div class="footer-col">
             <h4>Who we serve</h4>
             <a href="sympl-arts.html">Arts &amp; Culture</a>
-            <a href="sympl-settlement.html">Immigrant &amp; Settlement</a>
+            <a href="sympl-settlement.html">Immigration &amp; Settlement</a>
             <a href="#serve">All nonprofits</a>
           </div>
           <div class="footer-col">
@@ -3189,12 +2960,12 @@
       };
       const SVC = [
         {
-          n: "Bookkeeping & Payroll",
+          n: "Bookkeeping",
           i: "book",
           image: "images/Homepage/team_member_headshot1.png",
-          d: "Monthly books, payroll runs, and bill payments: current, accurate, done. Your monthly close is finished within five business days, every month.",
-          l: "Bookkeeping & payroll services →",
-          href: "sympl-bookkeeping-payroll.html",
+          d: "Monthly books, reconciliations, and cleanup: current, accurate, done. Your monthly close is finished within five business days, every month.",
+          l: "Bookkeeping services →",
+          href: "sympl-bookkeeping.html",
           stage: `<div class="rep-row">
     <div class="rep-card rep-a">
       <div class="rep-lbl">Invoices</div>
@@ -3214,30 +2985,31 @@
       </div>
     </div>
   </div>
-  <div class="rep-strip"><span class="rep-lbl" style="margin:0;">Payroll run · Jun 15</span><span style="font-size:14.5px;font-weight:700;">$28,440 · 12 staff <span class="chip-ok">Processed ✓</span></span></div>`,
+  <div class="rep-strip"><span class="rep-lbl" style="margin:0;">Reconciliations · May</span><span style="font-size:14.5px;font-weight:700;">12 of 12 accounts <span class="chip-ok">Reconciled ✓</span></span></div>`,
         },
         {
-          n: "Reporting & Compliance",
+          n: "Payroll",
           i: "clip",
           image: "images/Homepage/team_member_headshot2.png",
-          d: "Grant tracking, funder reports, T3010 filings, and audit prep, always on time. When your auditor calls, your books are already ready.",
-          l: "Reporting & compliance services →",
-          href: "sympl-reporting-compliance.html",
+          d: "Payroll runs, program and grant allocations, and remittances: accurate, on schedule, and funder-ready every time.",
+          l: "Payroll services →",
+          href: "sympl-payroll.html",
           stage: `<div class="rep-row">
     <div class="rep-card rep-a">
+      <div class="rep-lbl">Payroll run · Jun 15</div>
+      <div class="rep-big" style="margin-bottom:10px;">$28,440 · 12 staff</div>
+      <div class="rep-line"><span>Programs</span><b>74%</b></div>
+      <div class="bar" style="height:8px;margin-bottom:11px;"><i style="width:74%;background:var(--deepwater);"></i></div>
+      <div class="rep-line"><span>Admin</span><b>18%</b></div>
+      <div class="bar" style="height:8px;margin-bottom:11px;"><i style="width:18%;background:var(--bay);"></i></div>
+      <div class="rep-line"><span>Fundraising</span><b>8%</b></div>
+      <div class="bar" style="height:8px;"><i style="width:8%;background:var(--yolk);"></i></div>
+    </div>
+    <div class="rep-card rep-b">
       <div class="rep-lbl">Grant tracker</div>
       <div class="rep-line"><span>IRCC settlement</span><span class="chip-warn">due 9 days</span></div>
       <div class="rep-note" style="margin-bottom:5px;">$112,500 of $150,000 claimed</div>
-      <div class="bar" style="margin-bottom:16px;"><i style="width:75%;background:var(--deepwater);"></i></div>
-      <div class="rep-line"><span>OAC operating grant</span><span class="chip-ok">reported ✓</span></div>
-      <div class="rep-note" style="margin-bottom:5px;">$48,000 of $48,000</div>
-      <div class="bar"><i style="width:100%;background:var(--bay);"></i></div>
-    </div>
-    <div class="rep-card rep-b">
-      <div class="rep-lbl">Filings</div>
-      <div class="rep-li"><span>T3010 annual return</span><span class="chip-ok" style="font-size:11.5px;">filed Mar 31 ✓</span></div>
-      <div class="rep-li"><span>HST PSB rebate</span><span class="chip-ok" style="font-size:11.5px;">$6,212 recovered ✓</span></div>
-      <div class="rep-li"><span>Audit PBC list</span><span class="chip-warn" style="font-size:11.5px;">18 of 22 ready</span></div>
+      <div class="bar"><i style="width:75%;background:var(--deepwater);"></i></div>
     </div>
   </div>
   <div class="rep-strip"><span class="rep-lbl" style="margin:0;">Next deadline</span><span style="font-size:14.5px;font-weight:700;">IRCC Q2 report · Jun 22 <span class="chip-ok">drafted ✓</span></span></div>`,
@@ -3303,7 +3075,7 @@
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         let p = 0;
         svcTimer = setInterval(() => {
-          p += 0.55;
+          p += 2;
           const bar = document.getElementById("svcProg");
           if (bar) bar.style.width = Math.min(p, 100) + "%";
           if (p >= 100) {
@@ -3313,6 +3085,21 @@
         }, 60);
       }
       svcRestart();
+
+      /* ── Services: always start from the first card when scrolled into view ── */
+      const svcGrid = document.querySelector(".svc-grid");
+      const svcObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              svcActive = 0;
+              svcRestart();
+            }
+          });
+        },
+        { threshold: 0.35 },
+      );
+      svcObserver.observe(svcGrid);
 
       /* ── Lead magnet form (front-end only; wire to ESP later) ── */
       document.getElementById("magnetForm").addEventListener("submit", (e) => {
@@ -3358,70 +3145,22 @@
           animating = true;
           pos += 1;
           track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
+          track.offsetHeight; // force reflow so the transition registers
           track.style.transform  = `translateX(${-pos * pillWidth()}px)`;
 
-          track.addEventListener("transitionend", function done() {
-            track.removeEventListener("transitionend", done);
+          window.setTimeout(function () {
             if (pos >= origPills.length) {
               track.style.transition = "none";
               pos = 0;
               track.style.transform = "translateX(0)";
+              track.offsetHeight;
+              track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
             }
             animating = false;
-          }, { once: true });
+          }, 460);
         });
       })();
 
-      // ── Tools carousel ──────────────────────────────────────
-      (function () {
-        const track = document.getElementById("toolsTrack");
-        const btn   = document.getElementById("toolsArrow");
-        if (!track || !btn) return;
-
-        // Duplicate all cards for infinite loop
-        const origCards = Array.from(track.querySelectorAll(".tool-card"));
-        origCards.forEach(c => {
-          const clone = c.cloneNode(true);
-          clone.classList.remove("rv");
-          clone.classList.add("in");
-          track.appendChild(clone);
-        });
-
-        // Pin every card to the tallest card height so both grid rows are equal
-        const allCards = track.querySelectorAll(".tool-card");
-        let maxH = 0;
-        allCards.forEach(c => { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
-        if (maxH > 0) allCards.forEach(c => { c.style.minHeight = maxH + "px"; });
-
-        // 2-row column-flow grid: originals / 2 rows = number of original columns
-        const origCols = origCards.length / 2;
-
-        let pos = 0;
-        let animating = false;
-
-        function colWidth() {
-          const c = track.querySelector(".tool-card");
-          return c ? c.offsetWidth + 12 : 0;
-        }
-
-        btn.addEventListener("click", function () {
-          if (animating) return;
-          animating = true;
-          pos += 1;
-          track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
-          track.style.transform  = `translateX(${-pos * colWidth()}px)`;
-
-          track.addEventListener("transitionend", function done() {
-            track.removeEventListener("transitionend", done);
-            if (pos >= origCols) {
-              track.style.transition = "none";
-              pos = 0;
-              track.style.transform = "translateX(0)";
-            }
-            animating = false;
-          }, { once: true });
-        });
-      })();
     </script>
   </body>
 </html>

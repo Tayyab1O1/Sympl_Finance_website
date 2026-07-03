@@ -180,6 +180,9 @@ section{padding:80px 0;}
 .client-top{display:flex;justify-content:space-between;gap:14px;margin-bottom:18px;}
 .client-mark{width:54px;height:54px;border-radius:14px;background:var(--inkwell);color:var(--paper);display:grid;place-items:center;font-weight:800;position:relative;overflow:hidden;}
 .client-mark::after{content:"";position:absolute;left:10px;right:10px;bottom:12px;height:5px;border-radius:999px;background:var(--yolk);opacity:.75;transform:rotate(-8deg);}
+.client-mark.has-logo{background:#fff;border:1px solid var(--line);padding:8px;}
+.client-mark.has-logo::after{display:none;}
+.client-mark.has-logo img{width:100%;height:100%;object-fit:contain;}
 .client-sector{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--deepwater);background:var(--mist);border:1px solid var(--seaglass);border-radius:999px;padding:6px 10px;height:max-content;}
 .client-card h3{font-size:20px;letter-spacing:-.02em;line-height:1.2;margin-bottom:8px;}
 .client-card p{font-size:14px;color:var(--ink-soft);line-height:1.58;}
@@ -256,8 +259,8 @@ section{padding:80px 0;}
       <div class="nav-item">
         <a href="index.html#services">Services <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll<small>Monthly books, payroll, bill payments</small></a>
-          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance<small>Grants, T3010, audit prep</small></a>
+          <a href="sympl-bookkeeping.html">Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
+          <a href="sympl-payroll.html">Payroll<small>Payroll, allocations, remittances</small></a>
           <a href="sympl-cfo-advisory.html">CFO &amp; Advisory<small>Budgets, forecasts, board reporting</small></a>
         </div>
       </div>
@@ -265,7 +268,8 @@ section{padding:80px 0;}
         <a href="index.html#serve">Who We Serve <span class="caret">▾</span></a>
         <div class="dropdown">
           <a href="sympl-arts.html">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
-          <a href="sympl-settlement.html">Immigrant &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+          <a href="sympl-nonprofit.html">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
         </div>
       </div>
       <div class="nav-item"><a href="sympl-clients-partners.html" aria-current="page">Clients &amp; Partners</a></div>
@@ -305,26 +309,26 @@ section{padding:80px 0;}
       </div>
     </div>
   <div class="client-carousel-outer">
-    <button class="carousel-btn carousel-btn-prev is-hidden" aria-label="Previous clients">
+    <button class="carousel-btn carousel-btn-prev" aria-label="Previous clients">
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11 1 L4 8 L11 15 Z"/></svg>
     </button>
     <div class="client-carousel-inner">
       <div class="client-carousel-viewport">
         <div class="client-grid">
           <article class="client-card rv">
-            <div class="client-top"><span class="client-mark">EA</span><span class="client-sector">Arts</span></div>
+            <div class="client-top"><span class="client-mark has-logo"><img src="images/clients/Logos/East%20End%20Arts.png" alt="East End Arts logo" loading="lazy" /></span><span class="client-sector">Arts</span></div>
             <h3>East End Arts</h3>
             <p>Arts service organization with grant reporting, systems transition, and monthly finance support needs.</p>
             <div class="client-tags"><span>Grant tracking</span><span>Monthly close</span></div>
           </article>
           <article class="client-card rv">
-            <div class="client-top"><span class="client-mark">RP</span><span class="client-sector">Literacy</span></div>
+            <div class="client-top"><span class="client-mark has-logo"><img src="images/clients/Logos/The%20Reading%20Partnership.png" alt="The Reading Partnership logo" loading="lazy" /></span><span class="client-sector">Literacy</span></div>
             <h3>The Reading Partnership</h3>
             <p>Literacy nonprofit needing cleaner reporting, compliance rhythm, and leadership-ready numbers.</p>
             <div class="client-tags"><span>Board reporting</span><span>Compliance</span></div>
           </article>
           <article class="client-card rv">
-            <div class="client-top"><span class="client-mark">CO</span><span class="client-sector">Community</span></div>
+            <div class="client-top"><span class="client-mark has-logo"><img src="images/clients/Logos/Care%3AOf.png" alt="Care/Of logo" loading="lazy" /></span><span class="client-sector">Community</span></div>
             <h3>Care/Of</h3>
             <p>Community support organization with payables, reconciliations, and monthly close needs.</p>
             <div class="client-tags"><span>Payables</span><span>Reconciliations</span></div>
@@ -342,10 +346,22 @@ section{padding:80px 0;}
             <div class="client-tags"><span>Seasonal revenue</span><span>Board packs</span></div>
           </article>
           <article class="client-card rv">
-            <div class="client-top"><span class="client-mark">NP</span><span class="client-sector">Nonprofit</span></div>
-            <h3>Mission-driven teams</h3>
-            <p>Organizations that need calm books, clearer reports, and finance support without building a full department.</p>
-            <div class="client-tags"><span>QBO support</span><span>Flat monthly fee</span></div>
+            <div class="client-top"><span class="client-mark has-logo"><img src="images/clients/Logos/EcoEquitable.png" alt="EcoEquitable logo" loading="lazy" /></span><span class="client-sector">Employment</span></div>
+            <h3>EcoEquitable</h3>
+            <p>Social enterprise supporting newcomer women with income tracking, payroll, and program cost allocation.</p>
+            <div class="client-tags"><span>Payroll</span><span>Program budgets</span></div>
+          </article>
+          <article class="client-card rv">
+            <div class="client-top"><span class="client-mark has-logo"><img src="images/clients/Logos/Bcurrent.png" alt="Bcurrent logo" loading="lazy" /></span><span class="client-sector">Financial Literacy</span></div>
+            <h3>Bcurrent</h3>
+            <p>Financial education nonprofit needing streamlined bookkeeping, grant tracking, and board-ready reporting.</p>
+            <div class="client-tags"><span>Grant tracking</span><span>Board reporting</span></div>
+          </article>
+          <article class="client-card rv">
+            <div class="client-top"><span class="client-mark">YE</span><span class="client-sector">Education</span></div>
+            <h3>Youth Education Network</h3>
+            <p>Education-focused charity with restricted grants, multi-site operations, and annual audit preparation needs.</p>
+            <div class="client-tags"><span>Audit prep</span><span>Restricted funds</span></div>
           </article>
           <article class="client-card rv">
             <div class="client-top"><span class="client-mark">HF</span><span class="client-sector">Housing</span></div>
@@ -354,10 +370,22 @@ section{padding:80px 0;}
             <div class="client-tags"><span>Program budgets</span><span>Funder reports</span></div>
           </article>
           <article class="client-card rv">
-            <div class="client-top"><span class="client-mark">YE</span><span class="client-sector">Education</span></div>
-            <h3>Youth Education Network</h3>
-            <p>Education-focused charity with restricted grants, multi-site operations, and annual audit preparation needs.</p>
-            <div class="client-tags"><span>Audit prep</span><span>Restricted funds</span></div>
+            <div class="client-top"><span class="client-mark has-logo"><img src="images/clients/Logos/Regent%20Park%20Film%20Festival.png" alt="Regent Park Film Festival logo" loading="lazy" /></span><span class="client-sector">Arts</span></div>
+            <h3>Regent Park Film Festival</h3>
+            <p>Community film festival balancing grant funding, seasonal cash flow, and event-based revenue.</p>
+            <div class="client-tags"><span>Seasonal revenue</span><span>Grant funding</span></div>
+          </article>
+          <article class="client-card rv">
+            <div class="client-top"><span class="client-mark has-logo"><img src="images/clients/Logos/Pacific%20Immigration%20Resource%20Society.png" alt="Pacific Immigration Resource Society logo" loading="lazy" /></span><span class="client-sector">Settlement</span></div>
+            <h3>Pacific Immigration Resource Society</h3>
+            <p>Settlement agency managing multiple funder contracts, payroll splits, and IRCC reporting requirements.</p>
+            <div class="client-tags"><span>IRCC reporting</span><span>Multi-funder</span></div>
+          </article>
+          <article class="client-card rv">
+            <div class="client-top"><span class="client-mark">NP</span><span class="client-sector">Nonprofit</span></div>
+            <h3>Mission-driven teams</h3>
+            <p>Organizations that need calm books, clearer reports, and finance support without building a full department.</p>
+            <div class="client-tags"><span>QBO support</span><span>Flat monthly fee</span></div>
           </article>
         </div>
       </div>
@@ -369,21 +397,10 @@ section{padding:80px 0;}
   </section>
 
   <section class="auditors" id="auditors">
-    <div class="wrap auditor-grid">
-      <div class="section-head rv">
+    <div class="wrap">
+      <div class="section-head rv" style="text-align:center;margin-left:auto;margin-right:auto;">
         <p class="kicker">Auditor partners</p>
-        <h2 class="h2">A cleaner file before audit season starts.</h2>
-        <p>This section is for auditor partners, CPA firms, and advisors who want clients to arrive with cleaner schedules, reconciliations, and backup.</p>
-        <ul class="auditor-bullets">
-          <li>Clients arrive with reconciled books, organized backup, and no last-minute scramble.</li>
-          <li>We stay available through the file review so questions get answered fast.</li>
-        </ul>
-      </div>
-      <div class="handoff rv">
-        <h3>How we support the handoff</h3>
-        <div class="handoff-step"><span class="handoff-num">1</span><div><b>Clean the monthly rhythm</b><span>Reconciliations, schedules, and reporting gaps are addressed before audit prep begins.</span></div></div>
-        <div class="handoff-step"><span class="handoff-num">2</span><div><b>Prepare the backup</b><span>PBC lists, grant schedules, payroll allocations, and notes are organized for review.</span></div></div>
-        <div class="handoff-step"><span class="handoff-num">3</span><div><b>Stay available</b><span>We answer practical questions quickly so the client, auditor, and board are not stuck translating the file.</span></div></div>
+        <h2 class="h2">Auditors that recommend us.</h2>
       </div>
     </div>
     <div class="partner-carousel-outer">
@@ -514,14 +531,14 @@ section{padding:80px 0;}
         </div>
         <div class="sympl-footer-col">
           <h4>Services</h4>
-          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll</a>
-          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance</a>
+          <a href="sympl-bookkeeping.html">Bookkeeping</a>
+          <a href="sympl-payroll.html">Payroll</a>
           <a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>
         </div>
         <div class="sympl-footer-col">
           <h4>Who we serve</h4>
           <a href="sympl-arts.html">Arts &amp; Culture</a>
-          <a href="sympl-settlement.html">Immigrant &amp; Settlement</a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement</a>
           <a href="index.html#serve">All nonprofits</a>
         </div>
         <div class="sympl-footer-col">
@@ -570,39 +587,82 @@ section{padding:80px 0;}
   }
 })();
 
-  /* Client carousel */
+  /* Client carousel: seamless infinite loop via cloned column sets */
   (function() {
     var viewport = document.querySelector('.client-carousel-viewport');
     var grid = document.querySelector('.client-grid');
     var prevBtn = document.querySelector('.carousel-btn-prev');
     var nextBtn = document.querySelector('.carousel-btn-next');
     if (!viewport || !grid || !prevBtn || !nextBtn) return;
-    var cards = Array.from(grid.querySelectorAll('.client-card'));
     var rows = 2;
     var gap = 20;
-    var step = 0;
+
+    var realCards = Array.from(grid.querySelectorAll('.client-card'));
+    var realCols = Math.ceil(realCards.length / rows);
+
+    function cloneSet() {
+      var frag = document.createDocumentFragment();
+      realCards.forEach(function(c) {
+        var clone = c.cloneNode(true);
+        clone.classList.add('in'); // skip scroll-reveal fade for clones
+        frag.appendChild(clone);
+      });
+      return frag;
+    }
+
+    // DOM order: [clone of real] + [real] + [clone of real]
+    grid.insertBefore(cloneSet(), grid.firstChild);
+    grid.appendChild(cloneSet());
+
+    var step = realCols; // start on the real (middle) set
 
     function perView() {
       var vw = viewport.clientWidth;
       return vw < 500 ? 1 : vw < 800 ? 2 : 3;
     }
 
-    function update() {
+    function render(withTransition) {
       var pv = perView();
       var cw = (viewport.clientWidth - gap * (pv - 1)) / pv;
-      var totalCols = Math.ceil(cards.length / rows);
-      var maxStep = Math.max(0, totalCols - pv);
-      step = Math.min(step, maxStep);
       grid.style.gridAutoColumns = cw + 'px';
+      if (!withTransition) {
+        grid.style.transition = 'none';
+      }
       grid.style.transform = 'translateX(-' + step * (cw + gap) + 'px)';
-      prevBtn.classList.toggle('is-hidden', step <= 0);
-      nextBtn.classList.toggle('is-hidden', step >= maxStep);
+      if (!withTransition) {
+        grid.offsetHeight; // force reflow before restoring transition
+        grid.style.transition = '';
+      }
     }
 
-    prevBtn.addEventListener('click', function() { step--; update(); });
-    nextBtn.addEventListener('click', function() { step++; update(); });
-    window.addEventListener('resize', update);
-    update();
+    var busy = false;
+
+    function goNext() {
+      if (busy) return;
+      busy = true;
+      step++;
+      render(true);
+      window.setTimeout(function() {
+        if (step === realCols * 2) { step = realCols; render(false); }
+        busy = false;
+      }, 440);
+    }
+
+    function goPrev() {
+      if (busy) return;
+      busy = true;
+      step--;
+      render(true);
+      window.setTimeout(function() {
+        if (step === 0) { step = realCols; render(false); }
+        busy = false;
+      }, 440);
+    }
+
+    prevBtn.addEventListener('click', goPrev);
+    nextBtn.addEventListener('click', goNext);
+    window.addEventListener('resize', function() { render(false); });
+    render(false);
   })();
 
   /* Partner carousel */

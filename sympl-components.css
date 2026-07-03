@@ -48,7 +48,7 @@ sympl-footer {
 }
 
 .faq-head h2 {
-  font-size: clamp(28px, 3.8vw, 44px);
+  font-size: clamp(20px, 2.2vw, 26px);
 }
 
 .proof-head p,

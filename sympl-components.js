@@ -34,7 +34,7 @@ const SYMPL_DATA = {
     ]
   },
   arts: {
-    proofTitle: "Books built for grants, seasons, and earned revenue.",
+    proofTitle: "Books built for productions, seasons, and earned revenue.",
     proofLead: "Designed for theatres, galleries, festivals, and arts organizations where every funder speaks a slightly different language.",
     proofKicker: "Arts proof",
     clients: [
@@ -68,8 +68,8 @@ const SYMPL_DATA = {
     ],
     faqs: [
       {
-        q: "Can you track each arts grant separately?",
-        a: "Yes. We structure your chart of accounts so each funder, project, claim period, and restricted line can be reported cleanly without rebuilding spreadsheets at deadline time."
+        q: "Can you handle artist and contractor payments?",
+        a: "Yes. We classify every guest artist, performer, and casual hire correctly as T4 or T4A, apply the right union rates, and keep records ready for year-end T4A issuance, with the exact process refined to fit how your organization already works."
       },
       {
         q: "Can you reconcile ticketing, rentals, memberships, and donations?",
@@ -267,12 +267,7 @@ class SymplFaq extends HTMLElement {
           <div class="faq-head">
             <p class="kicker">FAQ</p>
             <h2>The questions that usually come up before the first review.</h2>
-            <p>Short answers now. The details get mapped to your books during the free finance review.</p>
           </div>
-          <aside class="faq-index">
-            <strong>First review</strong>
-            <span>We look at your current setup, your reporting pressure points, and one practical risk area to fix first.</span>
-          </aside>
           <div class="faq-list">
             ${faqs.map((faq, i) => `
               <div class="faq-item ${i === 0 ? "on" : ""}">
@@ -348,14 +343,14 @@ class SymplFooter extends HTMLElement {
             </div>
             <div class="sympl-footer-col">
               <h4>Services</h4>
-              <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll</a>
-              <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance</a>
+              <a href="sympl-bookkeeping.html">Bookkeeping</a>
+              <a href="sympl-payroll.html">Payroll</a>
               <a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>
             </div>
             <div class="sympl-footer-col">
               <h4>Who we serve</h4>
               <a href="sympl-arts.html">Arts &amp; Culture</a>
-              <a href="sympl-settlement.html">Immigrant &amp; Settlement</a>
+              <a href="sympl-settlement.html">Immigration &amp; Settlement</a>
               <a href="index.html#serve">All nonprofits</a>
             </div>
             <div class="sympl-footer-col">
@@ -405,14 +400,14 @@ document.addEventListener('DOMContentLoaded', function () {
       '<div class="nav-drawer-body">' +
         '<span class="nav-drawer-label">Services</span>' +
         '<div class="nav-drawer-sub">' +
-          '<a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll</a>' +
-          '<a href="sympl-reporting-compliance.html">Reporting &amp; Compliance</a>' +
+          '<a href="sympl-bookkeeping.html">Bookkeeping</a>' +
+          '<a href="sympl-payroll.html">Payroll</a>' +
           '<a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>' +
         '</div>' +
         '<span class="nav-drawer-label">Who We Serve</span>' +
         '<div class="nav-drawer-sub">' +
           '<a href="sympl-arts.html">Arts &amp; Culture</a>' +
-          '<a href="sympl-settlement.html">Immigrant &amp; Settlement</a>' +
+          '<a href="sympl-settlement.html">Immigration &amp; Settlement</a>' +
         '</div>' +
         '<a href="sympl-clients-partners.html">Clients &amp; Partners</a>' +
         '<a href="sympl-about.html">About</a>' +

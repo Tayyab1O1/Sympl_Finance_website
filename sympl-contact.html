@@ -139,10 +139,10 @@ section{padding:80px 0;}
 .contact-hero{padding:72px 0 0;background:var(--paper);}
 .contact-hero-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:flex-start;}
 .contact-copy{padding-bottom:72px;}
-.contact-copy h1{font-size:clamp(38px,4.8vw,58px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:20px;text-wrap:balance;}
+.contact-copy h1{font-size:clamp(38px,4.8vw,58px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:40px;text-wrap:balance;}
 .contact-copy h1 em{font-family:'Lora',serif;font-style:italic;font-weight:600;}
 .swoosh-wrap{position:relative;display:inline-block;white-space:nowrap;}
-.swoosh-wrap svg{position:absolute;left:-2%;bottom:-0.34em;width:104%;height:0.5em;}
+.swoosh-wrap svg{position:absolute;left:-2%;bottom:-0.6em;width:104%;height:0.62em;}
 .contact-copy .lead{font-size:17px;color:var(--ink-soft);line-height:1.65;margin-bottom:36px;max-width:460px;}
 .contact-pills{display:flex;flex-direction:column;gap:18px;}
 .contact-pill{display:flex;align-items:flex-start;gap:14px;}
@@ -154,18 +154,18 @@ section{padding:80px 0;}
 .contact-pill-text a:hover{text-decoration:underline;}
 
 /* ── FORM PANEL ── */
-.contact-form-wrap{position:sticky;top:90px;}
-.contact-panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px 36px 32px;box-shadow:0 20px 56px rgba(0,34,54,0.09);}
-.contact-panel h2{font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin-bottom:6px;}
-.contact-panel .sub{font-size:14.5px;color:var(--ink-soft);margin-bottom:26px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+.contact-form-wrap{position:sticky;top:90px;margin-bottom:48px;}
+.contact-panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 28px 24px;box-shadow:0 20px 56px rgba(0,34,54,0.09);}
+.contact-panel h2{font-size:20px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin-bottom:5px;}
+.contact-panel .sub{font-size:14px;color:var(--ink-soft);margin-bottom:18px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:11px;}
 .field:last-of-type{margin-bottom:0;}
 .field label{font-size:13px;font-weight:700;color:var(--inkwell);letter-spacing:0.01em;}
-.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:14.5px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:12px 14px;width:100%;transition:border-color .2s;}
+.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:14.5px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:10px 14px;width:100%;transition:border-color .2s;}
 .field input:focus,.field select,.field textarea:focus{outline:none;border-color:var(--deepwater);background:#fff;}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5f6b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
-.field textarea{min-height:100px;resize:vertical;}
+.field textarea{min-height:76px;resize:vertical;}
 .form-submit{width:100%;justify-content:center;margin-top:20px;padding:15px 24px;font-size:15px;}
 .form-micro{font-size:12px;color:var(--ink-soft);text-align:center;margin-top:12px;}
 .form-success{display:none;padding:18px 20px;background:var(--mist);border:1px solid var(--seaglass);border-radius:12px;text-align:center;font-size:14.5px;font-weight:600;color:var(--underbrush);margin-top:16px;}
@@ -210,8 +210,8 @@ section{padding:80px 0;}
       <div class="nav-item">
         <a href="index.html#services">Services <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll<small>Monthly books, payroll, allocations</small></a>
-          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance<small>Grants, audit prep, board packs</small></a>
+          <a href="sympl-bookkeeping.html">Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
+          <a href="sympl-payroll.html">Payroll<small>Payroll, allocations, remittances</small></a>
           <a href="sympl-cfo-advisory.html">CFO &amp; Advisory<small>Budgets, forecasts, finance decisions</small></a>
         </div>
       </div>
@@ -219,7 +219,8 @@ section{padding:80px 0;}
         <a href="index.html#serve">Who We Serve <span class="caret">▾</span></a>
         <div class="dropdown">
           <a href="sympl-arts.html">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
-          <a href="sympl-settlement.html">Immigrant &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+          <a href="sympl-nonprofit.html">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
         </div>
       </div>
       <div class="nav-item"><a href="sympl-clients-partners.html">Clients &amp; Partners</a></div>
@@ -239,8 +240,7 @@ section{padding:80px 0;}
       <!-- Left: copy + direct contacts -->
       <div class="contact-copy">
         <p class="kicker">Free 30-minute finance review</p>
-        <h1>Let's talk about your<br><span class="swoosh-wrap"><em>nonprofit's</em> finances.<svg viewBox="0 0 340 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 14 C100 5, 240 5, 336 11" stroke="#FFE079" stroke-width="10" fill="none" stroke-linecap="round"/></svg></span></h1>
-        <p class="lead">No pitch, no pressure. We'll learn about your organization, talk through where finance is slowing you down, and tell you honestly whether and how we can help.</p>
+        <h1>Let's talk about your<br><span class="swoosh-wrap"><em>nonprofit's</em> finances.<svg viewBox="0 0 900 180" preserveAspectRatio="none" aria-hidden="true"><path d="M892.363281 28.613281 C880.117188 20.863281 862.210938 20.316406 848.746094 21.167969 C581.359375 38.472656 287.574219 85.300781 25.824219 151.441406 C17.265625 153.613281 -13.433594 178.152344 8.507812 177.160156 C16.292969 176.804688 44.214844 166.097656 64.898438 160.871094 C130.410156 143.96875 373.34375 78.207031 762.449219 61.589844 C760.363281 67.359375 766.160156 73.148438 787.085938 79.035156 C830.804688 87.710938 856.148438 70.878906 892.847656 47.078125 C901.773438 41.617188 900.3125 33.648438 892.34375 28.589844 Z" fill="#F5CA43"/></svg></span></h1>
 
         <div class="contact-pills">
           <div class="contact-pill">
@@ -249,7 +249,7 @@ section{padding:80px 0;}
             </div>
             <div class="contact-pill-text">
               <strong>Email us directly</strong>
-              <span><a href="mailto:tayyab@symplsolutions.com">tayyab@symplsolutions.com</a></span>
+              <span><a href="mailto:contact@symplsolutions.com">contact@symplsolutions.com</a></span>
             </div>
           </div>
           <div class="contact-pill">
@@ -258,25 +258,7 @@ section{padding:80px 0;}
             </div>
             <div class="contact-pill-text">
               <strong>LinkedIn</strong>
-              <span><a href="https://www.linkedin.com/company/symplsolutions" target="_blank" rel="noopener">/symplsolutions</a></span>
-            </div>
-          </div>
-          <div class="contact-pill">
-            <div class="contact-pill-icon">
-              <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="none"/><path d="M11 6v5l3.5 3.5M11 2a9 9 0 100 18A9 9 0 0011 2z" stroke="#007E7C" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <div class="contact-pill-text">
-              <strong>Response time</strong>
-              <span>Typically within one business day</span>
-            </div>
-          </div>
-          <div class="contact-pill">
-            <div class="contact-pill-icon">
-              <svg viewBox="0 0 22 22" fill="none"><path d="M11 2C6.5 2 3 5.5 3 10c0 5.25 8 12 8 12s8-6.75 8-12c0-4.5-3.5-8-8-8zm0 10.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" stroke="#007E7C" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="contact-pill-text">
-              <strong>Based in</strong>
-              <span>Toronto, Ontario - serving nonprofits across Canada</span>
+              <span><a href="https://www.linkedin.com/company/sympl-finance/" target="_blank" rel="noopener">/sympl-finance</a></span>
             </div>
           </div>
         </div>
@@ -329,11 +311,7 @@ section{padding:80px 0;}
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 20 20" fill="none"><path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          CPA-led team
-        </div>
-        <div class="trust-item">
-          <svg viewBox="0 0 20 20" fill="none"><path d="M10 2C6 2 3 5.5 3 8.5c0 5 7 10 7 10s7-5 7-10C17 5.5 14 2 10 2zm0 8.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
-          Canada-based
+          Accountant-led team
         </div>
       </div>
     </div>
@@ -351,14 +329,14 @@ section{padding:80px 0;}
         </div>
         <div class="sympl-footer-col">
           <h4>Services</h4>
-          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll</a>
-          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance</a>
+          <a href="sympl-bookkeeping.html">Bookkeeping</a>
+          <a href="sympl-payroll.html">Payroll</a>
           <a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>
         </div>
         <div class="sympl-footer-col">
           <h4>Who we serve</h4>
           <a href="sympl-arts.html">Arts &amp; Culture</a>
-          <a href="sympl-settlement.html">Immigrant &amp; Settlement</a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement</a>
           <a href="index.html#serve">All nonprofits</a>
         </div>
         <div class="sympl-footer-col">

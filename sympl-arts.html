@@ -76,10 +76,10 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can you track each arts grant separately?",
+          "name": "Can you handle artist and contractor payments?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. We structure your chart of accounts so each funder, project, claim period, and restricted line can be reported cleanly without rebuilding spreadsheets at deadline time."
+            "text": "Yes. We classify every guest artist, performer, and casual hire correctly as T4 or T4A, apply the right union rates, and keep records ready for year-end T4A issuance, with the exact process refined to fit how your organization already works."
           }
         },
         {
@@ -275,6 +275,10 @@ a{color:inherit;}
 .rev-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .rev-src{color:var(--ink-soft);flex:1;}
 .rev-amt{font-weight:700;color:var(--inkwell);}
+.form-mini-row{display:flex;gap:12px;margin-bottom:12px;}
+.form-mini-field{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;}
+.form-mini-label{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-soft);}
+.form-mini-value{font-size:13.5px;font-weight:600;color:var(--inkwell);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 @media (max-width:900px){
   .how-row{grid-template-columns:1fr;gap:28px;margin-bottom:52px;}
   .how-row-flip .how-card-wrap{order:2;transform:none;}
@@ -334,8 +338,8 @@ a{color:inherit;}
       <div class="nav-item">
         <a href="index.html#services">Services <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll<small>Monthly books, payroll, bill payments</small></a>
-          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance<small>Grants, T3010, audit prep</small></a>
+          <a href="sympl-bookkeeping.html">Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
+          <a href="sympl-payroll.html">Payroll<small>Payroll, allocations, remittances</small></a>
           <a href="sympl-cfo-advisory.html">CFO &amp; Advisory<small>Budgets, forecasts, board reporting</small></a>
         </div>
       </div>
@@ -343,7 +347,7 @@ a{color:inherit;}
         <a href="index.html#serve" aria-current="page">Who We Serve <span class="caret">▾</span></a>
         <div class="dropdown">
           <a href="sympl-arts.html">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
-          <a href="sympl-settlement.html">Immigrant &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
           <a href="sympl-nonprofit.html">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
         </div>
       </div>
@@ -364,8 +368,8 @@ a{color:inherit;}
 
   <div class="stage">
     <p class="kicker">Who we serve · Arts &amp; Culture</p>
-    <h1>Bookkeeping that speaks
-      <span class="swoosh-wrap"><em>arts council.</em>
+    <h1>Book that keeps
+      <span class="swoosh-wrap"><em>the show running.</em>
         <svg viewBox="0 0 260 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C70 4, 190 4, 256 9" stroke="#FFE079" stroke-width="9" fill="none" stroke-linecap="round"/></svg>
       </span>
     </h1>
@@ -376,7 +380,7 @@ a{color:inherit;}
   </div>
 
   <div class="curtain-call">
-    <p class="lead">Grant reporting, rental revenue, and seasonal cash flow, handled by a team that works only with arts and culture organizations. Books current, reports on time, one flat monthly fee.</p>
+    <p class="lead">Box office, rentals, memberships, and season-driven cash flow, handled by a team that works with arts and culture organizations. Books current, reports on time, one flat monthly fee.</p>
     <div class="hero-ctas">
       <a href="sympl-contact.html" class="btn btn-yolk">Book a free review →</a>
       <a href="sympl-quote.html" class="btn btn-ghost rev">Get a quote</a>
@@ -396,21 +400,21 @@ a{color:inherit;}
     <div class="pain-cards" id="painCards">
       <div class="pain-card">
         <div class="pain-num">01</div>
-        <h3>Every funder wants a different report</h3>
-        <p>Each grant arrives with its own budget template, allocation rules, and final-report format. Keeping spend lined up against every restricted line becomes a job in itself.</p>
-        <div class="ptags"><span class="ptag">Canada Council</span><span class="ptag">Ontario Arts Council</span><span class="ptag">Toronto Arts Council</span></div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-num">02</div>
         <h3>Earned revenue gets messy</h3>
         <p>Box office, venue rentals, memberships, and concessions land through different systems that somehow all have to reconcile back to clean books.</p>
         <div class="ptags"><span class="ptag">Box office</span><span class="ptag">Rentals</span><span class="ptag">Memberships</span></div>
       </div>
       <div class="pain-card">
-        <div class="pain-num">03</div>
+        <div class="pain-num">02</div>
         <h3>Cash flow swings with the season</h3>
         <p>Money clusters around grant disbursements and season launches, while payroll and production costs roll on steadily all year long.</p>
         <div class="ptags"><span class="ptag">Seasonal funding</span><span class="ptag">Steady costs</span></div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <h3>Paying artists and crew gets complicated</h3>
+        <p>Guest artists, performers, and casual crew all get paid differently. Some need a T4, some a T4A, some fall under union rate agreements. Getting the classification wrong isn't just messy, it's a CRA risk.</p>
+        <div class="ptags"><span class="ptag">T4 vs. T4A</span><span class="ptag">Union rates</span><span class="ptag">Casual crew</span></div>
       </div>
     </div>
     <div class="pain-dots" id="painDots" aria-hidden="true"></div>
@@ -435,37 +439,41 @@ a{color:inherit;}
     <div class="how-row rv">
       <div class="how-text">
         <div class="how-num">01</div>
-        <h3>Every grant, tracked funder by funder</h3>
-        <p>We set up your chart of accounts around your funders, not the other way around. Each grant gets its own budget lines, claim periods tracked in real time, and a final report drafted before the deadline lands in your inbox.</p>
+        <h3>Artist and crew payments, classified correctly from day one</h3>
+        <p>We set up your payroll and contractor system to flag T4 vs. T4A up front, apply the right union rates automatically, and keep a clean record for every guest artist and casual hire, so year-end T4A issuance isn't a scramble.</p>
         <ul class="how-list">
-          <li>Restricted fund tracking per funder</li>
-          <li>Claim-period variance alerts</li>
-          <li>Final-report templates ready to go</li>
+          <li>Correct T4 vs. T4A classification</li>
+          <li>Union rate schedules applied automatically</li>
+          <li>Year-end T4A issuance ready to go</li>
         </ul>
       </div>
       <div class="how-card-wrap">
         <div class="rcard">
-          <div class="rcard-label">Grant tracker · current</div>
-          <div class="rcard-row">
-            <span class="rcard-name">Canada Council</span>
-            <span class="pill pill-ok">reported ✓</span>
+          <div class="rcard-label">Artist payment form · guest performer</div>
+          <div class="form-mini-row">
+            <div class="form-mini-field">
+              <span class="form-mini-label">Name</span>
+              <span class="form-mini-value">Jordan Reyes</span>
+            </div>
+            <div class="form-mini-field">
+              <span class="form-mini-label">Role</span>
+              <span class="form-mini-value">Guest performer</span>
+            </div>
           </div>
-          <div class="rbar-wrap"><div class="rbar" style="width:100%;background:var(--bay);"></div></div>
-          <div class="rcard-sub">$48,000 of $48,000 claimed</div>
-
-          <div class="rcard-row" style="margin-top:14px;">
-            <span class="rcard-name">Ontario Arts Council</span>
-            <span class="pill pill-warn">due in 11 days</span>
+          <div class="form-mini-row">
+            <div class="form-mini-field">
+              <span class="form-mini-label">Payment type</span>
+              <span class="form-mini-value">T4A · one-time</span>
+            </div>
+            <div class="form-mini-field">
+              <span class="form-mini-label">Rate</span>
+              <span class="form-mini-value">Union scale · $612/show</span>
+            </div>
           </div>
-          <div class="rbar-wrap"><div class="rbar" style="width:74%;background:var(--deepwater);"></div></div>
-          <div class="rcard-sub">$37,000 of $50,000 claimed</div>
-
-          <div class="rcard-row" style="margin-top:14px;">
-            <span class="rcard-name">Toronto Arts Council</span>
-            <span class="pill pill-ok">reported ✓</span>
+          <div class="rcard-row" style="margin-top:6px;">
+            <span class="rcard-name">Classification confirmed</span>
+            <span class="pill pill-ok">Ready for payment ✓</span>
           </div>
-          <div class="rbar-wrap"><div class="rbar" style="width:100%;background:var(--bay);"></div></div>
-          <div class="rcard-sub">$22,000 of $22,000 claimed</div>
         </div>
       </div>
     </div>
@@ -559,12 +567,11 @@ a{color:inherit;}
       <div class="faq-head">
         <p class="kicker">FAQ</p>
         <h2>The questions that usually come up before the first review.</h2>
-        <p>Short answers now. The details get mapped to your books during the free finance review.</p>
       </div>
       <div class="faq-list">
         <div class="faq-item on">
-          <h3 class="faq-q"><span class="faq-num">01</span><span class="faq-title">Can you track each arts grant separately?</span></h3>
-          <div class="faq-a"><p>Yes. We structure your chart of accounts so each funder, project, claim period, and restricted line can be reported cleanly without rebuilding spreadsheets at deadline time.</p></div>
+          <h3 class="faq-q"><span class="faq-num">01</span><span class="faq-title">Can you handle artist and contractor payments?</span></h3>
+          <div class="faq-a"><p>Yes. We classify every guest artist, performer, and casual hire correctly as T4 or T4A, apply the right union rates, and keep records ready for year-end T4A issuance, with the exact process refined to fit how your organization already works.</p></div>
         </div>
         <div class="faq-item">
           <h3 class="faq-q"><span class="faq-num">02</span><span class="faq-title">Can you reconcile ticketing, rentals, memberships, and donations?</span></h3>
@@ -614,14 +621,14 @@ a{color:inherit;}
         </div>
         <div class="sympl-footer-col">
           <h4>Services</h4>
-          <a href="sympl-bookkeeping-payroll.html">Bookkeeping &amp; Payroll</a>
-          <a href="sympl-reporting-compliance.html">Reporting &amp; Compliance</a>
+          <a href="sympl-bookkeeping.html">Bookkeeping</a>
+          <a href="sympl-payroll.html">Payroll</a>
           <a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>
         </div>
         <div class="sympl-footer-col">
           <h4>Who we serve</h4>
           <a href="sympl-arts.html">Arts &amp; Culture</a>
-          <a href="sympl-settlement.html">Immigrant &amp; Settlement</a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement</a>
           <a href="index.html#serve">All nonprofits</a>
         </div>
         <div class="sympl-footer-col">
