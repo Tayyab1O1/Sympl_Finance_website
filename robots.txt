@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /sympl-brand-guide.html
-Disallow: /sympl-brand-guide
 Disallow: /Sympl_Competitor_Analysis.xlsx
 Disallow: /sympl-progress.md
 

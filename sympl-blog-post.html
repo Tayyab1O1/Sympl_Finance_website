@@ -330,31 +330,31 @@ a{color:inherit;}
 <!-- ═══════════ NAV ═══════════ -->
 <header class="nav">
   <div class="nav-inner">
-    <a href="/" class="wordmark" aria-label="Sympl Finance home">
+    <a href="index.html" class="wordmark" aria-label="Sympl Finance home">
       <img src="Dark.svg" alt="Sympl Finance" style="height:44px;width:auto;display:block;">
     </a>
     <nav class="nav-links" aria-label="Main">
       <div class="nav-item">
-        <a href="/#services">Services <span class="caret">▾</span></a>
+        <a href="index.html#services">Services <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="sympl-bookkeeping">Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
-          <a href="sympl-payroll">Payroll<small>Payroll, allocations, remittances</small></a>
-          <a href="sympl-cfo-advisory">CFO &amp; Advisory<small>Budgets, forecasts, board reporting</small></a>
+          <a href="sympl-bookkeeping.html">Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
+          <a href="sympl-payroll.html">Payroll<small>Payroll, allocations, remittances</small></a>
+          <a href="sympl-cfo-advisory.html">CFO &amp; Advisory<small>Budgets, forecasts, board reporting</small></a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="/#serve">Who We Serve <span class="caret">▾</span></a>
+        <a href="index.html#serve">Who We Serve <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="sympl-arts">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
-          <a href="sympl-settlement">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
-          <a href="sympl-nonprofit">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
+          <a href="sympl-arts.html">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
+          <a href="sympl-settlement.html">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+          <a href="sympl-nonprofit.html">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
         </div>
       </div>
-      <div class="nav-item"><a href="sympl-clients-partners">Clients &amp; Partners</a></div>
-      <div class="nav-item"><a href="sympl-about">About</a></div>
-      <div class="nav-item"><a href="sympl-blog" aria-current="page">Blog</a></div>
-      <a href="sympl-contact" class="btn btn-yolk nav-cta">Book a Free Review</a>
-      <a href="sympl-quote" class="btn btn-ghost nav-cta">Get a quote</a>
+      <div class="nav-item"><a href="sympl-clients-partners.html">Clients &amp; Partners</a></div>
+      <div class="nav-item"><a href="sympl-about.html">About</a></div>
+      <div class="nav-item"><a href="sympl-blog.html" aria-current="page">Blog</a></div>
+      <a href="sympl-contact.html" class="btn btn-yolk nav-cta">Book a Free Review</a>
+      <a href="sympl-quote.html" class="btn btn-ghost nav-cta">Get a quote</a>
     </nav>
   </div>
 </header>
@@ -378,7 +378,7 @@ a{color:inherit;}
       '<p style="font-size:64px;margin-bottom:16px">📄</p>' +
       '<h1>Article not found</h1>' +
       '<p>This article may have moved or the link may be incorrect.</p>' +
-      '<a href="sympl-blog" class="btn btn-primary">Back to Blog</a>' +
+      '<a href="sympl-blog.html" class="btn btn-primary">Back to Blog</a>' +
       '</div>';
     return;
   }
@@ -405,9 +405,9 @@ a{color:inherit;}
   /* ── Shared fragments ── */
   function breadcrumb() {
     return '<nav class="breadcrumb" aria-label="Breadcrumb">' +
-      '<a href="sympl-blog">Blog</a>' +
+      '<a href="sympl-blog.html">Blog</a>' +
       '<span class="sep" aria-hidden="true">›</span>' +
-      '<a href="sympl-blog?cat=' + encodeURIComponent(article.category) + '">' + article.category + '</a>' +
+      '<a href="sympl-blog.html?cat=' + encodeURIComponent(article.category) + '">' + article.category + '</a>' +
       '<span class="sep" aria-hidden="true">›</span>' +
       '<span aria-current="page">' + truncate(article.title, 48) + '</span>' +
       '</nav>';
@@ -437,7 +437,7 @@ a{color:inherit;}
       '<div><div class="author-name">The Sympl Finance Team</div>' +
       '<div class="author-role">Ontario nonprofit finance experts - bookkeeping, grants, payroll &amp; CFO advisory</div>' +
       '</div></div>' +
-      '<a href="sympl-blog" class="back-link">' +
+      '<a href="sympl-blog.html" class="back-link">' +
       '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
       'Back to all articles</a>' +
       '</div>';
@@ -450,7 +450,7 @@ a{color:inherit;}
     }).slice(0, 3);
     if (!others.length) others = SYMPL_BLOG_DATA.filter(function(a){ return a.id !== article.id; }).slice(0, 3);
     var items = others.map(function(a){
-      return '<a class="related-item" href="sympl-blog-post?id=' + a.id + '">' +
+      return '<a class="related-item" href="sympl-blog-post.html?id=' + a.id + '">' +
         '<div class="ri-cat">' + a.category + '</div>' +
         '<div class="ri-title">' + a.title + '</div>' +
         '</a>';
@@ -528,7 +528,7 @@ a{color:inherit;}
       '<div class="sidebar-cta">' +
       '<h3>Is your grant reporting taking too long?</h3>' +
       '<p>Our team sets up your books so every funder report is a 20-minute export, not a two-week rebuild.</p>' +
-      '<a href="sympl-contact">Book a free review →</a>' +
+      '<a href="sympl-contact.html">Book a free review →</a>' +
       '</div>' +
       relatedPosts() +
       '</aside>' +
