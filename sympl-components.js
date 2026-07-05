@@ -171,7 +171,7 @@ class SymplProof extends HTMLElement {
           <div class="proof-cta">
             <p>Want to see what this would look like in your books? Start with a free, no-pressure finance review.</p>
             <div class="proof-cta-actions">
-              <a href="sympl-contact.html" class="btn btn-dark">Book a free review →</a>
+              <a href="sympl-contact" class="btn btn-dark">Book a free review →</a>
               <a href="#faq" class="btn btn-ghost">Read the FAQ</a>
             </div>
           </div>
@@ -320,8 +320,8 @@ class SymplFinalCta extends HTMLElement {
             <h2>Let's make your finances the calm part.</h2>
             <p>A structured look at your current books, reporting pressure, and one practical risk area. You leave with something useful either way. Free, no obligation.</p>
             <div class="proof-cta-actions">
-              <a href="sympl-contact.html" class="btn btn-yolk">Book a free review →</a>
-              <a href="index.html#services" class="btn btn-ghost rev">See services</a>
+              <a href="sympl-contact" class="btn btn-yolk">Book a free review →</a>
+              <a href="/#services" class="btn btn-ghost rev">See services</a>
             </div>
           </div>
           <sympl-cta-agenda></sympl-cta-agenda>
@@ -343,24 +343,24 @@ class SymplFooter extends HTMLElement {
             </div>
             <div class="sympl-footer-col">
               <h4>Services</h4>
-              <a href="sympl-bookkeeping.html">Bookkeeping</a>
-              <a href="sympl-payroll.html">Payroll</a>
-              <a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>
+              <a href="sympl-bookkeeping">Bookkeeping</a>
+              <a href="sympl-payroll">Payroll</a>
+              <a href="sympl-cfo-advisory">CFO &amp; Advisory</a>
             </div>
             <div class="sympl-footer-col">
               <h4>Who we serve</h4>
-              <a href="sympl-arts.html">Arts &amp; Culture</a>
-              <a href="sympl-settlement.html">Immigration &amp; Settlement</a>
-              <a href="index.html#serve">All nonprofits</a>
+              <a href="sympl-arts">Arts &amp; Culture</a>
+              <a href="sympl-settlement">Immigration &amp; Settlement</a>
+              <a href="/#serve">All nonprofits</a>
             </div>
             <div class="sympl-footer-col">
               <h4>Company</h4>
-              <a href="sympl-about.html">About</a>
-              <a href="sympl-clients-partners.html">Clients &amp; Partners</a>
-              <a href="sympl-blog.html">Blog</a>
-              <a href="index.html#tips">Finance tips</a>
-              <a href="sympl-contact.html">Book a review</a>
-              <a href="sympl-quote.html">Get a quote</a>
+              <a href="sympl-about">About</a>
+              <a href="sympl-clients-partners">Clients &amp; Partners</a>
+              <a href="sympl-blog">Blog</a>
+              <a href="/#tips">Finance tips</a>
+              <a href="sympl-contact">Book a review</a>
+              <a href="sympl-quote">Get a quote</a>
             </div>
           </div>
           <div class="sympl-footer-base">
@@ -400,22 +400,22 @@ document.addEventListener('DOMContentLoaded', function () {
       '<div class="nav-drawer-body">' +
         '<span class="nav-drawer-label">Services</span>' +
         '<div class="nav-drawer-sub">' +
-          '<a href="sympl-bookkeeping.html">Bookkeeping</a>' +
-          '<a href="sympl-payroll.html">Payroll</a>' +
-          '<a href="sympl-cfo-advisory.html">CFO &amp; Advisory</a>' +
+          '<a href="sympl-bookkeeping">Bookkeeping</a>' +
+          '<a href="sympl-payroll">Payroll</a>' +
+          '<a href="sympl-cfo-advisory">CFO &amp; Advisory</a>' +
         '</div>' +
         '<span class="nav-drawer-label">Who We Serve</span>' +
         '<div class="nav-drawer-sub">' +
-          '<a href="sympl-arts.html">Arts &amp; Culture</a>' +
-          '<a href="sympl-settlement.html">Immigration &amp; Settlement</a>' +
+          '<a href="sympl-arts">Arts &amp; Culture</a>' +
+          '<a href="sympl-settlement">Immigration &amp; Settlement</a>' +
         '</div>' +
-        '<a href="sympl-clients-partners.html">Clients &amp; Partners</a>' +
-        '<a href="sympl-about.html">About</a>' +
-        '<a href="sympl-blog.html">Blog</a>' +
+        '<a href="sympl-clients-partners">Clients &amp; Partners</a>' +
+        '<a href="sympl-about">About</a>' +
+        '<a href="sympl-blog">Blog</a>' +
       '</div>' +
       '<div class="nav-drawer-ctas">' +
-        '<a href="sympl-contact.html" class="btn btn-yolk">Book a Free Review</a>' +
-        '<a href="sympl-quote.html" class="btn btn-ghost">Get a quote</a>' +
+        '<a href="sympl-contact" class="btn btn-yolk">Book a Free Review</a>' +
+        '<a href="sympl-quote" class="btn btn-ghost">Get a quote</a>' +
       '</div>' +
     '</div>';
 
