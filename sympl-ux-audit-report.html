@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sympl Finance — UX/UI &amp; Accessibility Audit · July 2026</title>
+<style>
+  :root{
+    --ink:#0f2233; --ink-soft:#3d5265; --paper:#fbf7f2; --card:#ffffff;
+    --teal:#007e7c; --teal-dark:#005f5d; --yolk:#f5d565; --line:#e6ded4;
+    --red:#c0392b; --red-bg:#fdf0ee; --amber:#9a6200; --amber-bg:#fdf6e7;
+    --green:#1e7d4f; --green-bg:#ecf7f0; --blue:#28618f; --blue-bg:#eef4fa;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:16px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  header.hero{background:var(--ink);color:#fff;padding:56px 0 48px}
+  header.hero .wrap{max-width:1080px}
+  .hero-kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--yolk);font-weight:700;margin-bottom:14px}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;font-weight:800;max-width:760px}
+  .hero-meta{margin-top:18px;color:#b8c6d2;font-size:14px;display:flex;gap:22px;flex-wrap:wrap}
+  .hero-meta b{color:#fff;font-weight:600}
+
+  nav.toc{position:sticky;top:0;background:rgba(251,247,242,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:50}
+  nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:10px;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+  nav.toc a{white-space:nowrap;font-size:13.5px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:7px 13px;border-radius:99px}
+  nav.toc a:hover{background:#efe8de;color:var(--ink)}
+
+  section{padding:52px 0 8px}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;scroll-margin-top:70px}
+  .sub{color:var(--ink-soft);max-width:820px;margin-bottom:26px}
+  h3{font-size:19px;font-weight:700;margin:30px 0 10px}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0 8px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px}
+  .stat .n{font-size:32px;font-weight:800;line-height:1}
+  .stat .l{font-size:12.5px;color:var(--ink-soft);margin-top:6px;line-height:1.35}
+  .stat.crit .n{color:var(--red)} .stat.rec .n{color:var(--amber)} .stat.min .n{color:var(--blue)} .stat.good .n{color:var(--green)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px;vertical-align:2px}
+  .b-fix{background:var(--red-bg);color:var(--red)}
+  .b-rec{background:var(--amber-bg);color:var(--amber)}
+  .b-min{background:var(--blue-bg);color:var(--blue)}
+  .b-good{background:var(--green-bg);color:var(--green)}
+
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px}
+  .filters button{font:inherit;font-size:13px;font-weight:700;padding:7px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer}
+  .filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+  .finding{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+  .finding.fix{border-left-color:var(--red)}
+  .finding.rec{border-left-color:var(--amber)}
+  .finding.min{border-left-color:var(--blue)}
+  .finding.good{border-left-color:var(--green)}
+  .finding h4{font-size:16px;font-weight:700;margin-bottom:6px;line-height:1.35}
+  .finding .why{margin:8px 0;color:var(--ink-soft);font-size:14.5px}
+  .finding .act{margin-top:10px;font-size:14.5px;background:#f6f1ea;border-radius:8px;padding:10px 14px}
+  .finding .act b{color:var(--teal-dark)}
+  .ev{font-family:var(--mono);font-size:12.5px;background:#f1ece4;border-radius:6px;padding:2px 7px;color:#57430a;word-break:break-word}
+  details.evbox{margin-top:10px;font-size:13.5px}
+  details.evbox summary{cursor:pointer;font-weight:600;color:var(--teal-dark);font-size:13.5px}
+  details.evbox div{margin-top:8px;background:#faf6ef;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  details.evbox code{font-family:var(--mono);font-size:12.5px}
+
+  .page-card{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:18px 0;overflow:hidden}
+  .page-card > summary{list-style:none;cursor:pointer;padding:18px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .page-card > summary::-webkit-details-marker{display:none}
+  .page-card > summary:hover{background:#fdfaf5}
+  .page-card > summary .chev{margin-left:auto;transition:transform .2s;color:var(--ink-soft);flex-shrink:0}
+  .page-card[open] > summary .chev{transform:rotate(90deg)}
+  .page-card[open] > summary{border-bottom:1px solid var(--line)}
+  .pc-title{font-size:17px;font-weight:800}
+  .pc-url{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);background:#f4efe7;padding:2px 8px;border-radius:6px}
+  .pc-counts{display:flex;gap:6px;font-size:11px}
+  .page-body{padding:8px 22px 22px}
+  .page-body h5{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-dark);margin:20px 0 4px;font-weight:800}
+  .page-body p.desc{font-size:14.5px;color:var(--ink-soft)}
+  .page-body ul{margin:8px 0 0 0;padding-left:0;list-style:none}
+  .page-body li{font-size:14.5px;padding:9px 0;border-bottom:1px dashed var(--line);display:block}
+  .page-body li:last-child{border-bottom:none}
+  .page-body li .badge{margin-right:8px}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  .tbl-scroll{overflow-x:auto;margin:16px 0;border-radius:12px}
+  th{background:var(--ink);color:#fff;text-align:left;padding:11px 14px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+  td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+  td:first-child{font-weight:600;white-space:nowrap}
+  .ok{color:var(--green);font-weight:700}
+  .warn{color:var(--amber);font-weight:700}
+  .bad{color:var(--red);font-weight:700}
+
+  .road{counter-reset:step}
+  .road-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px 16px 62px;margin:12px 0;position:relative}
+  .road-item::before{counter-increment:step;content:counter(step);position:absolute;left:18px;top:16px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .road-item h4{font-size:15.5px;font-weight:700}
+  .road-item p{font-size:14px;color:var(--ink-soft);margin-top:3px}
+  .road-item .meta{font-size:12px;margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+  .tag{border:1px solid var(--line);border-radius:99px;padding:2px 10px;font-weight:600;color:var(--ink-soft);background:#faf6ef}
+  .phase-label{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin:30px 0 4px}
+  .phase-label.p0{color:var(--red)} .phase-label.p1{color:var(--amber)} .phase-label.p2{color:var(--blue)}
+
+  .res-note{margin-top:10px;font-size:13.5px;background:var(--green-bg);border:1px solid #cfe8d9;border-radius:8px;padding:9px 13px;color:var(--green);font-weight:600}
+  .res-note.partial{background:var(--amber-bg);border-color:#ecd9ae;color:var(--amber)}
+  .update-banner{background:var(--green-bg);border:1px solid #cfe8d9;border-radius:14px;padding:16px 20px;margin:22px 0 6px;font-size:14.5px}
+  .update-banner b{color:var(--green)}
+  .strength-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:16px}
+  .strength{background:var(--green-bg);border:1px solid #cfe8d9;border-radius:12px;padding:16px 18px;font-size:14.5px}
+  .strength b{display:block;margin-bottom:4px;color:var(--green)}
+
+  footer{margin-top:64px;padding:28px 0 40px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px}
+  .hidden{display:none!important}
+  @media (max-width:640px){
+    .page-card > summary{padding:15px 16px}
+    .page-body{padding:6px 16px 18px}
+    .finding{padding:15px 16px}
+  }
+  @media print{
+    nav.toc,.filters{display:none}
+    .page-card{page-break-inside:avoid}
+    details[open]{display:block}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="hero-kicker">UX/UI &amp; Accessibility Audit</p>
+    <h1>Sympl Finance website — usability, mobile &amp; WCAG 2.1 AA assessment</h1>
+    <p class="hero-meta">
+      <span><b>13 pages</b> audited</span>
+      <span><b>3 viewports</b> — 375px · 768–1024px · 1440px</span>
+      <span><b>July 7, 2026</b></span>
+      <span>Method: live browser testing, computed-style contrast analysis, interaction &amp; network tracing, source review</span>
+    </p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Report sections">
+  <div class="wrap">
+    <a href="#summary">Executive summary</a>
+    <a href="#critical">Critical findings</a>
+    <a href="#matrix">Viewport matrix</a>
+    <a href="#pages">Page-by-page</a>
+    <a href="#roadmap">Priority roadmap</a>
+    <a href="#strengths">Strengths &amp; patterns</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ EXECUTIVE SUMMARY ============ -->
+<section id="summary">
+  <h2>Executive summary</h2>
+  <p class="sub">The Sympl Finance site is <strong>visually polished, fast, and structurally responsive</strong> — no page shows layout breakage or horizontal scroll at any width from 375px to 1440px, page weight is exceptionally light (~130&nbsp;KB of images on the homepage), and the design system is applied consistently across all 13 pages. The serious problems are not cosmetic. They sit at the two points where the site is supposed to <em>do its job</em>: <strong>capturing leads</strong> and <strong>letting every visitor reach the service pages</strong>.</p>
+
+  <div class="update-banner"><b>✓ Remediation update — July 7, 2026:</b> all six Fix Required findings have been resolved. Forms now deliver to tayyab@symplsolutions.com (CC natasha@) via FormSubmit with validation and error states; dropdown navigation is click/tap/keyboard operable; the invisible "See services" button is fixed site-wide; draft/internal copy was replaced; and a privacy policy page is live. The anonymous Arts/Settlement testimonials are a known content to-do — client has confirmed real sector testimonials will be swapped in directly. Outstanding: one-time FormSubmit activation click after deploy and legal review of the privacy policy. Each resolved item is marked in green below.</div>
+
+  <div class="stat-grid">
+    <div class="stat crit"><div class="n">6</div><div class="l">Fix Required — harms conversion, access, or trust</div></div>
+    <div class="stat rec"><div class="n">11</div><div class="l">Recommended — meaningful UX / accessibility gains</div></div>
+    <div class="stat min"><div class="n">8</div><div class="l">Minor / Consider — polish items</div></div>
+    <div class="stat good"><div class="n">10</div><div class="l">Notable strengths worth protecting</div></div>
+  </div>
+
+  <h3>The three things to internalize</h3>
+  <div class="finding fix">
+    <h4>1 · Every lead-capture form on the site is a dead end. <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span></h4>
+    <p class="why">The contact form, the 3-step quote wizard, and the homepage checklist signup all show a success message ("Thanks! We'll be in touch within one business day") <strong>without sending data anywhere</strong> — there is no backend, no email service, no network request. A prospective client who fills in the quote wizard believes Sympl has their information; Sympl never receives it. Until this is fixed, every marketing dollar and SEO win driving traffic to these pages produces silently lost leads and, worse, prospects who conclude Sympl ignored them.</p>
+  </div>
+  <div class="finding fix">
+    <h4>2 · On touch tablets and for keyboard users, the Services and Who&nbsp;We&nbsp;Serve menus cannot be opened. <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span></h4>
+    <p class="why">Between 901px and desktop widths the header shows hover-only dropdowns, and the site's JavaScript actively cancels clicks on the "Services ▾" and "Who&nbsp;We&nbsp;Serve ▾" triggers. On an iPad in landscape (1024px) tapping them does nothing — verified in testing — so five core pages (Bookkeeping, Payroll, CFO&nbsp;&amp;&nbsp;Advisory, Arts, Settlement) are unreachable from the header. Keyboard users hit the same wall: focus never reveals the dropdown, and the script even blurs the link after clicking. This is both a conversion leak and a WCAG&nbsp;2.1.1 (Keyboard) failure.</p>
+  </div>
+  <div class="finding fix">
+    <h4>3 · Internal placeholder content is live in production. <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span> <span class="badge b-min">◔ Testimonials to be added</span></h4>
+    <p class="why">The Clients&nbsp;&amp;&nbsp;Partners page displays an editor's note to the team — <em>"Use this as the flexible client list. Swap placeholder marks for approved logos and add real client names as permissions…"</em> — as visible page copy. The homepage social-proof section carries similar draft text, and several testimonials are attributed to generic personas ("Gallery client", "Festival client", "Program lead"). For a firm selling trust and accuracy, shipped draft copy directly undercuts the brand promise.</p>
+  </div>
+
+  <p class="sub" style="margin-top:22px">Beyond these, the audit found a <strong>fully invisible button</strong> (1.0:1 contrast) on three pages caused by a missing shared CSS rule, a set of brand-color text styles that sit just below WCAG&nbsp;AA contrast thresholds, sub-44px touch targets in the header and footer, hotlinked images served from Squarespace and Unsplash accounts the team doesn't control, no analytics of any kind, and no privacy policy behind the footer's "Privacy" label — a gap for a financial-services firm collecting personal data through forms. Details, evidence, and fixes follow.</p>
+</section>
+
+<!-- ============ CRITICAL FINDINGS ============ -->
+<section id="critical">
+  <h2>Site-wide findings</h2>
+  <p class="sub">These issues repeat across pages because they live in shared components (<span class="ev">sympl-components.js</span>, <span class="ev">sympl-components.css</span>) or shared patterns. Fixing each once fixes it everywhere. Use the filter to focus on a severity level.</p>
+
+  <div class="filters" role="group" aria-label="Filter findings by severity">
+    <button data-f="all" aria-pressed="true">All</button>
+    <button data-f="fix" aria-pressed="false">Fix Required</button>
+    <button data-f="rec" aria-pressed="false">Recommended</button>
+    <button data-f="min" aria-pressed="false">Minor / Consider</button>
+  </div>
+
+  <div id="findings-list">
+
+  <div class="finding fix" data-sev="fix">
+    <h4>Forms simulate success but never transmit data <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span></h4>
+    <p class="why"><strong>Why it matters:</strong> this is the site's primary conversion path. All three capture points fail identically: the handler calls <code class="ev">e.preventDefault()</code> and swaps in a success message. Network tracing during test submissions confirmed zero outbound requests. The quote wizard compounds it — a user invests effort across 3 steps and 18 fields before the data evaporates.</p>
+    <details class="evbox"><summary>Evidence</summary><div>
+      <code>sympl-contact.html:361</code> — submit handler only toggles <code>#form-success</code> and disables the button.<br>
+      <code>sympl-quote.html:544</code> — <code>submitQuote()</code> hides the steps and shows <code>#quote-success</code>; nothing else.<br>
+      <code>index.html:3106</code> — lead magnet handler carries the comment <em>"front-end only; wire to ESP later"</em>.<br>
+      Browser network log after submitting each form: no POST/fetch/XHR issued.
+    </div></details>
+    <p class="act"><b>Fix:</b> wire all three forms to a real endpoint — a Vercel serverless function forwarding to email/CRM, or a managed service (Formspree, Basin, Netlify Forms). Add a loading state, a genuine failure state ("Something went wrong — email us at contact@symplsolutions.com"), and keep the existing success UI.</p>
+    <p class="res-note">✓ Resolved July 7, 2026 — all three forms now submit via FormSubmit to tayyab@symplsolutions.com (CC natasha@symplsolutions.com; subjects "Webform inquiry from website" / "Quote inquiry from website") through a shared <code>symplSendInquiry()</code> helper, with loading, success-on-delivery, and error-with-mailto-fallback states. Pending: one-time FormSubmit activation email click after first live submission.</p>
+  </div>
+
+  <div class="finding fix" data-sev="fix">
+    <h4>No validation on any form — empty submissions "succeed" <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span></h4>
+    <p class="why"><strong>Why it matters:</strong> not a single field on the contact form or quote wizard carries <code class="ev">required</code>, and clicking submit with every field empty immediately shows the thank-you state (verified). Once the forms are wired to a backend, this becomes a garbage-data problem; today it deepens the false-success problem. The quote wizard also lets users advance through all steps without entering anything, so its stepper communicates progress that isn't real.</p>
+    <details class="evbox"><summary>Evidence</summary><div>
+      Empty submit on <code>/sympl-contact</code> → button flips to "Sent ✓", success banner shows.<br>
+      All 18 quote-wizard inputs report <code>required: false</code>; <code>goStep()</code> performs no checks.<br>
+      Only the homepage email field has a minimal <code>includes("@")</code> check.
+    </div></details>
+    <p class="act"><b>Fix:</b> add <code>required</code> to name/email (contact) and email (quote step 3), validate per-step in <code>goStep()</code>, and show inline error messages tied to fields with <code>aria-describedby</code>. Native HTML validation gets 80% of this for free.</p>
+    <p class="res-note">✓ Resolved July 7, 2026 — <code>required</code> added to contact name/email and quote name/org/email; the wizard's <code>goStep()</code> now blocks forward navigation until the current step validates; all forms use native browser validation messages. Verified: empty submissions are blocked on every form.</p>
+  </div>
+
+  <div class="finding fix" data-sev="fix">
+    <h4>Dropdown navigation is hover-only; taps and keyboard are locked out <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span></h4>
+    <p class="why"><strong>Why it matters:</strong> the drawer only appears at ≤900px. Above that — iPads in landscape (1024px), Surface devices, touch laptops — the desktop nav renders, its dropdowns open on <code class="ev">:hover</code> only, and <code class="ev">sympl-components.js:383–390</code> cancels clicks on both triggers (<code>preventDefault()</code> + <code>blur()</code>). Testing at 1024px: tapping "Services ▾" produces no visible change. Keyboard focus likewise never opens the menu, and there are no <code class="ev">aria-haspopup</code>/<code class="ev">aria-expanded</code> attributes. Five revenue pages become unreachable from the header for these users (footer links are the only path). WCAG 2.1.1 Keyboard failure.</p>
+    <details class="evbox"><summary>Evidence</summary><div>
+      At 1024×768: hamburger hidden; <code>.dropdown</code> computed style stays <code>opacity:0 / visibility:hidden</code> after both click and focus on the trigger.<br>
+      Trigger href is <code>#services</code> but navigation is suppressed by the click handler.
+    </div></details>
+    <p class="act"><b>Fix:</b> make triggers real toggles: on click/Enter, toggle an <code>.open</code> class and <code>aria-expanded</code>; keep hover as an enhancement. Add <code>:focus-within</code> to the dropdown CSS so tabbing into the menu keeps it open. Alternatively, lower the drawer breakpoint's replacement — show the hamburger up to ~1080px.</p>
+    <p class="res-note">✓ Resolved July 7, 2026 — triggers now toggle on click/tap/Enter with <code>aria-haspopup</code>/<code>aria-expanded</code>, only one menu opens at a time, and outside-click and Escape close them. Hover behavior is preserved for mouse users. Verified at 1024px.</p>
+  </div>
+
+  <div class="finding fix" data-sev="fix">
+    <h4>"See services" button is invisible (1.0:1 contrast) on three pages <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span></h4>
+    <p class="why"><strong>Why it matters:</strong> the shared <code class="ev">&lt;sympl-final-cta&gt;</code> component renders a dark-navy band with a "See services" ghost button styled by <code class="ev">.btn-ghost.rev</code>. That rule lives in per-page CSS — and <strong>About, Clients&nbsp;&amp;&nbsp;Partners, and Blog-post never define it</strong>. Computed styles on those pages: text <code>rgb(0,34,54)</code> on background <code>rgb(0,34,54)</code> — a contrast ratio of exactly 1.0. The secondary CTA in the site's strongest closing section is literally unreadable there.</p>
+    <details class="evbox"><summary>Evidence</summary><div>
+      <code>grep 'btn-ghost.rev{'</code>: rule present in index, bookkeeping, payroll, cfo-advisory, arts, settlement, nonprofit, blog — <strong>absent</strong> in sympl-about.html, sympl-clients-partners.html, sympl-blog-post.html.<br>
+      Live inspection on /sympl-clients-partners: <code>color: rgb(0,34,54)</code>, <code>background: transparent</code>, band bg <code>rgb(0,34,54)</code>.
+    </div></details>
+    <p class="act"><b>Fix:</b> move the <code>.btn-ghost.rev</code> rule (and its hover state) into <span class="ev">sympl-components.css</span> next to the component that requires it, then delete the per-page copies. One-line prevention of an entire class of drift bugs.</p>
+    <p class="res-note">✓ Resolved July 7, 2026 — <code>.btn-ghost.rev</code> now lives in sympl-components.css. Verified on /sympl-clients-partners: the button renders cream on navy (≈13:1 contrast) on all pages using the shared final-CTA component.</p>
+  </div>
+
+  <div class="finding fix" data-sev="fix">
+    <h4>Draft/internal copy and placeholder testimonials are live <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span> <span class="badge b-min">◔ Testimonials to be added</span></h4>
+    <p class="why"><strong>Why it matters:</strong> visitors on the Clients&nbsp;&amp;&nbsp;Partners page can read an instruction meant for the Sympl team. The homepage proof section leads with <em>"Swap in real logos and client photos as they arrive."</em> Several testimonials use anonymous placeholder personas alongside real ones, which invites doubt about the real ones too. Social proof is the core persuasion device for a services firm — draft-quality proof reads as fabricated proof.</p>
+    <details class="evbox"><summary>Evidence</summary><div>
+      Visible on /sympl-clients-partners: "Use this as the flexible client list. Swap placeholder marks for approved logos and add real client names as permissions…"<br>
+      <code>sympl-components.js:4</code> — home <code>proofLead</code> contains the "swap in real logos" sentence, rendered by <code>&lt;sympl-proof&gt;</code>.<br>
+      <code>SYMPL_DATA</code> testimonials attributed to "Gallery client", "Festival client", "Settlement client", "Program lead", "Finance committee chair".
+    </div></details>
+    <p class="act"><b>Fix:</b> replace the two draft sentences with final copy now (5-minute fix); remove or clearly label unattributed testimonials until real quotes with permission exist. Fewer, real quotes beat more, generic ones.</p>
+    <p class="res-note">✓ Resolved July 7, 2026 — both draft sentences replaced with final visitor-facing copy (Clients &amp; Partners and homepage proof section). The anonymous placeholder testimonials on the Arts and Settlement pages ("Gallery client", "Festival client", "Settlement client", "Program lead", "Finance committee chair") are intentionally left as-is — <b>client confirmed real testimonials for these sectors will be swapped in directly</b>, tracked as a content to-do rather than an open bug.</p>
+  </div>
+
+  <div class="finding fix" data-sev="fix">
+    <h4>No privacy policy — footer "Privacy" is a dead label <span class="badge b-fix">Fix Required</span> <span class="badge b-good">✓ Resolved</span></h4>
+    <p class="why"><strong>Why it matters:</strong> the footer renders "Privacy" as a plain <code class="ev">&lt;span&gt;</code> with no page behind it (<code class="ev">sympl-components.js:368</code>). The site collects names, emails, phone numbers, and organizational financial details through its forms. For a finance firm serving Ontario nonprofits, PIPEDA expectations and basic client trust both require a real privacy policy — and its absence is most visible at the exact moment someone is deciding whether to hand over their information.</p>
+    <p class="act"><b>Fix:</b> publish a privacy policy page and link it from the footer. Include what's collected via forms, where it's stored, and a contact for data questions.</p>
+    <p class="res-note">✓ Resolved July 7, 2026 — /sympl-privacy published (PIPEDA-aware: data collected per form, FormSubmit relay, hosting/fonts disclosure, retention, access/correction/withdrawal rights) and the footer "Privacy" label is now a real link on every page. Pending: legal review of the draft.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>Brand teal and amber text colors sit just below AA contrast <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> the teal kickers/eyebrows (<code class="ev">rgb(0,126,124)</code> on cream) measure <strong>4.24–4.29:1</strong> — just under the 4.5:1 requirement for their 12–13px size. The amber "104%" stat chip measures <strong>3.72:1</strong> and client-sector tags <strong>4.1:1 at 11px</strong>. These are recurring design tokens, so a small color adjustment fixes dozens of instances at once. Low-vision users and anyone on a dim mobile screen in daylight are the ones squinting.</p>
+    <details class="evbox"><summary>Evidence (computed, per element)</summary><div>
+      <code>p.kicker</code> 4.29:1 @13px (needs 4.5) — every page<br>
+      <code>b.chip-warn</code> "104%" 3.72:1 @13px — homepage<br>
+      <code>span.ptag</code> 4.1:1 @12px — arts; <code>span.client-sector</code> 4.24:1 @11px — clients page
+    </div></details>
+    <p class="act"><b>Fix:</b> darken the teal token to ≈<code>#00706E</code> and the amber to ≈<code>#8a5a00</code> (both pass 4.5:1 on the cream background), or bump these labels to ≥18.66px bold where the 3:1 large-text threshold applies.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>Touch targets below the 44px guideline in header, footer, and inline links <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> measured at 375px: the hamburger button is <strong>38×32px</strong>, all footer links <strong>30px tall</strong>, "→ more" links on the homepage <strong>17–22px tall</strong>, and blog filter chips <strong>32px</strong>. Apple/WCAG 2.5.8 guidance is 44×44. Small targets cause mis-taps precisely on the highest-intent elements (menu, service links). The mobile drawer gets this right — its links measure 279×44+ — so the pattern already exists in the codebase.</p>
+    <p class="act"><b>Fix:</b> add padding (not font-size) — hamburger to 44×44, footer links <code>padding:10px 0</code>, inline "more" links <code>padding:12px 0; display:inline-block</code>.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>Team photos and blog imagery hotlinked from third-party accounts <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> the four About-page team headshots load from <code class="ev">images.squarespace-cdn.com</code> — the firm's old Squarespace account. If that subscription lapses or the media library is cleaned, the About page loses its faces silently. Roughly 18 blog/homepage images load from <code class="ev">images.unsplash.com</code> at request time, adding third-party requests to every visit and using generic stock that weakens an otherwise personal brand.</p>
+    <details class="evbox"><summary>Evidence</summary><div>
+      Network trace on /sympl-about: 4 squarespace-cdn requests (currently 200 OK, lazy-loaded).<br>
+      <code>grep</code> counts: sympl-blog.html ×18, sympl-blog-data.js ×18, index.html ×5 unsplash references.
+    </div></details>
+    <p class="act"><b>Fix:</b> download the four headshots into <span class="ev">images/Team/</span> as webp (matching every other image on the site) this week. Migrate blog images to local copies over time, replacing the most generic ones with real client/work photography as it arrives.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>No analytics — the site's performance is unmeasurable <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> no page includes any analytics (checked for GA4, GTM, Plausible, Fathom, Umami). Nobody can currently answer "which pages convert," "where do mobile users drop off," or even "did traffic grow" — and once the forms are fixed, there will be no funnel data proving it. Given the audience (nonprofit EDs wary of tracking), a lightweight privacy-first option is also a brand fit.</p>
+    <p class="act"><b>Fix:</b> add Plausible or Fathom (single script, no cookie banner needed) with custom events on form submissions and CTA clicks. Pairs with the new privacy policy.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>Keyboard &amp; screen-reader gaps: no skip link, no drawer focus management, missing landmarks <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> (a) no page has a skip-to-content link, so keyboard users tab through the full nav on every page; (b) opening the mobile drawer leaves focus on the page behind it — focus never moves in, isn't trapped, and the aria-hidden page is still tabbable (Escape does work, which is good); (c) index, arts, settlement and nonprofit lack a <code class="ev">&lt;main&gt;</code> landmark; (d) footer columns use <code>&lt;h4&gt;</code>, creating an h2→h4 skip on every page; (e) the homepage's interactive "Click me" dashboard toggles are plain <code class="ev">&lt;span&gt;</code>s — invisible to keyboards entirely.</p>
+    <p class="act"><b>Fix:</b> add a skip link in the shared nav; on drawer open, move focus to the close button and trap Tab within; wrap page content in <code>&lt;main&gt;</code> on the four pages missing it; restyle footer headings as styled <code>&lt;p&gt;</code>/<code>&lt;div&gt;</code>s; convert the hero toggles to <code>&lt;button&gt;</code>s.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>Form inputs under 16px trigger iOS auto-zoom <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> contact and quote inputs render at <strong>14.5px</strong>, the homepage newsletter field at <strong>13px</strong>. iOS Safari zooms the whole page when focusing any input under 16px, disorienting the user mid-form — a classic silent conversion killer on the device class most nonprofit EDs use after hours. The newsletter input is also only ~101px wide at 375px, cramped for a full email address.</p>
+    <p class="act"><b>Fix:</b> set <code>input, select, textarea { font-size: 16px }</code> at mobile widths; let the newsletter field flex to full width on small screens.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>Social sharing image is an SVG logo — previews will break <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> every page's <code class="ev">og:image</code>/<code class="ev">twitter:image</code> points to <code>Dark.svg</code>. LinkedIn, Slack, iMessage and X do not render SVG preview images — shares of the site will show a blank card. For a firm whose referrals travel through email and LinkedIn, that's lost credibility at the exact moment of word-of-mouth.</p>
+    <p class="act"><b>Fix:</b> export a 1200×630 PNG/JPG social card (logo + tagline on brand cream) and reference it absolutely on all pages.</p>
+  </div>
+
+  <div class="finding rec" data-sev="rec">
+    <h4>Unbranded default 404 page <span class="badge b-rec">Recommended</span></h4>
+    <p class="why"><strong>Why it matters:</strong> a mistyped or stale URL currently lands on the hosting platform's default error page — no logo, no navigation, no way back. Broken inbound links (old Squarespace URLs, typo'd newsletter links) become hard exits.</p>
+    <p class="act"><b>Fix:</b> add a branded <code>404.html</code> (Vercel picks it up automatically) with the site nav and links to Services, Blog, and Contact.</p>
+  </div>
+
+  <div class="finding min" data-sev="min">
+    <h4>Testimonial carousel: arrows only, no swipe or position indicator <span class="badge b-min">Minor / Consider</span></h4>
+    <p class="why">The carousel has well-sized 52×52 arrows with aria-labels (good), but no touch/drag support and no dots, so mobile users can't tell there are 3 cards or swipe as they'd expect. Arrows correctly disable at the ends.</p>
+    <p class="act"><b>Fix:</b> simplest robust option — switch the track to CSS <code>overflow-x:auto</code> + <code>scroll-snap</code>, keep arrows as an enhancement; add dots or a "1 / 3" counter.</p>
+  </div>
+
+  <div class="finding min" data-sev="min">
+    <h4>Blog filters lack toggle semantics; card grid works well otherwise <span class="badge b-min">Minor / Consider</span></h4>
+    <p class="why">Filter chips are real <code>&lt;button&gt;</code>s (good) and filtering works (18 → 2 posts verified), with an aria-live "no results" region. But the active filter isn't conveyed to assistive tech (<code>aria-pressed</code> is absent) and result-count changes aren't announced. No search across 18 posts yet — fine today, worth adding as the library grows.</p>
+    <p class="act"><b>Fix:</b> add <code>aria-pressed</code> to chips and announce "N articles shown" in the existing live region.</p>
+  </div>
+
+  <div class="finding min" data-sev="min">
+    <h4>FAQ open-state can clip after viewport changes <span class="badge b-min">Minor / Consider</span></h4>
+    <p class="why">FAQ accordions are semantically solid (buttons + aria-expanded, verified working). But the answer height is fixed to <code>scrollHeight</code> px at click time — rotate the phone or resize and an open answer can clip its last line.</p>
+    <p class="act"><b>Fix:</b> recompute open-item <code>max-height</code> on resize, or use <code>grid-template-rows: 0fr/1fr</code> transitions instead of pixel max-height.</p>
+  </div>
+
+  <div class="finding min" data-sev="min">
+    <h4>Decorative dashboard mock-ups contain 8–11px text <span class="badge b-min">Minor / Consider</span></h4>
+    <p class="why">The hero/report visualizations use labels down to 8px ("actual", "budget") and 10.5px ("Cash flow forecast"). As decorative illustrations this is acceptable, but they present real-looking information users will try to read, and team-role labels (11px) and the CPA note (11.5px) are genuine content.</p>
+    <p class="act"><b>Fix:</b> raise genuine content labels to ≥12px; mark purely decorative chart text with <code>aria-hidden</code>.</p>
+  </div>
+
+  <div class="finding min" data-sev="min">
+    <h4>Blog-post error state leaves the tab titled "Loading…" <span class="badge b-min">Minor / Consider</span></h4>
+    <p class="why">Bad article IDs show a proper "Article not found" message with a Back-to-Blog link (good pattern), but <code>document.title</code> stays "Loading… | Sympl Finance". Dynamic posts also lack canonical URLs, which slightly weakens SEO for the content marketing engine.</p>
+    <p class="act"><b>Fix:</b> set the title in the not-found branch; inject <code>&lt;link rel="canonical"&gt;</code> per post.</p>
+  </div>
+
+  </div><!-- /findings-list -->
+</section>
+
+<!-- ============ VIEWPORT MATRIX ============ -->
+<section id="matrix">
+  <h2>Cross-device test matrix</h2>
+  <p class="sub">Layout integrity was tested at 375px (phone), 768px and 1024px (tablet), and 1440px (desktop). The grid system holds up impressively well — the risks are interaction-model gaps, not layout breaks.</p>
+  <div class="tbl-scroll">
+  <table>
+    <thead><tr><th>Check</th><th>Phone · 375px</th><th>Tablet · 768px</th><th>Tablet · 1024px</th><th>Desktop · 1440px</th></tr></thead>
+    <tbody>
+      <tr><td>Horizontal overflow</td><td class="ok">None (all 13 pages)</td><td class="ok">None</td><td class="ok">None</td><td class="ok">None</td></tr>
+      <tr><td>Primary navigation</td><td class="ok">Drawer — clean, 44px+ targets, Esc closes</td><td class="ok">Drawer (breakpoint ≤900px)</td><td class="ok">✓ Resolved — dropdowns now open on tap</td><td class="ok">✓ Resolved — click/keyboard toggle added</td></tr>
+      <tr><td>Touch targets</td><td class="warn">Hamburger 38×32; footer links 30px; inline links 17–22px</td><td class="warn">Same as phone</td><td class="ok">✓ Resolved — dropdown triggers respond to touch</td><td class="ok">Pointer-based, adequate</td></tr>
+      <tr><td>Text readability</td><td class="warn">Body copy scales well; 10–11.5px in mocks/labels</td><td class="ok">Good</td><td class="ok">Good</td><td class="ok">Good</td></tr>
+      <tr><td>Forms</td><td class="warn">Inputs 42–49px tall (good); 13–14.5px fonts trigger iOS zoom</td><td class="warn">Same</td><td class="warn">Same</td><td class="warn">Same <span class="ok">(✓ validation + delivery now resolved site-wide)</span></td></tr>
+      <tr><td>Carousel / interactive</td><td class="warn">No swipe; arrows 52×52 good</td><td class="warn">1-per-view below 900px, no indicator</td><td class="ok">2-per-view</td><td class="ok">2-per-view, arrows disable at ends</td></tr>
+      <tr><td>Load performance (local)</td><td class="ok">~130KB images, DCL 66ms</td><td class="ok">Same assets</td><td class="ok">Same</td><td class="ok">36 images, no request &gt;100KB</td></tr>
+      <tr><td>Motion accessibility</td><td class="ok" colspan="4">prefers-reduced-motion honored in shared CSS and page animations</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ PAGE BY PAGE ============ -->
+<section id="pages">
+  <h2>Page-by-page audit</h2>
+  <p class="sub">Every finding below was observed in a live browser. Site-wide items (forms, dropdown nav, contrast tokens, touch targets) apply to all pages and are not repeated in full — pages list what's distinct about them. Click a page to expand.</p>
+
+  <details class="page-card" open>
+    <summary><span class="pc-title">Home</span><span class="pc-url">/</span>
+      <span class="pc-counts"><span class="badge b-fix">2</span><span class="badge b-rec">3</span><span class="badge b-min">2</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc"><strong>Desktop:</strong> collage hero with headline "Nonprofit finances, made sympl.", animated dashboard mock-ups, services grid, client marquee, testimonial carousel, lead-magnet signup, footer. <strong>Mobile:</strong> stacks cleanly; hero CTA full-width and prominent; no overflow. The strongest page visually — dense but well-paced.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> Lead-magnet form ("Send me the checklist") is front-end only — subscribers are lost. <span class="ev">index.html:3106</span> <em>Now emails the request via FormSubmit with validation and error handling.</em></li>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> Social-proof intro renders draft copy: "Swap in real logos and client photos as they arrive." <span class="ev">sympl-components.js:4</span> <em>Draft sentence removed.</em></li>
+        <li><span class="badge b-rec">Rec</span> Interactive hero toggles ("Click me" — Bookkeeping/Payroll) are <code>&lt;span&gt;</code>s: no keyboard access, no role, 11px hint text. Convert to buttons.</li>
+        <li><span class="badge b-rec">Rec</span> Newsletter input: 13px font (iOS zoom) and ~101px wide at 375px — hard to type an email into.</li>
+        <li><span class="badge b-rec">Rec</span> Amber stat chip "104%" contrast 3.72:1 at 13px (needs 4.5:1).</li>
+        <li><span class="badge b-min">Minor</span> Dashboard mock text down to 8px; mark decorative parts <code>aria-hidden</code>.</li>
+        <li><span class="badge b-min">Minor</span> 5 Unsplash images load at runtime; replace with local/brand photos.</li>
+      </ul>
+      <h5>What works</h5>
+      <p class="desc">1 h1, full meta/OG set, all 36 images have alt text, zero heavy requests, credential carousel and services grid degrade gracefully, drawer nav excellent on mobile.</p>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">About</span><span class="pc-url">/sympl-about</span>
+      <span class="pc-counts"><span class="badge b-fix">1</span><span class="badge b-rec">2</span><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">Team-focused page with group photo, individual headshots, values, and the shared final CTA. Clean at all widths; has a proper <code>&lt;main&gt;</code> landmark.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> "See services" button in the dark closing band is invisible — 1.0:1 contrast (missing <code>.btn-ghost.rev</code> rule on this page). <em>Rule moved to shared CSS; button now visible.</em></li>
+        <li><span class="badge b-rec">Rec</span> All four team headshots hotlink to <span class="ev">images.squarespace-cdn.com</span> — outside Sympl's control; move into <span class="ev">images/Team/</span> as webp.</li>
+        <li><span class="badge b-rec">Rec</span> Team role labels render at 11px — below comfortable reading size for real content.</li>
+        <li><span class="badge b-min">Minor</span> "Nonprofits only" teal small-text at 4.29:1 contrast (shared token issue).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Bookkeeping · Payroll · CFO &amp; Advisory</span><span class="pc-url">/sympl-bookkeeping · /sympl-payroll · /sympl-cfo-advisory</span>
+      <span class="pc-counts"><span class="badge b-rec">1</span><span class="badge b-min">2</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">The three service pages share one strong template: hero with report mock-up, inclusions list, process, pricing context, final CTA. Audited individually — results are identical, which is itself a good sign of template discipline. No overflow at any width; unique titles and meta descriptions; correct h1s; <code>&lt;main&gt;</code> present; <code>.btn-ghost.rev</code> correctly defined here.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-rec">Rec</span> Teal "What this includes" kickers at 4.29:1 contrast, 13px (shared token — fix once).</li>
+        <li><span class="badge b-min">Minor</span> Report-card mock labels at 10–11.5px (board-eyebrow 10.5px, strip-label 10px) — decorative, but mark <code>aria-hidden</code>.</li>
+        <li><span class="badge b-min">Minor</span> Site-wide items apply: hover-only dropdown nav, footer touch targets, heading h2→h4 skip in footer.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Arts &amp; Culture</span><span class="pc-url">/sympl-arts</span>
+      <span class="pc-counts"><span class="badge b-rec">2</span><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">Sector landing page: pain points, approach, proof (testimonials + client types), 4-item FAQ, final CTA. FAQ accordion verified working with correct <code>aria-expanded</code> toggling and large 331×85px tap targets — the best interactive component on the site.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-rec">Rec</span> Client-type tags (<code>.ptag</code>) at 4.1:1 contrast and 11.5px — below AA for its size.</li>
+        <li><span class="badge b-rec">Rec</span> No <code>&lt;main&gt;</code> landmark; testimonial carousel has no swipe support on touch.</li>
+        <li><span class="badge b-min">◔ Testimonials to be added</span> Two of three testimonials are anonymous personas ("Gallery client", "Festival client") — client confirmed real sector testimonials will be swapped in.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Immigration &amp; Settlement</span><span class="pc-url">/sympl-settlement</span>
+      <span class="pc-counts"><span class="badge b-rec">1</span><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">Mirror of the Arts template with IRCC/LINC-specific content — the copy specificity here is a genuine differentiator. Proper h1, working FAQ, no layout issues at any width.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-rec">Rec</span> No <code>&lt;main&gt;</code> landmark; carousel swipe gap as on Arts.</li>
+        <li><span class="badge b-min">◔ Testimonials to be added</span> All three testimonials are anonymous personas — client confirmed real sector testimonials will be swapped in.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">All Nonprofits</span><span class="pc-url">/sympl-nonprofit</span>
+      <span class="pc-counts"><span class="badge b-rec">1</span><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">Distinctive dark illustrated hero ("Finance built for mission-driven teams") with animated village scene — visually the most memorable page. Entrance animations respect the timing budget and honor reduced-motion. Note: content below the hero relies on scroll-triggered reveals; during testing, content jumped to via anchor could momentarily render at opacity 0 before reveal triggers fired.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-rec">Rec</span> No <code>&lt;main&gt;</code> landmark. Verify anchor-jump behavior (e.g. arriving at /#book-style deep links) always triggers reveal animations — jumped-to sections briefly showed as blank during testing.</li>
+        <li><span class="badge b-min">Minor</span> Hero CTA sits below the illustration on shorter viewports; consider surfacing a CTA within the first screen.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Clients &amp; Partners</span><span class="pc-url">/sympl-clients-partners</span>
+      <span class="pc-counts"><span class="badge b-fix">2</span><span class="badge b-rec">1</span><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">Logo wall (7 real client logos, served locally as webp — good) plus client list and partner context. This page carries the two most visible trust bugs on the site.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> Internal editor's note is live: "Use this as the flexible client list. Swap placeholder marks for approved logos and add real client names as permissions…" <em>Replaced with visitor-facing copy.</em></li>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> "See services" button invisible in closing band (missing <code>.btn-ghost.rev</code>). <em>Fixed via shared CSS; verified ≈13:1 contrast.</em></li>
+        <li><span class="badge b-rec">Rec</span> Client sector tags: 11px at 4.24:1 contrast.</li>
+        <li><span class="badge b-min">Minor</span> Consider linking logos to the relevant sector page or a short case note — currently inert proof.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Blog</span><span class="pc-url">/sympl-blog</span>
+      <span class="pc-counts"><span class="badge b-rec">2</span><span class="badge b-min">2</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">18 posts with category filtering. Filters verified working (All 18 → Payroll 2 → back), built as real buttons, with an aria-live empty state. Cards are full-card links — generous tap areas. Mobile: filter row fits without overflow.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-rec">Rec</span> All 18 card images hotlink to Unsplash at runtime — third-party dependency on every visit, and generic stock dilutes an otherwise specific brand.</li>
+        <li><span class="badge b-rec">Rec</span> Filter chips: 32px tall (target-size), no <code>aria-pressed</code>, result-count changes unannounced.</li>
+        <li><span class="badge b-min">Minor</span> No search — fine at 18 posts, plan for it as the library grows.</li>
+        <li><span class="badge b-min">Minor</span> Filter state isn't reflected in the URL, so filtered views can't be shared or restored on back-navigation.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Blog post (template)</span><span class="pc-url">/sympl-blog-post?id=…</span>
+      <span class="pc-counts"><span class="badge b-fix">1</span><span class="badge b-min">2</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">Client-side rendered article page. Tested with a real ID (T3010 checklist — title, h1, and article render correctly, ~765 words) and an invalid ID (clean "Article not found" state with a Back-to-Blog link — a genuinely good error pattern).</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> "See services" button invisible in closing band (missing <code>.btn-ghost.rev</code>). <em>Fixed via shared CSS.</em></li>
+        <li><span class="badge b-min">Minor</span> Error state leaves the browser tab titled "Loading… | Sympl Finance".</li>
+        <li><span class="badge b-min">Minor</span> No canonical URL per post; client-side rendering limits SEO value of 18 articles — consider pre-rendering posts as static pages eventually.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Contact / Book a review</span><span class="pc-url">/sympl-contact</span>
+      <span class="pc-counts"><span class="badge b-fix">2</span><span class="badge b-rec">1</span><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">Simple, well-structured page: 5-field form (all fields properly labeled — the only site with 100% label coverage we see less often than we should), mailto link, agenda card explaining the 30-minute review. Form reaches above the fold on mobile. This is the page every CTA on the site points to — which is why its silent form matters most.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> Form submits nowhere — success message with zero network activity. <span class="ev">sympl-contact.html:361</span> <em>Now delivers via FormSubmit with loading/success/error states and reply-to set.</em></li>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> No required fields or validation — empty submit "succeeds". <em>Name and email now required; empty submits blocked.</em></li>
+        <li><span class="badge b-rec">Rec</span> Inputs at 14.5px trigger iOS zoom-on-focus.</li>
+        <li><span class="badge b-min">Minor</span> No phone number/tel link — for a relationship business, consider offering one more channel (or embed the actual booking calendar to remove a round-trip).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Get a quote</span><span class="pc-url">/sympl-quote</span>
+      <span class="pc-counts"><span class="badge b-fix">2</span><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">3-step wizard (Your org → Services → Contact) with 18 labeled fields and a clear steps bar that fits a 375px screen without overflow. The step UX, expectation-setting copy ("You get a clear number… 1–2 business days"), and mobile layout are all genuinely good — the execution gap is entirely in the plumbing.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> <code>submitQuote()</code> only swaps divs — the most valuable form on the site sends nothing. <span class="ev">sympl-quote.html:544</span> <em>Now sends all 18 fields (including selected services) via FormSubmit with subject "Quote inquiry from website".</em></li>
+        <li><span class="badge b-fix">Fix</span> <span class="badge b-good">✓ Resolved</span> Zero validation: users can reach step 3 and "submit" with every field empty, including email — even once wired up, such leads would be uncontactable. <em>Name/org/email now required; steps block until valid.</em></li>
+        <li><span class="badge b-min">Minor</span> Step changes aren't announced to screen readers; add <code>aria-current="step"</code> on the active step and focus the step heading on transition.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="page-card">
+    <summary><span class="pc-title">Utility: Brand guide &amp; internal files</span><span class="pc-url">/sympl-brand-guide · /sympl-progress.md · /Sympl_Competitor_Analysis.xlsx</span>
+      <span class="pc-counts"><span class="badge b-min">1</span></span>
+      <span class="chev">▶</span></summary>
+    <div class="page-body">
+      <p class="desc">The brand guide is noindexed and disallowed in robots.txt, and the internal files are disallowed too — good hygiene, correctly done.</p>
+      <h5>Findings</h5>
+      <ul>
+        <li><span class="badge b-min">Minor</span> robots.txt <em>Disallow</em> prevents crawling but not direct access — the competitor analysis spreadsheet and progress notes are still downloadable by anyone who guesses or shares the URL. Consider removing internal files from the deployed site entirely (e.g. <code>.vercelignore</code>).</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section id="roadmap">
+  <h2>Priority roadmap</h2>
+  <p class="sub">Ordered by user/business impact against implementation effort. The entire P0 list is achievable in roughly a week of focused work; nothing in it requires design changes.</p>
+
+  <p class="phase-label p0">P0 — This week (conversion &amp; trust blockers)</p>
+  <div class="road">
+    <div class="road-item"><h4>Wire all three forms to a real backend, with validation <span class="badge b-good">✓ Resolved</span></h4><p>Vercel serverless function or Formspree; add <code>required</code> + inline errors + failure state. Until deployed, consider replacing the quote form with a mailto fallback so no more leads are lost. <strong>Done July 7</strong> — FormSubmit delivery to tayyab@ (CC natasha@) with validation and error states; one-time activation click pending after deploy.</p><div class="meta"><span class="tag">Impact: critical</span><span class="tag">Effort: 0.5–1 day</span><span class="tag">contact · quote · home</span></div></div>
+    <div class="road-item"><h4>Remove internal note and draft proof copy <span class="badge b-good">✓ Resolved</span></h4><p>Two sentences on Clients &amp; Partners and the home proof section; review anonymous testimonials. <strong>Done July 7</strong> — both sentences replaced; testimonial decision still open.</p><div class="meta"><span class="tag">Impact: high (trust)</span><span class="tag">Effort: 30 min</span><span class="tag">clients-partners · home</span></div></div>
+    <div class="road-item"><h4>Move <code>.btn-ghost.rev</code> into sympl-components.css <span class="badge b-good">✓ Resolved</span></h4><p>Restores the invisible "See services" button on About, Clients &amp; Partners, and Blog-post; prevents recurrence. <strong>Done July 7.</strong></p><div class="meta"><span class="tag">Impact: high</span><span class="tag">Effort: 15 min</span></div></div>
+    <div class="road-item"><h4>Make nav dropdowns click- and keyboard-operable <span class="badge b-good">✓ Resolved</span></h4><p>Toggle on click/Enter with <code>aria-expanded</code>; keep hover as enhancement; add <code>:focus-within</code>. Unblocks tablets and keyboard users on 5 revenue pages. <strong>Done July 7</strong> — click/tap/Enter toggle with ARIA states, outside-click and Escape close.</p><div class="meta"><span class="tag">Impact: high</span><span class="tag">Effort: 2–3 hrs</span><span class="tag">sympl-components.js</span></div></div>
+  </div>
+
+  <p class="phase-label p1">P1 — Next two weeks (measurement, compliance, mobile friction)</p>
+  <div class="road">
+    <div class="road-item"><h4>Publish a privacy policy; link it from the footer <span class="badge b-good">✓ Resolved</span></h4><p>Required credibility for a finance firm collecting PII; pairs with the forms fix. <strong>Done July 7</strong> — /sympl-privacy live and linked from every footer; pending legal review.</p><div class="meta"><span class="tag">Impact: high (trust/compliance)</span><span class="tag">Effort: 0.5 day</span></div></div>
+    <div class="road-item"><h4>Add privacy-friendly analytics with form/CTA events</h4><p>Plausible or Fathom; without it the P0 fixes can't be proven to work.</p><div class="meta"><span class="tag">Impact: high (measurement)</span><span class="tag">Effort: 1–2 hrs</span></div></div>
+    <div class="road-item"><h4>Self-host team headshots; create a real OG image</h4><p>Kill the Squarespace dependency; export a 1200×630 PNG social card for all pages.</p><div class="meta"><span class="tag">Impact: medium</span><span class="tag">Effort: 2 hrs</span></div></div>
+    <div class="road-item"><h4>Fix contrast tokens and input font sizes</h4><p>Teal → ≈#00706E, amber → ≈#8a5a00; inputs ≥16px at mobile widths; widen newsletter field.</p><div class="meta"><span class="tag">Impact: medium (a11y/AA)</span><span class="tag">Effort: 2 hrs</span></div></div>
+    <div class="road-item"><h4>Touch-target pass + branded 404</h4><p>Hamburger 44×44, footer links 44px rows, inline links padded; add 404.html with nav.</p><div class="meta"><span class="tag">Impact: medium</span><span class="tag">Effort: half day</span></div></div>
+  </div>
+
+  <p class="phase-label p2">P2 — Backlog (accessibility depth &amp; content maturity)</p>
+  <div class="road">
+    <div class="road-item"><h4>Keyboard/screen-reader depth</h4><p>Skip link; drawer focus trap; <code>&lt;main&gt;</code> on the 4 pages missing it; footer heading levels; hero toggles → buttons; <code>aria-pressed</code> on blog filters; wizard step announcements.</p><div class="meta"><span class="tag">Impact: medium</span><span class="tag">Effort: 1–2 days</span></div></div>
+    <div class="road-item"><h4>Carousel swipe + position indicator</h4><p>CSS scroll-snap with arrows as enhancement; dots or "1/3" counter.</p><div class="meta"><span class="tag">Impact: medium (mobile)</span><span class="tag">Effort: half day</span></div></div>
+    <div class="road-item"><h4>Localize blog imagery; replace stock with brand photos</h4><p>Remove the runtime Unsplash dependency; real client/work photography strengthens differentiation.</p><div class="meta"><span class="tag">Impact: medium (brand)</span><span class="tag">Effort: ongoing</span></div></div>
+    <div class="road-item"><h4>Blog maturity: canonical URLs, shareable filter state, search, pre-rendered posts</h4><p>Protects the SEO value of the 18-article investment.</p><div class="meta"><span class="tag">Impact: medium (SEO)</span><span class="tag">Effort: 1–2 days</span></div></div>
+    <div class="road-item"><h4>Remove internal files from the deployment</h4><p>Competitor analysis and progress notes are publicly fetchable despite robots.txt.</p><div class="meta"><span class="tag">Impact: low–medium</span><span class="tag">Effort: 15 min</span></div></div>
+  </div>
+</section>
+
+<!-- ============ STRENGTHS ============ -->
+<section id="strengths">
+  <h2>Strengths &amp; patterns worth protecting</h2>
+  <p class="sub">A large share of this site is done well above the standard for a small-firm marketing site. When making the fixes above, protect these:</p>
+  <div class="strength-grid">
+    <div class="strength"><b>Exceptional page weight</b>Homepage ships ~130&nbsp;KB of images across 36 images, webp everywhere local, no single request over 100&nbsp;KB, subset Google Fonts. Most agencies ship 10× this.</div>
+    <div class="strength"><b>Zero layout breakage</b>Every page tested at 375/768/1024/1440px with no horizontal overflow and sensible stacking — the 900px/620px breakpoint system is disciplined.</div>
+    <div class="strength"><b>Excellent mobile drawer</b>44px+ targets throughout, Escape-to-close, scroll lock, aria-hidden toggling. Add focus trapping and it's exemplary.</div>
+    <div class="strength"><b>Correct FAQ semantics</b>Real buttons, working <code>aria-expanded</code>, 85px tap targets. Copy quality inside the answers is a differentiator too.</div>
+    <div class="strength"><b>Complete meta layer</b>Unique titles, meta descriptions, and OG tags on all pages; sitemap + robots.txt present; internal pages correctly noindexed.</div>
+    <div class="strength"><b>Reduced-motion support</b><code>prefers-reduced-motion</code> honored in shared CSS and page animations — rare attention to vestibular accessibility.</div>
+    <div class="strength"><b>Universal alt text</b>Zero images missing alt attributes across all 13 pages; decorative initials-avatars correctly aria-hidden.</div>
+    <div class="strength"><b>Handled error states</b>Bad blog IDs get a friendly not-found message with a route back — a pattern many production sites lack.</div>
+    <div class="strength"><b>Component reuse</b>Shared web components (nav, footer, proof, FAQ, CTA) keep 13 pages consistent — the .rev bug shows the one place per-page CSS escaped this system.</div>
+    <div class="strength"><b>Copy specificity</b>Sector pages speak the audience's exact language (T3010, IRCC claim periods, T4A classification, salary allocation) — the site's biggest conversion asset once the forms work.</div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p><strong>Methodology.</strong> All 13 public pages were loaded in a Chromium browser against the local build (commit <span class="ev">be08ae1</span>) at 375, 768, 1024, and 1440px viewports. Findings derive from: computed-style contrast measurement (WCAG 2.1 formulas) on rendered text; bounding-box measurement of interactive elements; live interaction testing (drawer, dropdowns, FAQ, carousel, blog filters, all three forms including empty-submission tests); network request tracing; and source review of shared components. Severity: <strong>Fix Required</strong> = harms conversion, access, or trust today · <strong>Recommended</strong> = meaningful usability/accessibility improvement · <strong>Minor / Consider</strong> = polish. This report is a static file with no external dependencies and is safe to share or print.</p>
+  <p style="margin-top:10px">Prepared July 7, 2026 · Sympl Finance UX/UI &amp; Accessibility Audit</p>
+</footer>
+
+</main>
+
+<script>
+// Severity filter
+document.querySelectorAll('.filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+    btn.setAttribute('aria-pressed', 'true');
+    const f = btn.dataset.f;
+    document.querySelectorAll('#findings-list .finding').forEach(el => {
+      el.classList.toggle('hidden', f !== 'all' && el.dataset.sev !== f);
+    });
+  });
+});
+// Expand all page cards when printing
+window.addEventListener('beforeprint', () => document.querySelectorAll('.page-card').forEach(d => d.open = true));
+</script>
+</body>
+</html>

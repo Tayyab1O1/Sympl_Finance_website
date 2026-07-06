@@ -88,7 +88,7 @@
 <script src="sympl-components.js" defer></script>
 <style>
 :root{
-  --inkwell:#002236; --deepwater:#007E7C; --underbrush:#003C32;
+  --inkwell:#002236; --deepwater:#00706E; --underbrush:#003C32;
   --bay:#65C1BF; --seaglass:#C2E6E1; --mist:#E0F2F0;
   --yolk:#FFE079; --buttercup:#FFF5AB; --harvest:#E38900;
   --sorbet:#FFB97D; --orangecream:#FFD9BA;
@@ -114,27 +114,6 @@ section{padding:80px 0;}
 .btn:focus-visible{outline:3px solid var(--bay);outline-offset:2px;}
 
 /* ── NAV ── */
-.nav{position:sticky;top:0;z-index:200;background:rgba(251,245,240,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:74px;}
-.wordmark{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
-.wordmark .wm{font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--inkwell);}
-.wordmark .wm .dot{position:relative;}
-.wordmark .wm .dot::after{content:'';position:absolute;left:-1px;right:-2px;bottom:-3px;height:4px;background:var(--yolk);border-radius:3px;transform:rotate(-2deg);}
-.wordmark small{font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--deepwater);margin-top:4px;}
-.nav-links{display:flex;align-items:center;gap:6px;}
-.nav-item{position:relative;}
-.nav-item > a{display:inline-block;padding:10px 14px;font-size:14.5px;font-weight:500;color:var(--inkwell);text-decoration:none;border-radius:100px;transition:background .2s;}
-.nav-item > a:hover{background:rgba(0,34,54,0.05);}
-.nav-item > a[aria-current="page"]{background:var(--deepwater);color:#fff;}
-.nav-item .caret{font-size:10px;color:var(--ink-soft);margin-left:3px;}
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:248px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 14px 34px rgba(0,34,54,0.1);opacity:0;visibility:hidden;transform:translateY(6px);transition:all .2s;}
-.nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
-.dropdown a{display:block;padding:10px 14px;font-size:14px;font-weight:500;text-decoration:none;border-radius:9px;color:var(--inkwell);}
-.dropdown a:hover,.dropdown a[aria-current="page"]{background:var(--mist);color:var(--deepwater);}
-.dropdown a small{display:block;font-size:11.5px;font-weight:400;color:var(--ink-soft);margin-top:1px;}
-.nav-cta{margin-left:10px;padding:11px 20px;font-size:14px;}
-.nav-burger{display:none;}
-
 /* ── CONTACT HERO ── */
 .contact-hero{padding:72px 0 0;background:var(--paper);}
 .contact-hero-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:flex-start;}
@@ -162,13 +141,15 @@ section{padding:80px 0;}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:11px;}
 .field:last-of-type{margin-bottom:0;}
 .field label{font-size:13px;font-weight:700;color:var(--inkwell);letter-spacing:0.01em;}
-.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:14.5px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:10px 14px;width:100%;transition:border-color .2s;}
+.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:16px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:10px 14px;width:100%;transition:border-color .2s;}
 .field input:focus,.field select,.field textarea:focus{outline:none;border-color:var(--deepwater);background:#fff;}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5f6b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
 .field textarea{min-height:76px;resize:vertical;}
 .form-submit{width:100%;justify-content:center;margin-top:20px;padding:15px 24px;font-size:15px;}
 .form-micro{font-size:12px;color:var(--ink-soft);text-align:center;margin-top:12px;}
 .form-success{display:none;padding:18px 20px;background:var(--mist);border:1px solid var(--seaglass);border-radius:12px;text-align:center;font-size:14.5px;font-weight:600;color:var(--underbrush);margin-top:16px;}
+.form-error{display:none;padding:14px 18px;background:#fdf0ee;border:1px solid #e5b3ab;border-radius:12px;text-align:center;font-size:14px;color:#8c2f24;margin-top:16px;}
+.form-error a{color:inherit;font-weight:600;}
 
 /* ── TRUST STRIP ── */
 .contact-trust{background:var(--tan);padding:48px 0;}
@@ -183,8 +164,6 @@ section{padding:80px 0;}
   .contact-form-wrap{position:static;}
   .contact-hero{padding-bottom:0;}
   .form-row{grid-template-columns:1fr;}
-  .nav-links{display:none;}
-  .nav-burger{display:inline-flex;}
 }
 </style>
 </head>
@@ -201,37 +180,7 @@ section{padding:80px 0;}
   </filter>
 </defs></svg>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a href="/" class="wordmark" aria-label="sympl finance home">
-      <img src="Dark.svg" alt="Sympl Finance" style="height:44px;width:auto;display:block;">
-    </a>
-    <nav class="nav-links" aria-label="Main">
-      <div class="nav-item">
-        <a href="/#services">Services <span class="caret">▾</span></a>
-        <div class="dropdown">
-          <a href="sympl-bookkeeping">Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
-          <a href="sympl-payroll">Payroll<small>Payroll, allocations, remittances</small></a>
-          <a href="sympl-cfo-advisory">CFO &amp; Advisory<small>Budgets, forecasts, finance decisions</small></a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a href="/#serve">Who We Serve <span class="caret">▾</span></a>
-        <div class="dropdown">
-          <a href="sympl-arts">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
-          <a href="sympl-settlement">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
-          <a href="sympl-nonprofit">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
-        </div>
-      </div>
-      <div class="nav-item"><a href="sympl-clients-partners">Clients &amp; Partners</a></div>
-      <div class="nav-item"><a href="sympl-about">About</a></div>
-      <div class="nav-item"><a href="sympl-blog">Blog</a></div>
-      <a href="sympl-contact" class="btn btn-yolk nav-cta" aria-current="page">Book a Free Review</a>
-      <a href="sympl-quote" class="btn btn-ghost nav-cta">Get a quote</a>
-    </nav>
-    <a href="sympl-contact" class="btn btn-yolk nav-burger" style="padding:10px 16px;font-size:13px;">Book a review</a>
-  </div>
-</header>
+<sympl-nav current="contact"></sympl-nav>
 
 <main>
   <section class="contact-hero">
@@ -271,10 +220,10 @@ section{padding:80px 0;}
           <p class="sub">Tell us a little about your organization and we'll be in touch within one business day.</p>
           <form id="contact-form">
             <div class="form-row">
-              <div class="field"><label for="cf-name">Your name</label><input id="cf-name" type="text" placeholder="Jane Smith" autocomplete="name"></div>
+              <div class="field"><label for="cf-name">Your name</label><input id="cf-name" type="text" placeholder="Jane Smith" autocomplete="name" required></div>
               <div class="field"><label for="cf-org">Organization</label><input id="cf-org" type="text" placeholder="Your nonprofit" autocomplete="organization"></div>
             </div>
-            <div class="field"><label for="cf-email">Work email</label><input id="cf-email" type="email" placeholder="jane@yourorg.ca" autocomplete="email"></div>
+            <div class="field"><label for="cf-email">Work email</label><input id="cf-email" type="email" placeholder="jane@yourorg.ca" autocomplete="email" required></div>
             <div class="field">
               <label for="cf-service">What do you need help with?</label>
               <select id="cf-service">
@@ -290,7 +239,8 @@ section{padding:80px 0;}
             <div class="field"><label for="cf-message">Tell us about your situation</label><textarea id="cf-message" placeholder="Where are things at, and what's on your mind?"></textarea></div>
             <button class="btn btn-yolk form-submit" type="submit">Request my free consultation →</button>
             <p class="form-micro">We typically respond within one business day.</p>
-            <div class="form-success" id="form-success">Thanks! We'll be in touch within one business day.</div>
+            <div class="form-success" id="form-success" role="status">Thanks! We'll be in touch within one business day.</div>
+            <div class="form-error" id="form-error" role="alert">Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@symplsolutions.com">contact@symplsolutions.com</a>.</div>
           </form>
         </div>
       </div>
@@ -360,9 +310,29 @@ section{padding:80px 0;}
 <script>
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  document.getElementById('form-success').style.display = 'block';
-  this.querySelector('button[type=submit]').disabled = true;
-  this.querySelector('button[type=submit]').textContent = 'Sent ✓';
+  var form = this;
+  if (!form.reportValidity()) return;
+  var btn = form.querySelector('button[type=submit]');
+  var success = document.getElementById('form-success');
+  var error = document.getElementById('form-error');
+  error.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  window.symplSendInquiry('Webform inquiry from website', {
+    Name: document.getElementById('cf-name').value.trim(),
+    Organization: document.getElementById('cf-org').value.trim(),
+    Email: document.getElementById('cf-email').value.trim(),
+    'Needs help with': document.getElementById('cf-service').value || "Not sure yet",
+    Message: document.getElementById('cf-message').value.trim(),
+    _replyto: document.getElementById('cf-email').value.trim()
+  }).then(function() {
+    success.style.display = 'block';
+    btn.textContent = 'Sent ✓';
+  }).catch(function() {
+    error.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Request my free consultation →';
+  });
 });
 </script>
 

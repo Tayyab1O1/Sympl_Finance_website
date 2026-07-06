@@ -88,7 +88,7 @@
 <script src="sympl-components.js" defer></script>
 <style>
 :root{
-  --inkwell:#002236; --deepwater:#007E7C; --underbrush:#003C32;
+  --inkwell:#002236; --deepwater:#00706E; --underbrush:#003C32;
   --bay:#65C1BF; --seaglass:#C2E6E1; --mist:#E0F2F0;
   --yolk:#FFE079; --buttercup:#FFF5AB; --harvest:#E38900;
   --sorbet:#FFB97D; --orangecream:#FFD9BA;
@@ -113,26 +113,6 @@ a{color:inherit;}
 .btn:focus-visible{outline:3px solid var(--bay);outline-offset:2px;}
 
 /* ── NAV ── */
-.nav{position:sticky;top:0;z-index:200;background:rgba(251,245,240,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:74px;}
-.wordmark{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
-.wordmark .wm{font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--inkwell);}
-.wordmark .wm .dot{position:relative;}
-.wordmark .wm .dot::after{content:'';position:absolute;left:-1px;right:-2px;bottom:-3px;height:4px;background:var(--yolk);border-radius:3px;transform:rotate(-2deg);}
-.wordmark small{font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--deepwater);margin-top:4px;}
-.nav-links{display:flex;align-items:center;gap:6px;}
-.nav-item{position:relative;}
-.nav-item > a{display:inline-block;padding:10px 14px;font-size:14.5px;font-weight:500;color:var(--inkwell);text-decoration:none;border-radius:100px;transition:background .2s;}
-.nav-item > a:hover{background:rgba(0,34,54,0.05);}
-.nav-item .caret{font-size:10px;color:var(--ink-soft);margin-left:3px;}
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:248px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 14px 34px rgba(0,34,54,0.1);opacity:0;visibility:hidden;transform:translateY(6px);transition:all .2s;}
-.nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
-.dropdown a{display:block;padding:10px 14px;font-size:14px;font-weight:500;text-decoration:none;border-radius:9px;color:var(--inkwell);}
-.dropdown a:hover,.dropdown a[aria-current="page"]{background:var(--mist);color:var(--deepwater);}
-.dropdown a small{display:block;font-size:11.5px;font-weight:400;color:var(--ink-soft);margin-top:1px;}
-.nav-cta{margin-left:6px;padding:11px 20px;font-size:14px;}
-.nav-burger{display:none;}
-
 /* ── QUOTE PAGE ── */
 .quote-hero{padding:64px 0 80px;}
 .quote-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:flex-start;}
@@ -169,7 +149,7 @@ a{color:inherit;}
 /* Fields */
 .field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
 .field label{font-size:13px;font-weight:700;color:var(--inkwell);}
-.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:14.5px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:12px 14px;width:100%;transition:border-color .2s;}
+.field input,.field select,.field textarea{font-family:'Onest',sans-serif;font-size:16px;color:var(--inkwell);background:var(--paper);border:1.5px solid rgba(0,34,54,0.13);border-radius:11px;padding:12px 14px;width:100%;transition:border-color .2s;}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--deepwater);background:#fff;}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5f6b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
 .field textarea{min-height:88px;resize:vertical;}
@@ -192,6 +172,9 @@ a{color:inherit;}
 .form-nav .btn-next:hover{background:var(--underbrush);}
 .form-nav .btn-submit{background:var(--yolk);color:var(--inkwell);padding:13px 28px;font-size:15px;border:none;}
 .form-nav .btn-submit:hover{background:var(--harvest);color:#fff;}
+.form-nav .btn-submit[disabled]{opacity:.6;cursor:default;}
+.quote-error{display:none;padding:14px 18px;background:#fdf0ee;border:1px solid #e5b3ab;border-radius:12px;text-align:center;font-size:14px;color:#8c2f24;margin-top:16px;}
+.quote-error a{color:inherit;font-weight:600;}
 
 .step-panel{display:none;}
 .step-panel.active{display:block;}
@@ -211,8 +194,6 @@ a{color:inherit;}
   .form-row,.check-group{grid-template-columns:1fr;}
   .steps-bar{padding:16px 20px;}
   .form-steps{padding:20px;}
-  .nav-links{display:none;}
-  .nav-burger{display:inline-flex;}
 }
 </style>
 </head>
@@ -229,37 +210,7 @@ a{color:inherit;}
   </filter>
 </defs></svg>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a href="/" class="wordmark" aria-label="sympl finance home">
-      <img src="Dark.svg" alt="Sympl Finance" style="height:44px;width:auto;display:block;">
-    </a>
-    <nav class="nav-links" aria-label="Main">
-      <div class="nav-item">
-        <a href="/#services">Services <span class="caret">▾</span></a>
-        <div class="dropdown">
-          <a href="sympl-bookkeeping">Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
-          <a href="sympl-payroll">Payroll<small>Payroll, allocations, remittances</small></a>
-          <a href="sympl-cfo-advisory">CFO &amp; Advisory<small>Budgets, forecasts, finance decisions</small></a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a href="/#serve">Who We Serve <span class="caret">▾</span></a>
-        <div class="dropdown">
-          <a href="sympl-arts">Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
-          <a href="sympl-settlement">Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
-          <a href="sympl-nonprofit">Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
-        </div>
-      </div>
-      <div class="nav-item"><a href="sympl-clients-partners">Clients &amp; Partners</a></div>
-      <div class="nav-item"><a href="sympl-about">About</a></div>
-      <div class="nav-item"><a href="sympl-blog">Blog</a></div>
-      <a href="sympl-contact" class="btn btn-yolk nav-cta">Book a Free Review</a>
-      <a href="sympl-quote" class="btn btn-ghost nav-cta" aria-current="page">Get a quote</a>
-    </nav>
-    <a href="sympl-quote" class="btn btn-yolk nav-burger" style="padding:10px 16px;font-size:13px;">Get a quote</a>
-  </div>
-</header>
+<sympl-nav current="quote"></sympl-nav>
 
 <main>
   <section class="quote-hero">
@@ -323,11 +274,11 @@ a{color:inherit;}
               <div class="form-row">
                 <div class="field">
                   <label for="q-name">Your name</label>
-                  <input id="q-name" type="text" placeholder="Jane Smith" autocomplete="name">
+                  <input id="q-name" type="text" placeholder="Jane Smith" autocomplete="name" required>
                 </div>
                 <div class="field">
                   <label for="q-org">Organization name</label>
-                  <input id="q-org" type="text" placeholder="Your nonprofit">
+                  <input id="q-org" type="text" placeholder="Your nonprofit" required>
                 </div>
               </div>
               <div class="field">
@@ -437,7 +388,7 @@ a{color:inherit;}
             <div class="step-panel" id="step-3">
               <div class="field">
                 <label for="q-email">Work email</label>
-                <input id="q-email" type="email" placeholder="jane@yourorg.ca" autocomplete="email">
+                <input id="q-email" type="email" placeholder="jane@yourorg.ca" autocomplete="email" required>
               </div>
               <div class="field">
                 <label for="q-phone">Phone number <span style="font-weight:400;color:var(--ink-soft)">(optional)</span></label>
@@ -459,8 +410,9 @@ a{color:inherit;}
               </div>
               <div class="form-nav">
                 <button class="btn btn-back" onclick="goStep(2)">← Back</button>
-                <button class="btn btn-submit" onclick="submitQuote()">Send my quote request →</button>
+                <button class="btn btn-submit" id="quote-submit-btn" onclick="submitQuote()">Send my quote request →</button>
               </div>
+              <div class="quote-error" id="quote-error" role="alert">Something went wrong sending your request. Please try again, or email us directly at <a href="mailto:contact@symplsolutions.com">contact@symplsolutions.com</a>.</div>
             </div>
 
           </div>
@@ -523,7 +475,20 @@ a{color:inherit;}
 <script>
 var currentStep = 1;
 
+function validateStep(n) {
+  var panel = document.getElementById('step-' + n);
+  var fields = panel.querySelectorAll('input[required], select[required], textarea[required]');
+  for (var i = 0; i < fields.length; i++) {
+    if (!fields[i].checkValidity()) {
+      fields[i].reportValidity();
+      return false;
+    }
+  }
+  return true;
+}
+
 function goStep(n) {
+  if (n > currentStep && !validateStep(currentStep)) return;
   document.getElementById('step-' + currentStep).classList.remove('active');
   currentStep = n;
   document.getElementById('step-' + currentStep).classList.add('active');
@@ -542,9 +507,41 @@ function updateStepsBar() {
 }
 
 function submitQuote() {
-  document.getElementById('form-steps').style.display = 'none';
-  document.querySelector('.steps-bar').style.display = 'none';
-  document.getElementById('quote-success').style.display = 'block';
+  if (!validateStep(3)) return;
+  var btn = document.getElementById('quote-submit-btn');
+  var error = document.getElementById('quote-error');
+  var val = function (id) { return (document.getElementById(id).value || '').trim(); };
+  var services = Array.prototype.map.call(
+    document.querySelectorAll('#step-2 .check-option input:checked'),
+    function (c) { return c.closest('.check-option').textContent.trim(); }
+  ).join(', ');
+  error.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  window.symplSendInquiry('Quote inquiry from website', {
+    Name: val('q-name'),
+    Organization: val('q-org'),
+    'Organization type': val('q-type'),
+    'Annual budget': val('q-budget'),
+    'Paid staff': val('q-staff'),
+    'Services needed': services || 'None selected',
+    'Current situation': val('q-situation'),
+    'Accounting software': val('q-software'),
+    'Fiscal year end': val('q-fyear'),
+    Email: val('q-email'),
+    Phone: val('q-phone'),
+    Timeline: val('q-timeline'),
+    Notes: val('q-notes'),
+    _replyto: val('q-email')
+  }).then(function () {
+    document.getElementById('form-steps').style.display = 'none';
+    document.querySelector('.steps-bar').style.display = 'none';
+    document.getElementById('quote-success').style.display = 'block';
+  }).catch(function () {
+    error.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Send my quote request →';
+  });
 }
 </script>
 

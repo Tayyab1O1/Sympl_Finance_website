@@ -107,7 +107,7 @@
     <style>
       :root {
         --inkwell: #002236;
-        --deepwater: #007e7c;
+        --deepwater: #00706e;
         --underbrush: #003c32;
         --bay: #65c1bf;
         --seaglass: #c2e6e1;
@@ -225,134 +225,6 @@
       .btn:focus-visible {
         outline: 3px solid var(--bay);
         outline-offset: 2px;
-      }
-
-      /* ───────── NAV ───────── */
-      .nav {
-        position: sticky;
-        top: 0;
-        z-index: 200;
-        background: rgba(251, 245, 240, 0.92);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--line);
-      }
-      .nav-inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 32px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 74px;
-      }
-      .wordmark {
-        display: flex;
-        flex-direction: column;
-        line-height: 1;
-        text-decoration: none;
-      }
-      .wordmark .wm {
-        font-size: 24px;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        color: var(--inkwell);
-      }
-      .wordmark .wm .dot {
-        position: relative;
-      }
-      .wordmark .wm .dot::after {
-        content: "";
-        position: absolute;
-        left: -1px;
-        right: -2px;
-        bottom: -3px;
-        height: 4px;
-        background: var(--yolk);
-        border-radius: 3px;
-        transform: rotate(-2deg);
-      }
-      .wordmark small {
-        font-size: 9px;
-        font-weight: 600;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--deepwater);
-        margin-top: 4px;
-      }
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .nav-item {
-        position: relative;
-      }
-      .nav-item > a {
-        display: inline-block;
-        padding: 10px 14px;
-        font-size: 14.5px;
-        font-weight: 500;
-        color: var(--inkwell);
-        text-decoration: none;
-        border-radius: 100px;
-        transition: background 0.2s;
-      }
-      .nav-item > a:hover {
-        background: rgba(0, 34, 54, 0.05);
-      }
-      .nav-item .caret {
-        font-size: 10px;
-        color: var(--ink-soft);
-        margin-left: 3px;
-      }
-      .dropdown {
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        min-width: 240px;
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 8px;
-        box-shadow: 0 14px 34px rgba(0, 34, 54, 0.1);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(6px);
-        transition: all 0.2s;
-      }
-      .nav-item:hover .dropdown,
-      .nav-item:focus-within .dropdown {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-      .dropdown a {
-        display: block;
-        padding: 10px 14px;
-        font-size: 14px;
-        font-weight: 500;
-        text-decoration: none;
-        border-radius: 9px;
-        color: var(--inkwell);
-      }
-      .dropdown a:hover {
-        background: var(--mist);
-        color: var(--deepwater);
-      }
-      .dropdown a small {
-        display: block;
-        font-size: 11.5px;
-        font-weight: 400;
-        color: var(--ink-soft);
-        margin-top: 1px;
-      }
-      .nav-cta {
-        margin-left: 10px;
-        padding: 11px 20px;
-        font-size: 14px;
-      }
-      .nav-burger {
-        display: none;
       }
 
       /* ───────── HERO ───────── */
@@ -632,6 +504,8 @@
         font-weight: 600;
         color: var(--deepwater);
         text-decoration: none;
+        display: inline-block;
+        padding: 14px 0;
       }
       .serve-card .more:hover {
         text-decoration: underline;
@@ -740,6 +614,8 @@
         font-weight: 600;
         color: var(--deepwater);
         text-decoration: none;
+        display: inline-block;
+        padding: 14px 0;
       }
       .svc-body .more:hover {
         text-decoration: underline;
@@ -820,7 +696,7 @@
         font-weight: 600;
       }
       .chip-warn {
-        color: #ba7517;
+        color: #8a5a00;
         font-weight: 600;
       }
       .pill {
@@ -1254,7 +1130,7 @@
         border: 1.5px solid var(--seaglass);
         background: #fff;
         font-family: inherit;
-        font-size: 14.5px;
+        font-size: 16px;
         color: var(--inkwell);
       }
       .magnet input[type="email"]:focus {
@@ -1680,140 +1556,6 @@
       }
 
       /* ───────── FOOTER ───────── */
-      .footer {
-        background: var(--inkwell);
-        color: var(--paper);
-        padding: 56px 0 36px;
-      }
-      .footer-grid {
-        display: grid;
-        grid-template-columns: 1.4fr auto auto auto 360px;
-        align-items: start;
-        gap: 40px;
-        margin-bottom: 40px;
-      }
-      .footer .wm {
-        font-size: 26px;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        color: var(--paper);
-      }
-      .footer .wm .dot {
-        color: var(--yolk);
-      }
-      .footer .fin {
-        display: block;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--deepwater);
-        margin-top: 5px;
-      }
-      .footer .tagline {
-        font-size: 13.5px;
-        color: rgba(251, 245, 240, 0.55);
-        margin-top: 14px;
-        max-width: 280px;
-        line-height: 1.6;
-      }
-      .footer-col h4 {
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(251, 245, 240, 0.45);
-        margin-bottom: 14px;
-      }
-      .footer-col a {
-        display: block;
-        font-size: 14px;
-        color: rgba(251, 245, 240, 0.75);
-        text-decoration: none;
-        padding: 4px 0;
-      }
-      .footer-col a:hover {
-        color: var(--yolk);
-      }
-      .footer-magnet {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 14px;
-        padding: 22px 24px;
-        flex-shrink: 0;
-      }
-      .footer-magnet .tag {
-        display: inline-block;
-        background: var(--yolk);
-        color: var(--inkwell);
-        font-size: 9.5px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 4px 11px;
-        border-radius: 100px;
-        margin-bottom: 12px;
-      }
-      .footer-magnet h3 {
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--paper);
-        line-height: 1.3;
-        margin-bottom: 8px;
-      }
-      .footer-magnet p {
-        font-size: 12.5px;
-        color: rgba(251,245,240,0.6);
-        line-height: 1.55;
-        margin-bottom: 14px;
-      }
-      .footer-magnet form {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-      .footer-magnet input[type="email"] {
-        flex: 1;
-        min-width: 0;
-        padding: 10px 14px;
-        border-radius: 9px;
-        border: 1.5px solid rgba(255,255,255,0.18);
-        background: rgba(255,255,255,0.08);
-        font-family: inherit;
-        font-size: 13px;
-        color: var(--paper);
-      }
-      .footer-magnet input[type="email"]::placeholder { color: rgba(251,245,240,0.4); }
-      .footer-magnet input[type="email"]:focus {
-        outline: none;
-        border-color: var(--deepwater);
-      }
-      .footer-magnet .btn { font-size: 13px; padding: 10px 18px; }
-      .footer-magnet .micro {
-        font-size: 11px;
-        color: rgba(251,245,240,0.35);
-        margin-top: 8px;
-        margin-bottom: 0;
-      }
-      .footer-magnet .thanks {
-        display: none;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--bay);
-        margin-top: 6px;
-      }
-      .footer-base {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: 22px;
-        font-size: 12.5px;
-        color: rgba(251, 245, 240, 0.4);
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-
       /* Reveal on scroll */
       .rv {
         opacity: 0;
@@ -1834,12 +1576,6 @@
         }
         .wrap {
           padding: 0 22px;
-        }
-        .nav-links {
-          display: none;
-        }
-        .nav-burger {
-          display: inline-flex;
         }
         .hero {
           padding: 44px 0 56px;
@@ -1890,13 +1626,6 @@
         .insight-item--hide-mobile {
           display: none;
         }
-        .footer-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .footer-magnet {
-          grid-column: 1 / -1;
-          max-width: 100%;
-        }
       }
       @media (max-width: 560px) {
         .serve-grid,
@@ -1924,77 +1653,9 @@
   </head>
   <body>
     <!-- ═══════════ NAV ═══════════ -->
-    <header class="nav">
-      <div class="nav-inner">
-        <a href="/" class="wordmark" aria-label="sympl finance home">
-          <img
-            src="Dark.svg"
-            alt="Sympl Finance"
-            style="height: 44px; width: auto; display: block"
-          />
-        </a>
-        <nav class="nav-links" aria-label="Main">
-          <div class="nav-item">
-            <a href="#services">Services <span class="caret">▾</span></a>
-            <div class="dropdown">
-              <a href="sympl-bookkeeping"
-                >Bookkeeping<small
-                  >Monthly books, reconciliations, cleanup</small
-                ></a
-              >
-              <a href="sympl-payroll"
-                >Payroll<small
-                  >Payroll, allocations, remittances</small
-                ></a
-              >
-              <a href="sympl-cfo-advisory"
-                >CFO &amp; Advisory<small
-                  >Budgets, forecasts, board reporting</small
-                ></a
-              >
-            </div>
-          </div>
-          <div class="nav-item">
-            <a href="#serve">Who We Serve <span class="caret">▾</span></a>
-            <div class="dropdown">
-              <a href="sympl-arts"
-                >Arts &amp; Culture<small
-                  >Theatres, galleries, festivals</small
-                ></a
-              >
-              <a href="sympl-settlement"
-                >Immigration &amp; Settlement<small
-                  >Settlement and newcomer agencies</small
-                ></a
-              >
-              <a href="sympl-nonprofit"
-                >Other Nonprofits<small
-                  >Housing, health, youth &amp; more</small
-                ></a
-              >
-            </div>
-          </div>
-          <div class="nav-item">
-            <a href="sympl-clients-partners">Clients &amp; Partners</a>
-          </div>
-          <div class="nav-item"><a href="sympl-about">About</a></div>
-          <div class="nav-item"><a href="sympl-blog">Blog</a></div>
-          <a href="sympl-contact" class="btn btn-yolk nav-cta"
-            >Book a Free Review</a
-          >
-          <a href="sympl-quote" class="btn btn-ghost nav-cta"
-            >Get a quote</a
-          >
-        </nav>
-        <a
-          href="sympl-contact"
-          class="btn btn-yolk nav-burger"
-          style="padding: 10px 16px; font-size: 13px"
-          >Book a review</a
-        >
-      </div>
-    </header>
+    <sympl-nav></sympl-nav>
 
+    <main>
     <!-- ═══════════ HERO ═══════════ -->
     <section class="hero">
       <div class="wrap hero-grid">
@@ -2833,72 +2494,10 @@
         </div>
       </div>
     </section>
+    </main>
 
     <!-- ═══════════ FOOTER ═══════════ -->
-    <footer class="footer">
-      <div class="wrap">
-        <div class="footer-grid">
-          <div>
-            <img
-              src="Light.svg"
-              alt="Sympl Finance"
-              style="
-                height: 48px;
-                width: auto;
-                display: block;
-                margin-bottom: 4px;
-              "
-            />
-            <p class="tagline">
-              Nonprofit bookkeeping, reporting, and finance leadership.
-              Ontario-based, nonprofit-only.
-            </p>
-          </div>
-          <div class="footer-col">
-            <h4>Services</h4>
-            <a href="sympl-bookkeeping"
-              >Bookkeeping</a
-            >
-            <a href="sympl-payroll"
-              >Payroll</a
-            >
-            <a href="sympl-cfo-advisory">CFO &amp; Advisory</a>
-          </div>
-          <div class="footer-col">
-            <h4>Who we serve</h4>
-            <a href="sympl-arts">Arts &amp; Culture</a>
-            <a href="sympl-settlement">Immigration &amp; Settlement</a>
-            <a href="#serve">All nonprofits</a>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="sympl-about">About</a>
-            <a href="sympl-clients-partners">Clients &amp; Partners</a>
-            <a href="sympl-blog">Blog</a>
-            <a href="sympl-contact">Book a review</a>
-            <a href="sympl-quote">Get a quote</a>
-          </div>
-          <div class="footer-magnet">
-            <span class="tag">Free download</span>
-            <h3>The Nonprofit Finance Health Checklist</h3>
-            <p>15 questions every ED and board should answer about their finances. Score yourself in 10 minutes.</p>
-            <form id="magnetForm" novalidate>
-              <input type="email" name="email" placeholder="you@yourorg.ca" aria-label="Email address" required />
-              <button type="submit" class="btn btn-yolk">Send me the checklist</button>
-            </form>
-            <p class="thanks" id="magnetThanks">Thanks, the checklist is on its way to your inbox.</p>
-            <p class="micro">No spam. One useful email a month, unsubscribe anytime.</p>
-          </div>
-        </div>
-        <div class="footer-base">
-          <span
-            >© Sympl 2026 · Part of Sympl Solutions: Strategy · Marketing ·
-            Digital · Finance</span
-          >
-          <span>Privacy</span>
-        </div>
-      </div>
-    </footer>
+    <sympl-footer magnet></sympl-footer>
 
     <script>
       /* ── Reveal on scroll ── */
@@ -3101,18 +2700,6 @@
         { threshold: 0.35 },
       );
       svcObserver.observe(svcGrid);
-
-      /* ── Lead magnet form (front-end only; wire to ESP later) ── */
-      document.getElementById("magnetForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const em = e.target.email.value.trim();
-        if (!em || !em.includes("@")) {
-          e.target.email.focus();
-          return;
-        }
-        e.target.style.display = "none";
-        document.getElementById("magnetThanks").style.display = "block";
-      });
 
       // ── Credentials carousel ────────────────────────────────
       (function () {

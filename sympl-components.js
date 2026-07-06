@@ -1,7 +1,7 @@
 const SYMPL_DATA = {
   home: {
     proofTitle: "Trusted by nonprofit leaders who need cleaner books, not another system to manage.",
-    proofLead: "A few of the organizations and leaders behind the work. Swap in real logos and client photos as they arrive.",
+    proofLead: "A few of the organizations and leaders behind the work.",
     proofKicker: "Clients and partners",
     clients: [
       { name: "East End Arts", sector: "Arts & culture", tags: ["Grant reporting", "Monthly close"] },
@@ -139,6 +139,34 @@ const SYMPL_DATA = {
   }
 };
 
+// Shared inquiry mailer. FormSubmit relays to the inbox below with CC + subject.
+// NOTE: the first live submission triggers a one-time activation email to this
+// address; submissions flow only after that link is clicked.
+window.symplSendInquiry = function (subject, data) {
+  var payload = Object.assign(
+    {
+      _subject: subject,
+      _cc: "natasha@symplsolutions.com",
+      _template: "table",
+      _captcha: "false"
+    },
+    data
+  );
+  return fetch("https://formsubmit.co/ajax/tayyab@symplsolutions.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(payload)
+  }).then(function (r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json().then(function (j) {
+      if (j && (j.success === false || j.success === "false")) {
+        throw new Error(j.message || "Send failed");
+      }
+      return j;
+    });
+  });
+};
+
 function initials(name) {
   return name
     .split(/\s+/)
@@ -154,6 +182,61 @@ function faceMarkup(item, className) {
     return `<span class="${className}"><img src="${item.photo}" alt="${item.name}"></span>`;
   }
   return `<span class="${className}" aria-hidden="true">${initials(item.name)}</span>`;
+}
+
+const NAV_CURRENT = {
+  bookkeeping: { group: "services", item: "sympl-bookkeeping" },
+  payroll: { group: "services", item: "sympl-payroll" },
+  "cfo-advisory": { group: "services", item: "sympl-cfo-advisory" },
+  arts: { group: "serve", item: "sympl-arts" },
+  settlement: { group: "serve", item: "sympl-settlement" },
+  nonprofit: { group: "serve", item: "sympl-nonprofit" },
+  clients: { item: "sympl-clients-partners" },
+  about: { item: "sympl-about" },
+  blog: { item: "sympl-blog" },
+  contact: { cta: "contact" },
+  quote: { cta: "quote" }
+};
+
+class SymplNav extends HTMLElement {
+  connectedCallback() {
+    const current = NAV_CURRENT[this.getAttribute("current")] || {};
+    const cur = (name) => (current.item === name || current.group === name ? ' aria-current="page"' : "");
+    const ctaCur = (name) => (current.cta === name ? ' aria-current="page"' : "");
+    this.innerHTML = `
+      <header class="nav">
+        <div class="nav-inner">
+          <a href="/" class="wordmark" aria-label="sympl finance home">
+            <img src="Dark.svg" alt="Sympl Finance" style="height:44px;width:auto;display:block;">
+          </a>
+          <nav class="nav-links" aria-label="Main">
+            <div class="nav-item">
+              <a href="/#services"${cur("services")}>Services <span class="caret">▾</span></a>
+              <div class="dropdown">
+                <a href="sympl-bookkeeping"${cur("sympl-bookkeeping")}>Bookkeeping<small>Monthly books, reconciliations, cleanup</small></a>
+                <a href="sympl-payroll"${cur("sympl-payroll")}>Payroll<small>Payroll, allocations, remittances</small></a>
+                <a href="sympl-cfo-advisory"${cur("sympl-cfo-advisory")}>CFO &amp; Advisory<small>Budgets, forecasts, finance decisions</small></a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="/#serve"${cur("serve")}>Who We Serve <span class="caret">▾</span></a>
+              <div class="dropdown">
+                <a href="sympl-arts"${cur("sympl-arts")}>Arts &amp; Culture<small>Theatres, galleries, festivals</small></a>
+                <a href="sympl-settlement"${cur("sympl-settlement")}>Immigration &amp; Settlement<small>Settlement and newcomer agencies</small></a>
+                <a href="sympl-nonprofit"${cur("sympl-nonprofit")}>Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
+              </div>
+            </div>
+            <div class="nav-item"><a href="sympl-clients-partners"${cur("sympl-clients-partners")}>Clients &amp; Partners</a></div>
+            <div class="nav-item"><a href="sympl-about"${cur("sympl-about")}>About</a></div>
+            <div class="nav-item"><a href="sympl-blog"${cur("sympl-blog")}>Blog</a></div>
+            <a href="sympl-contact" class="btn btn-yolk nav-cta"${ctaCur("contact")}>Book a Free Review</a>
+            <a href="sympl-quote" class="btn btn-ghost nav-cta"${ctaCur("quote")}>Get a quote</a>
+          </nav>
+          <a href="sympl-contact" class="btn btn-yolk nav-burger" style="padding:10px 16px;font-size:13px;">Book a review</a>
+        </div>
+      </header>
+    `;
+  }
 }
 
 class SymplProof extends HTMLElement {
@@ -333,6 +416,21 @@ class SymplFinalCta extends HTMLElement {
 
 class SymplFooter extends HTMLElement {
   connectedCallback() {
+    const hasMagnet = this.hasAttribute("magnet");
+    const magnetBlock = hasMagnet
+      ? `
+            <div class="sympl-footer-magnet">
+              <span class="tag">Free download</span>
+              <h3>The Nonprofit Finance Health Checklist</h3>
+              <p>15 questions every ED and board should answer about their finances. Score yourself in 10 minutes.</p>
+              <form id="magnetForm" novalidate>
+                <input type="email" name="email" placeholder="you@yourorg.ca" aria-label="Email address" required>
+                <button type="submit" class="btn btn-yolk">Send me the checklist</button>
+              </form>
+              <p class="thanks" id="magnetThanks">Thanks, the checklist is on its way to your inbox.</p>
+              <p class="micro">No spam. One useful email a month, unsubscribe anytime.</p>
+            </div>`
+      : "";
     this.innerHTML = `
       <footer class="sympl-footer">
         <div class="sympl-footer-wrap">
@@ -361,18 +459,55 @@ class SymplFooter extends HTMLElement {
               <a href="/#tips">Finance tips</a>
               <a href="sympl-contact">Book a review</a>
               <a href="sympl-quote">Get a quote</a>
-            </div>
+            </div>${magnetBlock}
           </div>
           <div class="sympl-footer-base">
             <span>© Sympl 2026 · Part of Sympl Solutions: Strategy · Marketing · Digital · Finance</span>
-            <span>Privacy</span>
+            <a href="sympl-privacy">Privacy</a>
           </div>
         </div>
       </footer>
     `;
+    if (hasMagnet) this.wireMagnetForm();
+  }
+
+  wireMagnetForm() {
+    const form = this.querySelector("#magnetForm");
+    const thanks = this.querySelector("#magnetThanks");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = form.email;
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        return;
+      }
+      const btn = form.querySelector("button[type=submit]");
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+      window
+        .symplSendInquiry("Webform inquiry from website", {
+          "Inquiry type": "Finance Health Checklist request",
+          Email: input.value.trim(),
+          _replyto: input.value.trim()
+        })
+        .then(() => {
+          form.style.display = "none";
+          thanks.style.display = "block";
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.textContent = "Send me the checklist";
+          input.setCustomValidity(
+            "Something went wrong — please try again or email contact@symplsolutions.com"
+          );
+          input.reportValidity();
+          input.setCustomValidity("");
+        });
+    });
   }
 }
 
+customElements.define("sympl-nav", SymplNav);
 customElements.define("sympl-proof", SymplProof);
 customElements.define("sympl-testimonials", SymplTestimonials);
 customElements.define("sympl-faq", SymplFaq);
@@ -381,12 +516,56 @@ customElements.define("sympl-final-cta", SymplFinalCta);
 customElements.define("sympl-footer", SymplFooter);
 
 document.addEventListener('DOMContentLoaded', function () {
+  // ── Skip link ──
+  var main = document.querySelector('main');
+  if (main) {
+    if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+    var skip = document.createElement('a');
+    skip.href = '#';
+    skip.className = 'sympl-skip-link';
+    skip.textContent = 'Skip to main content';
+    skip.addEventListener('click', function (e) {
+      e.preventDefault();
+      main.focus();
+      main.scrollIntoView();
+    });
+    document.body.insertBefore(skip, document.body.firstChild);
+  }
+
+  // Dropdown triggers: click/tap/Enter toggles the menu (hover still works via CSS).
+  var dropdownItems = [];
   document.querySelectorAll('.nav-item').forEach(function (item) {
     if (!item.querySelector('.dropdown')) return;
+    dropdownItems.push(item);
     var trigger = item.querySelector('a');
-    if (trigger) {
-      trigger.addEventListener('click', function (e) { e.preventDefault(); this.blur(); });
-    }
+    if (!trigger) return;
+    trigger.setAttribute('aria-haspopup', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = item.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', String(isOpen));
+      dropdownItems.forEach(function (other) {
+        if (other !== item) {
+          other.classList.remove('open');
+          var t = other.querySelector('a');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  });
+  function closeDropdowns() {
+    dropdownItems.forEach(function (item) {
+      item.classList.remove('open');
+      var t = item.querySelector('a');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  }
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-item')) closeDropdowns();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDropdowns();
   });
 
   // ── Mobile nav drawer ──
@@ -437,12 +616,38 @@ document.addEventListener('DOMContentLoaded', function () {
     navInner.appendChild(hamburger);
   }
 
+  var lastFocused = null;
+
+  function focusableInDrawer() {
+    return Array.prototype.slice.call(
+      drawer.querySelectorAll('a[href], button:not([disabled])')
+    ).filter(function (el) { return el.offsetParent !== null; });
+  }
+
+  function trapTab(e) {
+    if (e.key !== 'Tab') return;
+    var focusable = focusableInDrawer();
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
   function openDrawer() {
+    lastFocused = document.activeElement;
     overlay.classList.add('open');
     drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+    closeBtn.focus();
+    drawer.addEventListener('keydown', trapTab);
   }
 
   function closeDrawer() {
@@ -451,6 +656,12 @@ document.addEventListener('DOMContentLoaded', function () {
     drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+    drawer.removeEventListener('keydown', trapTab);
+    if (lastFocused && typeof lastFocused.focus === 'function') {
+      lastFocused.focus();
+    } else if (hamburger) {
+      hamburger.focus();
+    }
   }
 
   if (hamburger) hamburger.addEventListener('click', openDrawer);
@@ -458,6 +669,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeDrawer();
+    if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
   });
 });
