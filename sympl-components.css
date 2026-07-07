@@ -4,13 +4,20 @@
 .sympl-final-cta,
 .sympl-footer,
 sympl-cta-agenda,
-sympl-nav,
 sympl-proof,
 sympl-testimonials,
 sympl-faq,
 sympl-final-cta,
 sympl-footer {
   display: block;
+}
+
+/* The <sympl-nav> wrapper must not generate its own box: an unstyled
+   custom-element ancestor (even display:block) can break position:sticky
+   on its child in Chromium. display:contents removes it from the box
+   tree so <header class="nav"> behaves as a direct child of <body>. */
+sympl-nav {
+  display: contents;
 }
 
 /* ══ Shared nav (rendered by <sympl-nav>) ══ */
