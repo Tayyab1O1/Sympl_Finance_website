@@ -587,6 +587,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<div class="nav-drawer-sub">' +
           '<a href="sympl-arts">Arts &amp; Culture</a>' +
           '<a href="sympl-settlement">Immigration &amp; Settlement</a>' +
+          '<a href="sympl-nonprofit">Other Nonprofits</a>' +
         '</div>' +
         '<a href="sympl-clients-partners">Clients &amp; Partners</a>' +
         '<a href="sympl-about">About</a>' +
