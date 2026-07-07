@@ -202,6 +202,8 @@ section{padding:80px 0;}
 .tools-scroll-btn:hover{background:rgba(255,255,255,0.2);box-shadow:0 0 0 6px rgba(255,255,255,0.06);}
 .tools-scroll-btn:active{background:rgba(255,255,255,0.28);}
 .tools-scroll-btn svg{width:14px;height:14px;fill:rgba(251,245,240,0.85);}
+/* Keep the carousel arrow inside the viewport when the page margin runs out. */
+@media(max-width:1240px){.tools-scroll-btn{right:8px;}}
 @media(max-width:640px){.cert-pill{min-width:140px;}}
 
 /* ── Client marquee (mirrors homepage) ── */
