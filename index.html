@@ -1311,7 +1311,6 @@
       }
       .tools-scroll-btn {
         position: absolute;
-        right: -52px;
         top: 50%;
         transform: translateY(-50%);
         width: 40px; height: 40px;
@@ -1320,16 +1319,37 @@
         border: 1px solid rgba(255,255,255,0.15);
         display: flex; align-items: center; justify-content: center;
         cursor: pointer;
-        transition: background 0.2s, box-shadow 0.2s;
+        transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
         z-index: 2;
       }
+      .tools-prev { left: -52px; }
+      .tools-next { right: -52px; }
       .tools-scroll-btn:hover { background: rgba(255,255,255,0.2); box-shadow: 0 0 0 6px rgba(255,255,255,0.06); }
       .tools-scroll-btn:active { background: rgba(255,255,255,0.28); }
+      .tools-scroll-btn:disabled { opacity: 0.3; cursor: default; }
+      .tools-scroll-btn:disabled:hover { background: rgba(255,255,255,0.1); box-shadow: none; }
       .tools-scroll-btn svg { width: 14px; height: 14px; fill: rgba(251,245,240,0.85); }
       @media (max-width: 1240px) {
-        /* Keep the carousel arrow inside the viewport when the page margin
-           runs out (above this it sits in the gutter at right:-52px). */
-        .tools-scroll-btn { right: 8px; }
+        /* Once the page gutter runs out, move both arrows to a centered row
+           below the carousel so they never overflow the viewport. */
+        .creds-carousel-wrap { padding-bottom: 60px; }
+        .tools-scroll-btn { top: auto; bottom: 0; transform: none; }
+        .tools-prev { left: 50%; right: auto; margin-left: -46px; }
+        .tools-next { right: 50%; left: auto; margin-right: -46px; }
+      }
+      @media (max-width: 900px) {
+        /* Two cards per view on tablets. */
+        .cert-pill { flex: 0 0 calc(50% - 6px); }
+      }
+      @media (max-width: 560px) {
+        /* One card per view on phones, logo stacked on top of the text. */
+        .cert-pill {
+          flex: 0 0 100%;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .cert-abbr { font-size: 24px; }
       }
       .tools-grid {
         display: grid;
@@ -2061,7 +2081,10 @@
                 </div>
               </div>
             </div>
-            <button class="tools-scroll-btn" id="credsArrow" aria-label="Next credentials">
+            <button class="tools-scroll-btn tools-prev" id="credsPrev" aria-label="Previous credentials">
+              <svg viewBox="0 0 16 16"><path d="M12 1 L4 8 L12 15 Z"/></svg>
+            </button>
+            <button class="tools-scroll-btn tools-next" id="credsNext" aria-label="Next credentials">
               <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
             </button>
           </div>
@@ -2647,9 +2670,11 @@
       ];
       const tabsEl = document.getElementById("svcTabs");
       const stageEl = document.getElementById("svcStage");
+      const svcGrid = document.querySelector(".svc-grid");
       let svcActive = 0,
         svcTimer;
-      function svcRender() {
+      // Build the tabs + stage DOM for the current svcActive (no fade).
+      function svcBuild() {
         tabsEl.innerHTML = "";
         SVC.forEach((s, idx) => {
           const b = document.createElement("button");
@@ -2665,14 +2690,33 @@
           };
           tabsEl.appendChild(b);
         });
-        stageEl.style.opacity = "0.3";
         stageEl.innerHTML = SVC[svcActive].stage;
         const photo = document.getElementById("svcPhoto");
         photo.src = SVC[svcActive].image;
         photo.alt = SVC[svcActive].n;
+      }
+      function svcRender() {
+        stageEl.style.opacity = "0.3";
+        svcBuild();
         setTimeout(() => {
           stageEl.style.opacity = "1";
         }, 180);
+      }
+      // Lock the section to the height of its tallest step so that
+      // auto-advancing never reflows the page under the reader.
+      function svcLockHeight() {
+        const prev = svcActive;
+        svcGrid.style.minHeight = "";
+        let maxH = 0;
+        for (let i = 0; i < SVC.length; i++) {
+          svcActive = i;
+          svcBuild();
+          if (svcGrid.offsetHeight > maxH) maxH = svcGrid.offsetHeight;
+        }
+        svcActive = prev;
+        svcBuild();
+        stageEl.style.opacity = "1";
+        svcGrid.style.minHeight = maxH + "px";
       }
       function svcRestart() {
         clearInterval(svcTimer);
@@ -2689,10 +2733,24 @@
           }
         }, 60);
       }
+      svcLockHeight();
       svcRestart();
+      // Re-measure once fonts load and whenever the layout width changes,
+      // since both affect how tall each step renders.
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(svcLockHeight);
+      }
+      let svcResizeT;
+      window.addEventListener(
+        "resize",
+        () => {
+          clearTimeout(svcResizeT);
+          svcResizeT = setTimeout(svcLockHeight, 200);
+        },
+        { passive: true },
+      );
 
       /* ── Services: always start from the first card when scrolled into view ── */
-      const svcGrid = document.querySelector(".svc-grid");
       const svcObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -2709,49 +2767,49 @@
       // ── Credentials carousel ────────────────────────────────
       (function () {
         const track = document.getElementById("credsTrack");
-        const btn   = document.getElementById("credsArrow");
-        if (!track || !btn) return;
+        const prevBtn = document.getElementById("credsPrev");
+        const nextBtn = document.getElementById("credsNext");
+        if (!track || !nextBtn) return;
 
-        const origPills = Array.from(track.querySelectorAll(".cert-pill"));
-        origPills.forEach(p => {
-          const clone = p.cloneNode(true);
-          clone.classList.remove("rv");
-          clone.classList.add("in");
-          track.appendChild(clone);
-        });
+        const pills = Array.from(track.querySelectorAll(".cert-pill"));
+        let index = 0;
 
-        // Equalize pill heights
-        const allPills = track.querySelectorAll(".cert-pill");
-        let maxH = 0;
-        allPills.forEach(p => { if (p.offsetHeight > maxH) maxH = p.offsetHeight; });
-        if (maxH > 0) allPills.forEach(p => { p.style.minHeight = maxH + "px"; });
+        function perView() {
+          const w = window.innerWidth;
+          if (w > 900) return 4;
+          if (w > 560) return 2;
+          return 1;
+        }
+        function maxIndex() { return Math.max(0, pills.length - perView()); }
+        function step() { const p = pills[0]; return p ? p.offsetWidth + 12 : 0; }
 
-        let pos = 0, animating = false;
-
-        function pillWidth() {
-          const p = track.querySelector(".cert-pill");
-          return p ? p.offsetWidth + 12 : 0;
+        // Give every card the height of the tallest so the row stays even.
+        function equalize() {
+          pills.forEach(p => { p.style.minHeight = ""; });
+          let maxH = 0;
+          pills.forEach(p => { if (p.offsetHeight > maxH) maxH = p.offsetHeight; });
+          if (maxH > 0) pills.forEach(p => { p.style.minHeight = maxH + "px"; });
         }
 
-        btn.addEventListener("click", function () {
-          if (animating) return;
-          animating = true;
-          pos += 1;
+        function go(to) {
+          index = Math.min(Math.max(0, to), maxIndex());
           track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
-          track.offsetHeight; // force reflow so the transition registers
-          track.style.transform  = `translateX(${-pos * pillWidth()}px)`;
+          track.style.transform = `translateX(${-index * step()}px)`;
+          if (prevBtn) prevBtn.disabled = index === 0;
+          nextBtn.disabled = index === maxIndex();
+        }
 
-          window.setTimeout(function () {
-            if (pos >= origPills.length) {
-              track.style.transition = "none";
-              pos = 0;
-              track.style.transform = "translateX(0)";
-              track.offsetHeight;
-              track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
-            }
-            animating = false;
-          }, 460);
-        });
+        if (prevBtn) prevBtn.addEventListener("click", () => go(index - 1));
+        nextBtn.addEventListener("click", () => go(index + 1));
+
+        let credsRT;
+        window.addEventListener("resize", () => {
+          clearTimeout(credsRT);
+          credsRT = setTimeout(() => { equalize(); go(index); }, 150);
+        }, { passive: true });
+
+        equalize();
+        go(0);
       })();
 
     </script>

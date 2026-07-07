@@ -198,13 +198,26 @@ section{padding:80px 0;}
 .cert-detail{display:flex;flex-direction:column;gap:2px;}
 .cert-title{font-size:13.5px;font-weight:700;color:var(--paper);line-height:1.2;}
 .cert-body{font-size:11.5px;color:rgba(251,245,240,0.5);line-height:1.4;}
-.tools-scroll-btn{position:absolute;right:-52px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,box-shadow .2s;z-index:2;}
+.tools-scroll-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,box-shadow .2s,opacity .2s;z-index:2;}
+.tools-prev{left:-52px;}
+.tools-next{right:-52px;}
 .tools-scroll-btn:hover{background:rgba(255,255,255,0.2);box-shadow:0 0 0 6px rgba(255,255,255,0.06);}
 .tools-scroll-btn:active{background:rgba(255,255,255,0.28);}
+.tools-scroll-btn:disabled{opacity:0.3;cursor:default;}
+.tools-scroll-btn:disabled:hover{background:rgba(255,255,255,0.1);box-shadow:none;}
 .tools-scroll-btn svg{width:14px;height:14px;fill:rgba(251,245,240,0.85);}
-/* Keep the carousel arrow inside the viewport when the page margin runs out. */
-@media(max-width:1240px){.tools-scroll-btn{right:8px;}}
-@media(max-width:640px){.cert-pill{min-width:140px;}}
+/* Once the page gutter runs out, move both arrows to a centered row below. */
+@media(max-width:1240px){
+  .creds-carousel-wrap{padding-bottom:60px;}
+  .tools-scroll-btn{top:auto;bottom:0;transform:none;}
+  .tools-prev{left:50%;right:auto;margin-left:-46px;}
+  .tools-next{right:50%;left:auto;margin-right:-46px;}
+}
+@media(max-width:900px){.cert-pill{flex:0 0 calc(50% - 6px);}}
+@media(max-width:560px){
+  .cert-pill{flex:0 0 100%;flex-direction:column;align-items:flex-start;gap:10px;}
+  .cert-abbr{font-size:24px;}
+}
 
 /* ── Client marquee (mirrors homepage) ── */
 .marquee-band{padding:34px 0 40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);}
@@ -406,7 +419,10 @@ section{padding:80px 0;}
           </div>
         </div>
       </div>
-      <button class="tools-scroll-btn" id="credsArrow" aria-label="Next credentials">
+      <button class="tools-scroll-btn tools-prev" id="credsPrev" aria-label="Previous credentials">
+        <svg viewBox="0 0 16 16"><path d="M12 1 L4 8 L12 15 Z"/></svg>
+      </button>
+      <button class="tools-scroll-btn tools-next" id="credsNext" aria-label="Next credentials">
         <svg viewBox="0 0 16 16"><path d="M4 1 L12 8 L4 15 Z"/></svg>
       </button>
     </div>
@@ -573,47 +589,47 @@ section{padding:80px 0;}
 
   /* Credentials carousel */
   const track = document.getElementById("credsTrack");
-  const btn   = document.getElementById("credsArrow");
-  if (track && btn) {
-    const origPills = Array.from(track.querySelectorAll(".cert-pill"));
-    origPills.forEach(p => {
-      const clone = p.cloneNode(true);
-      clone.classList.remove("rv");
-      clone.classList.add("in");
-      track.appendChild(clone);
-    });
+  const prevBtn = document.getElementById("credsPrev");
+  const nextBtn = document.getElementById("credsNext");
+  if (track && nextBtn) {
+    const pills = Array.from(track.querySelectorAll(".cert-pill"));
+    let index = 0;
 
-    const allPills = track.querySelectorAll(".cert-pill");
-    let maxH = 0;
-    allPills.forEach(p => { if (p.offsetHeight > maxH) maxH = p.offsetHeight; });
-    if (maxH > 0) allPills.forEach(p => { p.style.minHeight = maxH + "px"; });
+    function perView() {
+      const w = window.innerWidth;
+      if (w > 900) return 4;
+      if (w > 560) return 2;
+      return 1;
+    }
+    function maxIndex() { return Math.max(0, pills.length - perView()); }
+    function step() { const p = pills[0]; return p ? p.offsetWidth + 12 : 0; }
 
-    let pos = 0, animating = false;
-
-    function pillWidth() {
-      const p = track.querySelector(".cert-pill");
-      return p ? p.offsetWidth + 12 : 0;
+    function equalize() {
+      pills.forEach(p => { p.style.minHeight = ""; });
+      let maxH = 0;
+      pills.forEach(p => { if (p.offsetHeight > maxH) maxH = p.offsetHeight; });
+      if (maxH > 0) pills.forEach(p => { p.style.minHeight = maxH + "px"; });
     }
 
-    btn.addEventListener("click", function () {
-      if (animating) return;
-      animating = true;
-      pos += 1;
+    function go(to) {
+      index = Math.min(Math.max(0, to), maxIndex());
       track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
-      track.offsetHeight; // force reflow so the transition registers
-      track.style.transform  = `translateX(${-pos * pillWidth()}px)`;
+      track.style.transform = `translateX(${-index * step()}px)`;
+      if (prevBtn) prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === maxIndex();
+    }
 
-      window.setTimeout(function () {
-        if (pos >= origPills.length) {
-          track.style.transition = "none";
-          pos = 0;
-          track.style.transform = "translateX(0)";
-          track.offsetHeight;
-          track.style.transition = "transform 0.45s cubic-bezier(0.4,0,0.2,1)";
-        }
-        animating = false;
-      }, 460);
-    });
+    if (prevBtn) prevBtn.addEventListener("click", () => go(index - 1));
+    nextBtn.addEventListener("click", () => go(index + 1));
+
+    let credsRT;
+    window.addEventListener("resize", () => {
+      clearTimeout(credsRT);
+      credsRT = setTimeout(() => { equalize(); go(index); }, 150);
+    }, { passive: true });
+
+    equalize();
+    go(0);
   }
 
   /* Client marquee: duplicate track for seamless loop */
