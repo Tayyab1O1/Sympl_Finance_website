@@ -11,25 +11,36 @@ const SYMPL_DATA = {
     ],
     testimonials: [
       {
+        name: "Christina Giannelia",
+        title: "Executive Director",
+        company: "North York Arts",
+        quote: "Natasha and the Sympl Solutions team have brought transformative systems to North York Arts, including a new CRM that integrates multiple layers of our organisation... The entire team has been nothing short of exceptional: highly communicative, collaborative and solution-oriented! I highly recommend them.",
+        tag: "Arts client",
+        photo: "images/Testimonials/christina.webp"
+      },
+      {
         name: "Eileen Arandiga",
         title: "Executive Director",
         company: "East End Arts",
-        quote: "The team really knows the nonprofit world, and that's made all the difference. The transition was smooth and thorough as we moved to new systems. I'd happily recommend them.",
-        tag: "Arts client"
+        quote: "East End Arts has been very impressed with the thorough and responsive bookkeeping service that Sympl Solutions have provided us... The team at Sympl Solutions have expertise in the not-for-profit sector which has been an invaluable asset. I would highly recommend their service.",
+        tag: "Arts client",
+        photo: "images/Testimonials/eileen.webp"
       },
       {
         name: "Camesha Cox",
         title: "Executive Director",
         company: "The Reading Partnership",
-        quote: "As a growing nonprofit, their expertise keeps us compliant and financially healthy. They're responsive, easy to work with, and genuinely invested in our success.",
-        tag: "Nonprofit leadership"
+        quote: "Sympl Solutions has been an invaluable partner in managing our finances accurately and efficiently. As a growing nonprofit, their expertise ensures we stay compliant and financially healthy... They are a pleasure to work with—highly responsive, engaging, and truly invested in our success!",
+        tag: "Nonprofit leadership",
+        photo: "images/Testimonials/camesha-cox.webp"
       },
       {
         name: "Bridge Love",
         title: "CEO",
         company: "Care/Of",
-        quote: "They handle our payables and reconciliations without much input from us, and send a note when the month is closed. It's one thing I just don't worry about anymore.",
-        tag: "Operations support"
+        quote: "We needed a professional, digitally enabled solution which could process our payables and receivables every month... The Sympl team has been fantastic, super professional to work with and also quite flexible whenever we need to make payments outside of our regular timelines... We would highly recommend them to other organizations and not-for-profits!",
+        tag: "Operations support",
+        photo: "images/Testimonials/bridge-love.webp"
       }
     ]
   },
@@ -76,8 +87,8 @@ const SYMPL_DATA = {
         a: "Yes. We map each revenue source into the books, reconcile monthly, and keep earned revenue separate where your reporting or board package needs that view."
       },
       {
-        q: "Do you help with seasonal cash flow?",
-        a: "Yes. We build a rolling forecast that reflects grant disbursements, season launches, production costs, and steady payroll so you can see runway before the board asks."
+        q: "Can you help with CADAC reporting?",
+        a: "Yes. We keep your books structured to match CADAC's categories throughout the year, so when reporting season comes around, the numbers are ready to pull, no scrambling through spreadsheets to reverse-engineer the format."
       },
       {
         q: "Do we need to leave QuickBooks Online?",
@@ -250,7 +261,6 @@ class SymplProof extends HTMLElement {
             <p class="kicker">${data.proofKicker}</p>
             <h2>${data.proofTitle}</h2>
           </div>
-          <div class="testimonial-lab" data-testimonial-lab></div>
           <div class="proof-cta">
             <p>Want to see what this would look like in your books? Start with a free, no-pressure finance review.</p>
             <div class="proof-cta-actions">
@@ -261,7 +271,6 @@ class SymplProof extends HTMLElement {
         </div>
       </section>
     `;
-    renderTestimonials(this.querySelector("[data-testimonial-lab]"), data.testimonials);
   }
 }
 
