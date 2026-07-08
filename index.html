@@ -346,6 +346,90 @@
         grid-area: f2;
       }
 
+      /* Diagonal cascade (exploration) */
+      .cascade {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1.14;
+      }
+      .casc-blob {
+        position: absolute;
+        top: -6%;
+        right: -10%;
+        width: 80%;
+        height: 68%;
+        background: var(--buttercup);
+        opacity: 0.85;
+        border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
+        z-index: 0;
+      }
+      .casc-dots {
+        position: absolute;
+        bottom: -3%;
+        right: -5%;
+        width: 44%;
+        height: 38%;
+        z-index: 0;
+        background-image: radial-gradient(var(--ink-soft) 1.6px, transparent 1.6px);
+        background-size: 15px 15px;
+        opacity: 0.28;
+        -webkit-mask-image: radial-gradient(circle at 70% 30%, #000 0%, transparent 75%);
+        mask-image: radial-gradient(circle at 70% 30%, #000 0%, transparent 75%);
+      }
+      .casc-spark {
+        position: absolute;
+        top: -3%;
+        left: 22%;
+        z-index: 5;
+        color: var(--harvest);
+      }
+      .casc-photo {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 16px;
+        border: 8px solid var(--paper);
+        box-shadow: 0 16px 34px rgba(0, 34, 54, 0.16);
+        background: #ddd6cc;
+      }
+      .casc-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .casc-a {
+        top: 2%;
+        left: 28%;
+        width: 52%;
+        aspect-ratio: 1 / 1;
+        transform: rotate(5deg);
+        z-index: 2;
+      }
+      .casc-b {
+        top: 30%;
+        left: -2%;
+        width: 58%;
+        aspect-ratio: 3 / 2;
+        transform: rotate(-9deg);
+        z-index: 1;
+      }
+      .casc-c {
+        top: 36%;
+        left: 49%;
+        width: 55%;
+        aspect-ratio: 3 / 2;
+        transform: rotate(-5deg);
+        z-index: 3;
+      }
+      .casc-d {
+        top: 58%;
+        left: 10%;
+        width: 61%;
+        aspect-ratio: 3 / 2;
+        transform: rotate(7deg);
+        z-index: 4;
+      }
+
       /* ───────── MARQUEE ───────── */
       .marquee-band {
         padding: 34px 0 40px;
@@ -1451,6 +1535,9 @@
         max-width: 600px;
       }
       .cta-bridge-btns { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+      .cta-bridge--teal {
+        background: var(--deepwater);
+      }
       @media (max-width: 680px) {
         .cta-bridge-card { flex-direction: column; align-items: flex-start; }
       }
@@ -1661,6 +1748,18 @@
           width: 100%;
           justify-content: center;
         }
+        .hero .kicker,
+        .hero h1,
+        .hero .lead {
+          text-align: center;
+        }
+        .hero h1 {
+          font-size: 36px;
+        }
+        .hero .lead {
+          margin-left: auto;
+          margin-right: auto;
+        }
       }
       @media (prefers-reduced-motion: reduce) {
         *,
@@ -1715,38 +1814,41 @@
 
         <div class="mosaic-zone">
           <div
-            class="mosaic"
+            class="cascade"
             aria-label="Photos of nonprofit communities Sympl works with"
           >
-            <div class="cube m-a">
+            <div class="casc-blob" aria-hidden="true"></div>
+            <div class="casc-dots" aria-hidden="true"></div>
+            <svg class="casc-spark" width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+              <path d="M17 0 L19.4 14.6 L34 17 L19.4 19.4 L17 34 L14.6 19.4 L0 17 L14.6 14.6 Z" fill="currentColor"/>
+            </svg>
+            <div class="casc-photo casc-a">
               <img
                 src="images/Homepage/hero%201.webp"
                 fetchpriority="high"
                 alt="Community program graduation celebration"
                 style="object-position: 50% 30%" width="700" height="700"/>
             </div>
-            <div class="cube fill m-f1" aria-hidden="true"></div>
-            <div class="cube m-b">
+            <div class="casc-photo casc-b">
               <img
                 src="images/Homepage/hero%202.webp"
-                alt="Outdoor community movie night"
+                alt="Community taiko drumming performance"
                 loading="lazy"
-                style="object-position: 50% 55%" width="700" height="546"/>
+                style="object-position: 50% 55%" width="700" height="467"/>
             </div>
-            <div class="cube fill warm m-f2" aria-hidden="true"></div>
-            <div class="cube m-c">
+            <div class="casc-photo casc-c">
               <img
                 src="images/Homepage/hero%203.webp"
-                alt="Nonprofit staff training workshop"
+                alt="Teacher helping children with a puzzle activity"
                 loading="lazy"
-                style="object-position: 50% 45%" width="700" height="437"/>
+                style="object-position: 50% 45%" width="700" height="467"/>
             </div>
-            <div class="cube m-d">
+            <div class="casc-photo casc-d">
               <img
                 src="images/Homepage/hero%204.webp"
-                alt="Community art class in the park"
+                alt="Adult education class in session"
                 loading="lazy"
-                style="object-position: 50% 40%" width="700" height="467"/>
+                style="object-position: 50% 40%" width="700" height="468"/>
             </div>
           </div>
         </div>
@@ -1877,7 +1979,7 @@
               reporting, rental revenue, and seasonal cash flow, handled.
             </p>
             <a class="more" href="sympl-arts"
-              >How we work with arts orgs →</a
+              >Learn more →</a
             >
           </div>
           <div class="serve-card rv">
@@ -1895,7 +1997,7 @@
               contract reporting and funder-by-funder tracking, handled.
             </p>
             <a class="more" href="sympl-settlement"
-              >How we work with settlement orgs →</a
+              >Learn more →</a
             >
           </div>
           <div class="serve-card rv" style="display:none;">
@@ -1928,7 +2030,7 @@
               Schools, tutoring programs, and education-focused nonprofits
               balancing tuition, grants, and program budgets.
             </p>
-            <a class="more" href="sympl-contact">Talk to us →</a>
+            <a class="more" href="sympl-nonprofit">Learn more →</a>
           </div>
           <div class="serve-card rv">
             <div class="serve-ico">
@@ -1942,17 +2044,17 @@
               every kind that need reliable books and clear financial
               reporting.
             </p>
-            <a class="more" href="sympl-contact">Talk to us →</a>
+            <a class="more" href="sympl-nonprofit">Learn more →</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ── CTA BRIDGE 1 ── -->
-    <div class="cta-bridge">
+    <div class="cta-bridge cta-bridge--teal">
       <div class="wrap">
         <div class="cta-bridge-card rv">
-          <p class="cta-bridge-text">Big or small, arts or settlement or something else entirely, you shouldn't have to figure out your finances alone. Let's talk, no prep needed.</p>
+          <p class="cta-bridge-text">As a nonprofit, you shouldn't have to figure out your finances alone. Let's talk, no prep needed.</p>
           <div class="cta-bridge-btns">
             <a href="sympl-contact" class="btn btn-primary">Book a free review →</a>
             <a href="sympl-quote" class="btn btn-ghost">Get a quote</a>
@@ -1978,12 +2080,31 @@
               <article class="testimonial-card">
                 <div class="testimonial-mark" aria-hidden="true">&quot;</div>
                 <blockquote class="testimonial-quote">
-                  The team really knows the nonprofit world, and that's made all
-                  the difference. The transition was smooth and thorough as we
-                  moved to new systems. I'd happily recommend them.
+                  Natasha and the Sympl Solutions team have brought transformative
+                  systems to North York Arts, including a new CRM that integrates
+                  multiple layers of our organisation... The entire team has been
+                  nothing short of exceptional: highly communicative, collaborative
+                  and solution-oriented! I highly recommend them.
                 </blockquote>
                 <div class="testimonial-who">
-                  <span class="testimonial-face" aria-hidden="true">EA</span>
+                  <span class="testimonial-face"><img src="images/Testimonials/christina.webp" alt="Christina Giannelia"></span>
+                  <div>
+                    <b>Christina Giannelia</b
+                    ><span>Executive Director, North York Arts</span>
+                  </div>
+                </div>
+              </article>
+              <article class="testimonial-card">
+                <div class="testimonial-mark" aria-hidden="true">&quot;</div>
+                <blockquote class="testimonial-quote">
+                  East End Arts has been very impressed with the thorough and
+                  responsive bookkeeping service that Sympl Solutions have provided
+                  us... The team at Sympl Solutions have expertise in the
+                  not-for-profit sector which has been an invaluable asset. I
+                  would highly recommend their service.
+                </blockquote>
+                <div class="testimonial-who">
+                  <span class="testimonial-face"><img src="images/Testimonials/eileen.webp" alt="Eileen Arandiga"></span>
                   <div>
                     <b>Eileen Arandiga</b
                     ><span>Executive Director, East End Arts</span>
@@ -1993,12 +2114,14 @@
               <article class="testimonial-card">
                 <div class="testimonial-mark" aria-hidden="true">&quot;</div>
                 <blockquote class="testimonial-quote">
-                  As a growing nonprofit, their expertise keeps us compliant and
-                  financially healthy. They're responsive, easy to work with,
-                  and genuinely invested in our success.
+                  Sympl Solutions has been an invaluable partner in managing our
+                  finances accurately and efficiently. As a growing nonprofit,
+                  their expertise ensures we stay compliant and financially
+                  healthy... They are a pleasure to work with—highly responsive,
+                  engaging, and truly invested in our success!
                 </blockquote>
                 <div class="testimonial-who">
-                  <span class="testimonial-face" aria-hidden="true">CC</span>
+                  <span class="testimonial-face"><img src="images/Testimonials/camesha-cox.webp" alt="Camesha Cox"></span>
                   <div>
                     <b>Camesha Cox</b
                     ><span>Executive Director, The Reading Partnership</span>
@@ -2008,12 +2131,15 @@
               <article class="testimonial-card">
                 <div class="testimonial-mark" aria-hidden="true">&quot;</div>
                 <blockquote class="testimonial-quote">
-                  They handle our payables and reconciliations without much
-                  input from us, and send a note when the month is closed. It's
-                  one thing I just don't worry about anymore.
+                  We needed a professional, digitally enabled solution which could
+                  process our payables and receivables every month... The Sympl
+                  team has been fantastic, super professional to work with and
+                  also quite flexible whenever we need to make payments outside
+                  of our regular timelines... We would highly recommend them to
+                  other organizations and not-for-profits!
                 </blockquote>
                 <div class="testimonial-who">
-                  <span class="testimonial-face" aria-hidden="true">BL</span>
+                  <span class="testimonial-face"><img src="images/Testimonials/bridge-love.webp" alt="Bridge Love"></span>
                   <div><b>Bridge Love</b><span>CEO, Care/Of</span></div>
                 </div>
               </article>
