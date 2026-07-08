@@ -174,14 +174,30 @@ a{color:inherit;}
 .board{
   position:relative;max-width:660px;margin:0 auto;
   background:linear-gradient(180deg,#FFFFFF 0%,#FBF8F3 100%);
-  border:1px solid rgba(0,34,54,0.12);border-radius:12px;
+  border-radius:6px;
   padding:clamp(28px,4vw,44px) clamp(26px,4vw,52px) clamp(32px,4.4vw,46px);
-  box-shadow:0 30px 60px rgba(0,0,0,0.32), 0 4px 0 rgba(0,34,54,0.10);
+  box-shadow:
+    0 0 0 1px rgba(0,34,54,0.1),
+    0 0 0 8px #eef0f1,
+    0 0 0 10px #c3c8cc,
+    0 30px 60px rgba(0,0,0,0.32),
+    0 4px 0 rgba(0,34,54,0.10);
   opacity:0;transform:translateY(16px) scale(.985);
   animation:boardIn .8s cubic-bezier(.2,.7,.2,1) .15s forwards;
 }
-.board::after{content:'';position:absolute;inset:0;border-radius:12px;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,0.5),transparent 22%);}
+.board::after{content:'';position:absolute;inset:0;border-radius:6px;pointer-events:none;
+  background:
+    linear-gradient(115deg,transparent 30%,rgba(255,255,255,0.35) 45%,transparent 60%),
+    linear-gradient(180deg,rgba(255,255,255,0.5),transparent 22%);}
+.clip{position:absolute;width:22px;height:13px;z-index:2;
+  background:linear-gradient(180deg,#f5f6f7,#c7cbce);border:1px solid #a8adb1;border-radius:3px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.3);}
+.clip::after{content:'';position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;
+  background:#888d91;transform:translate(-50%,-50%);}
+.clip.tl{left:-9px;top:-9px;transform:rotate(-45deg);}
+.clip.tr{right:-9px;top:-9px;transform:rotate(45deg);}
+.clip.bl{left:-9px;bottom:-9px;transform:rotate(45deg);}
+.clip.br{right:-9px;bottom:-9px;transform:rotate(-45deg);}
 @keyframes boardIn{to{opacity:1;transform:none;}}
 .board .kicker{font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
   color:var(--deepwater);margin-bottom:14px;}
@@ -192,12 +208,20 @@ a{color:inherit;}
 .swoosh-wrap svg{position:absolute;left:-2%;bottom:-0.46em;width:104%;height:0.5em;}
 .swoosh-wrap svg path{stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1s ease .85s forwards;}
 @keyframes draw{to{stroke-dashoffset:0;}}
-.tray{position:relative;width:150px;height:9px;margin:0 auto;
-  background:#0b3346;border-radius:0 0 5px 5px;box-shadow:0 8px 16px rgba(0,0,0,0.3);
+.tray{position:relative;width:min(320px,64%);height:16px;margin:10px auto 0;
+  background:linear-gradient(180deg,#e4e7e9 0%,#c3c8cc 45%,#9ba1a6 100%);
+  border-radius:0 0 6px 6px;border:1px solid #8b9095;border-top:none;
+  box-shadow:0 10px 18px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
   opacity:0;animation:rise .7s ease .5s forwards;}
-.tray .marker{position:absolute;top:-4px;height:7px;border-radius:4px;}
-.tray .m1{left:30px;width:42px;background:var(--yolk);}
-.tray .m2{left:84px;width:34px;background:var(--deepwater);}
+.tray::before{content:'';position:absolute;left:6%;right:6%;top:2px;height:4px;border-radius:2px;
+  background:rgba(0,0,0,0.12);}
+.tray .marker{position:absolute;top:-9px;height:11px;border-radius:3px 3px 2px 2px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.25);}
+.tray .marker::after{content:'';position:absolute;left:50%;top:-4px;width:5px;height:5px;
+  border-radius:1px;background:inherit;transform:translateX(-50%);}
+.tray .m1{left:26%;width:46px;background:var(--yolk);}
+.tray .m2{left:52%;width:38px;background:var(--deepwater);}
+.tray .m3{left:74%;width:32px;background:var(--sorbet);}
 
 .room2{position:relative;z-index:2;width:100%;}
 .room2 svg{display:block;width:100%;height:auto;}
@@ -326,6 +350,10 @@ a{color:inherit;}
 <section class="set-hero" aria-label="Immigration and Settlement hero">
   <div class="room">
     <div class="board">
+      <span class="clip tl" aria-hidden="true"></span>
+      <span class="clip tr" aria-hidden="true"></span>
+      <span class="clip bl" aria-hidden="true"></span>
+      <span class="clip br" aria-hidden="true"></span>
       <p class="kicker">Who we serve · Immigration &amp; Settlement</p>
       <h1>Books structured for your
         <span class="swoosh-wrap"><em>reporting.</em>
@@ -333,7 +361,7 @@ a{color:inherit;}
         </span>
       </h1>
     </div>
-    <div class="tray" aria-hidden="true"><span class="marker m1"></span><span class="marker m2"></span></div>
+    <div class="tray" aria-hidden="true"><span class="marker m1"></span><span class="marker m2"></span><span class="marker m3"></span></div>
   </div>
 
   <div class="room2" aria-hidden="true">
