@@ -11,14 +11,6 @@ const SYMPL_DATA = {
     ],
     testimonials: [
       {
-        name: "Christina Giannelia",
-        title: "Executive Director",
-        company: "North York Arts",
-        quote: "Natasha and the Sympl Solutions team have brought transformative systems to North York Arts, including a new CRM that integrates multiple layers of our organisation... The entire team has been nothing short of exceptional: highly communicative, collaborative and solution-oriented! I highly recommend them.",
-        tag: "Arts client",
-        photo: "images/Testimonials/christina.webp"
-      },
-      {
         name: "Eileen Arandiga",
         title: "Executive Director",
         company: "East End Arts",
@@ -41,6 +33,14 @@ const SYMPL_DATA = {
         quote: "We needed a professional, digitally enabled solution which could process our payables and receivables every month... The Sympl team has been fantastic, super professional to work with and also quite flexible whenever we need to make payments outside of our regular timelines... We would highly recommend them to other organizations and not-for-profits!",
         tag: "Operations support",
         photo: "images/Testimonials/bridge-love.webp"
+      },
+      {
+        name: "Christina Giannelia",
+        title: "Executive Director",
+        company: "North York Arts",
+        quote: "Natasha and the Sympl Solutions team have brought transformative systems to North York Arts, including a new CRM that integrates multiple layers of our organisation... The entire team has been nothing short of exceptional: highly communicative, collaborative and solution-oriented! I highly recommend them.",
+        tag: "Arts client",
+        photo: "images/Testimonials/christina.webp"
       }
     ]
   },
