@@ -271,6 +271,7 @@ a{color:inherit;}
 .pain-transition svg{width:16px;height:16px;}
 .pain-transition:hover{text-decoration:underline;}
 .pain-dots{display:none;}
+.pain-nav{display:none;}
 
 /* large screens: equal-height cards, aligned descriptions, tags pinned to bottom */
 @media (min-width:701px){
@@ -281,9 +282,15 @@ a{color:inherit;}
 @media (max-width:700px){
   .pain{padding:60px 0;}
   .pain .wrap{padding:0 22px;}
-  .pain-cards{display:block;}
-  .pain-card{margin-bottom:16px;}
-  .pain-card:last-child{margin-bottom:0;}
+  .pain-viewport{overflow:hidden;}
+  .pain-cards{display:flex;gap:0;transition:transform .3s ease;}
+  .pain-card{flex:0 0 100%;}
+  .pain-card:hover{transform:none;box-shadow:none;}
+  .pain-nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px;}
+  .pain-arrow{width:44px;height:44px;border-radius:50%;border:0;background:var(--deepwater);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s,opacity .2s;flex:0 0 auto;}
+  .pain-arrow:hover{background:var(--underbrush);}
+  .pain-arrow:disabled{opacity:.32;cursor:default;}
+  .pain-arrow svg{width:16px;height:16px;}
 }
 /* ───────── SECTION 3 · HOW WE HANDLE IT ───────── */
 .how{background:var(--mist);padding:84px 0;}
@@ -386,27 +393,36 @@ a{color:inherit;}
       <p>You're not alone. Most settlement organizations we meet are wrestling with the same three things.</p>
     </div>
 
-    <div class="pain-cards" id="painCards">
-      <div class="pain-card">
-        <div class="pain-num">01</div>
-        <h3>Every funder, its own rulebook</h3>
-        <p>Each funder, from IRCC to provincial and municipal contracts, arrives with its own budget lines, claim periods, and variance rules, all reported separately.</p>
-        <div class="ptags"><span class="ptag">IRCC</span><span class="ptag">MLITSD</span><span class="ptag">Funder-by-funder</span></div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-num">02</div>
-        <h3>Staff time is split across contracts</h3>
-        <p>One settlement worker is often funded across several programs, so payroll has to be apportioned precisely, with each funder charged its correct share.</p>
-        <div class="ptags"><span class="ptag">Salary allocation</span><span class="ptag">Multiple contracts</span></div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-num">03</div>
-        <h3>Program reporting has its own language</h3>
-        <p>Language training and employment programs report on their own outputs, units, and budget categories that a general bookkeeper rarely tracks.</p>
-        <div class="ptags"><span class="ptag">LINC</span><span class="ptag">Employment programs</span></div>
+    <div class="pain-viewport">
+      <div class="pain-cards" id="painCards">
+        <div class="pain-card">
+          <div class="pain-num">01</div>
+          <h3>Every funder, its own rulebook</h3>
+          <p>Each funder, from IRCC to provincial and municipal contracts, arrives with its own budget lines, claim periods, and variance rules, all reported separately.</p>
+          <div class="ptags"><span class="ptag">IRCC</span><span class="ptag">MLITSD</span><span class="ptag">Funder-by-funder</span></div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">02</div>
+          <h3>Staff time is split across contracts</h3>
+          <p>One settlement worker is often funded across several programs, so payroll has to be apportioned precisely, with each funder charged its correct share.</p>
+          <div class="ptags"><span class="ptag">Salary allocation</span><span class="ptag">Multiple contracts</span></div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">03</div>
+          <h3>Program reporting has its own language</h3>
+          <p>Language training and employment programs report on their own outputs, units, and budget categories that a general bookkeeper rarely tracks.</p>
+          <div class="ptags"><span class="ptag">LINC</span><span class="ptag">Employment programs</span></div>
+        </div>
       </div>
     </div>
-    <div class="pain-dots" id="painDots" aria-hidden="true"></div>
+    <div class="pain-nav" id="painNav">
+      <button class="pain-arrow" id="painPrev" type="button" aria-label="Previous issue">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2 L4 8 L10 14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="pain-arrow" id="painNext" type="button" aria-label="Next issue">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2 L12 8 L6 14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
 
     <a class="pain-transition rv" href="#how">Here's how we take each of these off your plate
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 L8 13 M3 8 L8 13 L13 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -716,66 +732,32 @@ a{color:inherit;}
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 })();
 
-/* mobile pain deck: one card, swipe up on scroll (builds/tears down with viewport) */
+/* mobile pain deck: one card at a time, advanced with a right arrow (no swipe/scroll hijack) */
 (function(){
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mq=matchMedia('(max-width:700px)');
   const cardsEl=document.getElementById('painCards');
-  const dotsEl=document.getElementById('painDots');
-  if(!cardsEl) return;
+  const prevBtn=document.getElementById('painPrev');
+  const nextBtn=document.getElementById('painNext');
+  if(!cardsEl||!prevBtn||!nextBtn) return;
   const cards=[...cardsEl.children];
-  let track=null, dots=[], built=false, ticking=false;
+  const mq=matchMedia('(max-width:700px)');
+  let index=0;
 
-  function build(){
-    if(built||reduce) return; built=true;
-    track=document.createElement('div'); track.className='pain-track';
-    track.style.height=(cards.length*40)+'vh';
-    cardsEl.parentNode.insertBefore(track,cardsEl);
-    track.appendChild(cardsEl);
-    cardsEl.style.position='sticky'; cardsEl.style.top='90px';
-    cardsEl.style.height='min(64vh,420px)'; cardsEl.style.display='block';
-    cards.forEach(c=>{c.style.position='absolute';c.style.left='0';c.style.right='0';c.style.top='50%';c.style.margin='0';c.style.willChange='transform,opacity';});
-    cardsEl.appendChild(dotsEl);
-    dotsEl.style.cssText='position:absolute;left:0;right:0;bottom:2px;display:flex;gap:8px;justify-content:center;';
-    dots=cards.map(()=>{const d=document.createElement('span');
-      d.style.cssText='width:7px;height:7px;border-radius:50%;background:rgba(0,34,54,0.18);transition:background .2s,transform .2s;';
-      dotsEl.appendChild(d);return d;});
-    addEventListener('scroll',onScroll,{passive:true});
-    render();
-  }
-  function teardown(){
-    if(!built) return; built=false;
-    removeEventListener('scroll',onScroll);
-    track.parentNode.insertBefore(cardsEl,track); track.remove(); track=null;
-    cardsEl.removeAttribute('style');
-    cards.forEach(c=>c.removeAttribute('style'));
-    dots.forEach(d=>d.remove()); dots=[];
-    dotsEl.removeAttribute('style');
-    cardsEl.parentNode.insertBefore(dotsEl,cardsEl.nextSibling);
-  }
   function render(){
-    ticking=false; if(!built) return;
-    const dist=track.offsetHeight - cardsEl.offsetHeight;
-    const scrolled=90 - track.getBoundingClientRect().top;
-    const p=Math.min(1,Math.max(0,scrolled/Math.max(1,dist)));
-    const active=p*(cards.length-1);
-    cards.forEach((c,i)=>{
-      const d=i-active, off=d*48, op=Math.max(0,1-Math.abs(d)), sc=1-Math.min(0.12,Math.abs(d)*0.06);
-      c.style.transform='translateY(calc(-50% + '+off.toFixed(1)+'px)) scale('+sc.toFixed(3)+')';
-      c.style.opacity=op.toFixed(3);
-      c.style.zIndex=String(100-Math.round(Math.abs(d)*10));
-      c.style.pointerEvents=Math.abs(d)<0.5?'auto':'none';
-    });
-    const cur=Math.round(active);
-    dots.forEach((dt,i)=>{const on=i===cur;
-      dt.style.background=on?'var(--sorbet)':'rgba(0,34,54,0.18)';
-      dt.style.transform=on?'scale(1.25)':'none';});
+    cardsEl.style.transform=mq.matches?'translateX(-'+(index*100)+'%)':'';
+    prevBtn.disabled=index<=0;
+    nextBtn.disabled=index>=cards.length-1;
   }
-  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(render);}}
-  function apply(){ if(mq.matches) build(); else teardown(); }
-  addEventListener('resize',()=>{render();},{passive:true});
-  mq.addEventListener ? mq.addEventListener('change',apply) : mq.addListener(apply);
-  apply();
+  prevBtn.addEventListener('click',()=>{
+    index=Math.max(0,index-1);
+    render();
+  });
+  nextBtn.addEventListener('click',()=>{
+    index=Math.min(cards.length-1,index+1);
+    render();
+  });
+  mq.addEventListener ? mq.addEventListener('change',render) : mq.addListener(render);
+  addEventListener('resize',render,{passive:true});
+  render();
 })();
 </script>
 </body>

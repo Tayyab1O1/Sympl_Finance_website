@@ -202,9 +202,9 @@ const NAV_CURRENT = {
   arts: { group: "serve", item: "sympl-arts" },
   settlement: { group: "serve", item: "sympl-settlement" },
   nonprofit: { group: "serve", item: "sympl-nonprofit" },
-  clients: { item: "sympl-clients-partners" },
-  about: { item: "sympl-about" },
-  blog: { item: "sympl-blog" },
+  clients: { group: "company", item: "sympl-clients-partners" },
+  about: { group: "company", item: "sympl-about" },
+  blog: { group: "company", item: "sympl-blog" },
   contact: { cta: "contact" },
   quote: { cta: "quote" }
 };
@@ -237,11 +237,17 @@ class SymplNav extends HTMLElement {
                 <a href="sympl-nonprofit"${cur("sympl-nonprofit")}>Other Nonprofits<small>Housing, health, youth &amp; more</small></a>
               </div>
             </div>
-            <div class="nav-item"><a href="sympl-clients-partners"${cur("sympl-clients-partners")}>Clients &amp; Partners</a></div>
-            <div class="nav-item"><a href="sympl-about"${cur("sympl-about")}>About</a></div>
-            <div class="nav-item"><a href="sympl-blog"${cur("sympl-blog")}>Blog</a></div>
+            <div class="nav-item">
+              <a href="sympl-about"${cur("company")}>Company <span class="caret">▾</span></a>
+              <div class="dropdown">
+                <a href="sympl-about"${cur("sympl-about")}>About Us<small>Our team and story</small></a>
+                <a href="sympl-blog"${cur("sympl-blog")}>Blog<small>Insights and updates</small></a>
+                <a href="sympl-clients-partners"${cur("sympl-clients-partners")}>Clients &amp; Partners<small>Who we work with</small></a>
+              </div>
+            </div>
             <a href="sympl-contact" class="btn btn-yolk nav-cta"${ctaCur("contact")}>Book a Free Review</a>
             <a href="sympl-quote" class="btn btn-ghost nav-cta"${ctaCur("quote")}>Get a quote</a>
+            <a href="https://portal.symplfinance.com" class="btn btn-primary nav-cta">Client Portal</a>
           </nav>
           <a href="sympl-contact" class="btn btn-yolk nav-burger" style="padding:10px 16px;font-size:13px;">Book a review</a>
         </div>
@@ -283,7 +289,7 @@ class SymplTestimonials extends HTMLElement {
         <div class="proof-wrap">
           <div class="proof-head">
             <p class="kicker">What our clients say</p>
-            <h2>Trusted by nonprofits who mean business.</h2>
+            <h2>The bookkeeping partner nonprofits recommend.</h2>
           </div>
           <div class="testimonial-lab" data-testimonial-lab></div>
         </div>
@@ -578,6 +584,14 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ── Mobile nav drawer ──
+  var navEl = document.querySelector('sympl-nav');
+  var drawerCurrent = NAV_CURRENT[navEl && navEl.getAttribute('current')] || {};
+  var drawerCur = function (name) {
+    return (drawerCurrent.item === name || drawerCurrent.group === name) ? ' aria-current="page"' : '';
+  };
+  var drawerCtaCur = function (name) {
+    return drawerCurrent.cta === name ? ' aria-current="page"' : '';
+  };
   var drawerHTML =
     '<div class="nav-overlay" id="navOverlay"></div>' +
     '<div class="nav-drawer" id="navDrawer" aria-hidden="true">' +
@@ -588,23 +602,27 @@ document.addEventListener('DOMContentLoaded', function () {
       '<div class="nav-drawer-body">' +
         '<span class="nav-drawer-label">Services</span>' +
         '<div class="nav-drawer-sub">' +
-          '<a href="sympl-bookkeeping">Bookkeeping</a>' +
-          '<a href="sympl-payroll">Payroll</a>' +
-          '<a href="sympl-cfo-advisory">CFO &amp; Advisory</a>' +
+          '<a href="sympl-bookkeeping"' + drawerCur('sympl-bookkeeping') + '>Bookkeeping</a>' +
+          '<a href="sympl-payroll"' + drawerCur('sympl-payroll') + '>Payroll</a>' +
+          '<a href="sympl-cfo-advisory"' + drawerCur('sympl-cfo-advisory') + '>CFO &amp; Advisory</a>' +
         '</div>' +
         '<span class="nav-drawer-label">Who We Serve</span>' +
         '<div class="nav-drawer-sub">' +
-          '<a href="sympl-arts">Arts &amp; Culture</a>' +
-          '<a href="sympl-settlement">Immigration &amp; Settlement</a>' +
-          '<a href="sympl-nonprofit">Other Nonprofits</a>' +
+          '<a href="sympl-arts"' + drawerCur('sympl-arts') + '>Arts &amp; Culture</a>' +
+          '<a href="sympl-settlement"' + drawerCur('sympl-settlement') + '>Immigration &amp; Settlement</a>' +
+          '<a href="sympl-nonprofit"' + drawerCur('sympl-nonprofit') + '>Other Nonprofits</a>' +
         '</div>' +
-        '<a href="sympl-clients-partners">Clients &amp; Partners</a>' +
-        '<a href="sympl-about">About</a>' +
-        '<a href="sympl-blog">Blog</a>' +
+        '<span class="nav-drawer-label">Company</span>' +
+        '<div class="nav-drawer-sub">' +
+          '<a href="sympl-about"' + drawerCur('sympl-about') + '>About Us</a>' +
+          '<a href="sympl-blog"' + drawerCur('sympl-blog') + '>Blog</a>' +
+          '<a href="sympl-clients-partners"' + drawerCur('sympl-clients-partners') + '>Clients &amp; Partners</a>' +
+        '</div>' +
       '</div>' +
       '<div class="nav-drawer-ctas">' +
-        '<a href="sympl-contact" class="btn btn-yolk">Book a Free Review</a>' +
-        '<a href="sympl-quote" class="btn btn-ghost">Get a quote</a>' +
+        '<a href="sympl-contact" class="btn btn-yolk"' + drawerCtaCur('contact') + '>Book a Free Review</a>' +
+        '<a href="sympl-quote" class="btn btn-ghost"' + drawerCtaCur('quote') + '>Get a quote</a>' +
+        '<a href="https://portal.symplfinance.com" class="btn btn-primary">Client Portal</a>' +
       '</div>' +
     '</div>';
 

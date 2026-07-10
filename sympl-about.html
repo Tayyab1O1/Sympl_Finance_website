@@ -215,8 +215,14 @@ section{padding:80px 0;}
 }
 @media(max-width:900px){.cert-pill{flex:0 0 calc(50% - 6px);}}
 @media(max-width:560px){
-  .cert-pill{flex:0 0 100%;flex-direction:column;align-items:flex-start;gap:10px;}
+  /* Phones: static 2-column grid instead of a swipeable carousel, header on top of the text. */
+  .creds-carousel-wrap{padding-bottom:0;}
+  .creds-track-outer{overflow:visible;}
+  .creds-track{display:grid;grid-template-columns:1fr 1fr;transform:none!important;}
+  .cert-pill{flex-direction:column;align-items:flex-start;gap:10px;}
   .cert-abbr{font-size:24px;}
+  .tools-scroll-btn.tools-prev,
+  .tools-scroll-btn.tools-next{display:none;}
 }
 
 /* ── Client marquee (mirrors homepage) ── */
@@ -611,7 +617,7 @@ section{padding:80px 0;}
       const w = window.innerWidth;
       if (w > 900) return 4;
       if (w > 560) return 2;
-      return 1;
+      return pills.length; // phones show a static grid, not a carousel
     }
     function maxIndex() { return Math.max(0, pills.length - perView()); }
     function step() { const p = pills[0]; return p ? p.offsetWidth + 12 : 0; }
