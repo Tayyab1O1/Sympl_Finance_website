@@ -177,7 +177,8 @@ window.symplSendInquiry = function (subject, data) {
     });
   }).then(function (j) {
     if (typeof window.gtag === "function") {
-      window.gtag("event", "generate_lead", { form_name: subject });
+      var eventName = /quote/i.test(subject) ? "generate_lead_quote_form" : "generate_lead_contact_form";
+      window.gtag("event", eventName);
     }
     return j;
   });
@@ -706,24 +707,23 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// GA4 click tracking: CTA buttons and tel/mailto links, site-wide.
+// GA4 click tracking: the two primary CTAs (by destination, so every button
+// instance site-wide is caught regardless of label wording) plus tel/mailto.
 document.addEventListener('click', function (e) {
   if (typeof window.gtag !== 'function') return;
   var link = e.target.closest('a, button');
   if (!link) return;
 
-  var label = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 100);
   var href = link.getAttribute('href') || '';
+  var pageName = window.symplPageName || document.title;
 
   if (href.indexOf('tel:') === 0) {
-    window.gtag('event', 'contact_click', { contact_method: 'phone', link_label: label });
+    window.gtag('event', 'phone_click', { page_title: pageName });
   } else if (href.indexOf('mailto:') === 0) {
-    window.gtag('event', 'contact_click', { contact_method: 'email', link_label: label });
-  } else if (link.matches('.btn, .nav-cta')) {
-    window.gtag('event', 'cta_click', {
-      link_label: label,
-      link_url: href,
-      page_path: window.location.pathname
-    });
+    window.gtag('event', 'email_click', { page_title: pageName });
+  } else if (/(^|\/)sympl-contact(\.html)?$/.test(href)) {
+    window.gtag('event', 'cta_book_review', { page_title: pageName });
+  } else if (/(^|\/)sympl-quote(\.html)?$/.test(href)) {
+    window.gtag('event', 'cta_get_quote', { page_title: pageName });
   }
 });
