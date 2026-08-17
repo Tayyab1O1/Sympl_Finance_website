@@ -47,7 +47,8 @@ const SYMPL_DATA = {
         title: "ED",
         company: "EcoEquitable",
         quote: "Since starting with Sympl just a few months ago, I've been really impressed with the quality of their service, attention to detail, and general professionalism in handling and organizing our books. I feel they go above and beyond with every interaction, not just thinking about what needs to get done but how things can be done better. Thank you Sympl team!",
-        tag: "Nonprofit leadership"
+        tag: "Nonprofit leadership",
+        photo: "images/Testimonials/julia.webp"
       }
     ]
   },
