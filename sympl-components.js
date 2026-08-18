@@ -41,6 +41,14 @@ const SYMPL_DATA = {
         quote: "Natasha and the Sympl Solutions team have brought transformative systems to North York Arts, including a new CRM that integrates multiple layers of our organisation... The entire team has been nothing short of exceptional: highly communicative, collaborative and solution-oriented! I highly recommend them.",
         tag: "Arts client",
         photo: "images/Testimonials/christina.webp"
+      },
+      {
+        name: "Julia Hunter",
+        title: "ED",
+        company: "EcoEquitable",
+        quote: "Since starting with Sympl just a few months ago, I've been really impressed with the quality of their service, attention to detail, and general professionalism in handling and organizing our books. I feel they go above and beyond with every interaction, not just thinking about what needs to get done but how things can be done better. Thank you Sympl team!",
+        tag: "Nonprofit leadership",
+        photo: "images/Testimonials/julia.webp"
       }
     ]
   },
