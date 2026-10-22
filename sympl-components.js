@@ -171,11 +171,15 @@ window.symplSendInquiry = function (subject, data) {
     },
     data
   );
+  var controller = new AbortController();
+  var timeout = setTimeout(function () { controller.abort(); }, 10000);
   return fetch("https://formsubmit.co/ajax/zarah.s@symplsolutions.com", {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
+    signal: controller.signal
   }).then(function (r) {
+    clearTimeout(timeout);
     if (!r.ok) throw new Error("HTTP " + r.status);
     return r.json().then(function (j) {
       if (j && (j.success === false || j.success === "false")) {
