@@ -165,13 +165,13 @@ window.symplSendInquiry = function (subject, data) {
   var payload = Object.assign(
     {
       _subject: subject,
-      _cc: "natasha@symplsolutions.com",
+      _cc: "tayyab@symplsolutions.com,natasha@symplsolutions.com",
       _template: "table",
       _captcha: "false"
     },
     data
   );
-  return fetch("https://formsubmit.co/ajax/tayyab@symplsolutions.com", {
+  return fetch("https://formsubmit.co/ajax/zarah.s@symplsolutions.com", {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify(payload)
